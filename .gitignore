@@ -9,4 +9,6 @@ Fung_HPCC_out/Pedro_run/
 Fung_HPCC_out/Raw_qual_file/
 R_files/distance_files/
 R_code/old_code/
-
+.Rproj.user/
+Bact_HPCC_out/
+Fung_HPCC_out/
