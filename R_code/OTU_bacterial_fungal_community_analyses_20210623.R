@@ -17,6 +17,7 @@ library(cowplot)
 library(lmerTest)
 library(emmeans)
 library(gdm)
+library(ggsignif)
 pa=function(x)(ifelse(x>0,1,0))
 p5=function(x)(ifelse(x>4,x,0))
 "%w/o%" <- function(x,y)!('%in%'(x,y))
@@ -90,7 +91,7 @@ GLBRC018_bact_raw_CONSTAX_UNITE8.2_all_DOM_KNW=subset(GLBRC018_bact_raw_CONSTAX_
 nrow(GLBRC018_bact_raw_CONSTAX_UNITE8.2_all_DOM_KNW)
 #43398
 
-Rank_2_RDP
+
 GLBRC018_bact_raw_CONSTAX_UNITE8.2_all_DOM_KNW$Dom_diff=ifelse(GLBRC018_bact_raw_CONSTAX_UNITE8.2_all_DOM_KNW$Rank_1_RDP!=
                                                                GLBRC018_bact_raw_CONSTAX_UNITE8.2_all_DOM_KNW$Rank_1_BLAST|
                                                                GLBRC018_bact_raw_CONSTAX_UNITE8.2_all_DOM_KNW$Rank_1_RDP!=
@@ -169,7 +170,7 @@ GLBRC018_bact_raw_CONSTAX_UNITE8.2_all_KNW=subset(GLBRC018_bact_raw_CONSTAX_UNIT
 nrow(GLBRC018_bact_raw_CONSTAX_UNITE8.2_all_KNW)
 #21053
 
-Rank_2_RDP
+
 GLBRC018_bact_raw_CONSTAX_UNITE8.2_all_KNW$Phyla_diff=ifelse(GLBRC018_bact_raw_CONSTAX_UNITE8.2_all_KNW$Rank_2_RDP!=
                                                                                    GLBRC018_bact_raw_CONSTAX_UNITE8.2_all_KNW$Rank_2_BLAST|
                                                                                    GLBRC018_bact_raw_CONSTAX_UNITE8.2_all_KNW$Rank_2_RDP!=
@@ -386,7 +387,7 @@ write.fasta(sequences =rep_set.GLBRC018_bact_OTU_cons_SINTAX_bug, names = names(
 #I am going to use the sintax classification for now 
 
 
-GLBRC018_bact_raw_SINTAX_UNITE8.2 = read.delim(here::here("Bact_HPCC_out","taxonomy_combined_merged_ITS1_2_GLBRC_otus.SINTAX"),
+GLBRC018_bact_raw_SINTAX_UNITE8.2 = read.delim(here::here("Bact_HPCC_out","combined_soil_roots_merged_16S_GLBRC018_otus_silva123_taxonomy.SINTAX"),
                                                sep = "\t",header = F,fill=T)
 
 
@@ -1101,7 +1102,7 @@ GLBRC018_OTU_bact_mock_rar_ord=ordinate(GLBRC018_OTU_bact_mock_rar,method = "NMD
 plot_ordination(GLBRC018_OTU_bact_mock_rar,GLBRC018_OTU_bact_mock_rar_ord,color = "Run",label = "SampleID")
 #not great but the best I can do for now. 
 
-#####Remove non bactal reads####
+#####Remove non bacterial reads####
 ntaxa(GLBRC018_OTU_bact_MMPRNT_mock_fin_fil2)
 #32302
 
@@ -1143,7 +1144,7 @@ GLBRC018_OTU_bact_MMPRNT_mock_bact_rar=rarefy_even_depth(GLBRC018_OTU_bact_MMPRN
 #111OTUs were removed because they are no longer 
 #present in any sample after random subsampling
 
-#save(GLBRC018_OTU_bact_MMPRNT_mock_bact_rar, file = here::here("R_files","GLBRC018_OTU_bact_MMPRNT_mock_bact_rar.RData")
+#save(GLBRC018_OTU_bact_MMPRNT_mock_bact_rar, file = here::here("R_files","GLBRC018_OTU_bact_MMPRNT_mock_bact_rar.RData"))
 load(here::here("R_files","GLBRC018_OTU_bact_MMPRNT_mock_bact_rar.RData"))
 #####END: Pre-processing Bacterial community####
 
@@ -2841,25 +2842,32 @@ site_labels=c("Lux Arbor","Lake City","Escanaba", "Hancock","Rhinlander")
 
 ####Richness####
 
+pairwise_fert_bact_rich=data.frame(y_bot=c(1760,1420,0,0),
+                                   x_min=c(2.8,3.8,0,0),
+                                   x_max=c(3.2,4.2,0,0),
+                                   annot_text=c("***"," *** "),
+                                   Root_soil=c(Root_soil=c(rep("Root",2),rep("Soil",2))))
 
 (bact_rich_p=ggplot(GLBRC018_OTU_bact_MMPRNT_All_sites_G5_div)+
     geom_boxplot(aes(y=Observed, x=factor(siteID,levels = site_order),fill=FertStatus))+
-    geom_text(data = bact_rich_max_disp_letters, aes(x=siteID, y = 10 + max_value, label = sig_let), vjust=0, size=10)+
+    geom_text(data = bact_rich_max_disp_letters, aes(x=siteID, y = 170 + max_value, label = sig_let), vjust=0, size=10)+
+    geom_signif(data=pairwise_fert_bact_rich,aes(y_position = y_bot, xmin = x_min, xmax = x_max,annotations = annot_text), 
+                tip_length = 0,textsize = 10,manual = T)+
     facet_wrap(~Root_soil,nrow = 1)+scale_x_discrete(labels=site_labels,name=NULL)+theme_cowplot(font_size = 24)+
     scale_y_continuous(name = "Richness",limits = c(700,2800))+theme(axis.text.x = element_blank()))
 
 
-pairwise_fert_fung_rich=data.frame(y_bot=c(0,0,0,225,0,0,0,0,0,0),
-                                   x_min=c(0,0,0,3.85,0,0,0,0,0,0),
-                                   x_max=c(0,0,0,4.15,0,0,0,0,0,0),
-                                   annot_text=c("","","","*","","","","","",""),
-                                   Root_soil=c(Root_soil=c(rep("Root",5),rep("Soil",5))))
+pairwise_fert_fung_rich=data.frame(y_bot=c(225,0),
+                                   x_min=c(3.85,0),
+                                   x_max=c(4.15,0),
+                                   annot_text=c("*",""),
+                                   Root_soil=c(Root_soil=c(rep("Root",1),rep("Soil",1))))
 
 (fung_rich_p=ggplot(GLBRC018_OTU_fung_MMPRNT_All_sites_G5_div,aes(y=Observed, x=factor(siteID,levels = site_order)))+
     geom_boxplot(aes(y=Observed, x=factor(siteID,levels = site_order),fill=FertStatus))+
     geom_text(data = fung_rich_max_rich_letters, aes(x=siteID, y = 10 + max_value, label = sig_let), vjust=0, size=10)+
     geom_signif(data=pairwise_fert_fung_rich,aes(y_position = y_bot, xmin = x_min, xmax = x_max,annotations = annot_text), 
-                tip_length = 0,textsize = 8,manual = T)+
+                tip_length = 0,textsize = 10,manual = T)+
     facet_wrap(~Root_soil,nrow = 1)+scale_x_discrete(labels=site_labels,name=NULL)+theme_cowplot(font_size = 24)+
     scale_y_continuous(name = "Richness",limits = c(98,520))+theme(strip.text = element_blank(),strip.background = element_blank()))
 
