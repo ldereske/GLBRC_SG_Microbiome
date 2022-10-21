@@ -1080,7 +1080,7 @@ Total basepairs processed: 12,104,755,498 bp
 Total written (filtered):  9,691,315,718 bp (80.1%)
 ```
 
-I got an error with the second line of primer removal I think I need to a newer version of [cutadapt]{https://cutadapt.readthedocs.io/en/stable/installation.html}
+I got an error with the second line of primer removal I think I need to a newer version of [cutadapt](https://cutadapt.readthedocs.io/en/stable/installation.html)
 
 ```
 

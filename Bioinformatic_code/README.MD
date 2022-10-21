@@ -1,4 +1,4 @@
-#Bioformatic code used for the processing of the switchgrass microbiome
+# Bioformatic code used for the processing of the switchgrass microbiome
 
 ### HPCC_Bacterial_Soil_Root_USEARCH_pipeline.MD
 The bioinformatic pipeline used to process the bacterial sequences from the GLBRC Marginal Lands Experiment. Raw reads are available in NCBI Short Read Archive under BioProject PRJNA733764.

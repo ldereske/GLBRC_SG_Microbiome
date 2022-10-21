@@ -1,7 +1,7 @@
 # Code for the analysis of the switchgrass microbiome in the R environment
 
 ### OTU_bacterial_fungal_pre_processing.R
-Code for the pre processing and assessment of microbial communities post bioinformatic processing detailed in the Bioinformatic_code directory of this repository. The files are not provided for this processing due the inclusion of samples that are not published. Please contact [Lukas Bell-Dereske]{www.ecobelldereske.com} for the raw data or find the raw sequences in the NCBI Short Read Archive under BioProject PRJNA733764 for bacterial communities and PRJNA799201 for fungal communities.
+Code for the pre processing and assessment of microbial communities post bioinformatic processing detailed in the Bioinformatic_code directory of this repository. The files are not provided for this processing due the inclusion of samples that are not published. Please contact [Lukas Bell-Dereske](www.ecobelldereske.com) for the raw data or find the raw sequences in the NCBI Short Read Archive under BioProject PRJNA733764 for bacterial communities and PRJNA799201 for fungal communities.
 
 This code was used to produce 
 + Tables S3-S5
@@ -9,7 +9,7 @@ This code was used to produce
 ### NMDS_MLE_graph_PERMANOVA.R and NMDS_GDM_Lux_Arbor_graph_PERMANOVA.R  
 The analyses and plotting of community composition from both bacterial and fungal communities. 
 This code was used to produce 
-+ Tables 1&2 with the PERMANOVA analyzed using [PRIMER v6]{https://www.researchgate.net/publication/235425881_Primer_v6_User_ManualTutorial}
++ Tables 1&2 with the PERMANOVA analyzed using [PRIMER v6](https://www.researchgate.net/publication/235425881_Primer_v6_User_ManualTutorial)
 + Table 3 
 + Tables S10
 + Figures 1-3
@@ -43,7 +43,7 @@ This code was used to produce
 
 
 ### FunGuild_database_creation.R                        
-Code for the creation and processing of the [FunGuild]{https://github.com/UMNFuN/FUNGuild} database used for the charaterization of the traits in the core fungal community.
+Code for the creation and processing of the [FunGuild](https://github.com/UMNFuN/FUNGuild) database used for the charaterization of the traits in the core fungal community.
 
 This code was used to produce 
                             
