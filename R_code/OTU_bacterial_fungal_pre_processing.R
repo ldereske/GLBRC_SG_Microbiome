@@ -1,4 +1,17 @@
 
+## ---------------------------
+##
+## Script name: Preprocessing of the microbial communities
+##
+## Purpose of script: Preprocessing and creation of community tables used for the analyses of 
+## bacteria and fungi of roots and soils of switchgrass (Panicum virgatum)
+##
+## Author: Lukas Bell-Dereske
+##
+## Email: lukas.dereske@gmail.com
+##
+## ---------------------------
+
 library(here)
 library(phyloseq)
 library(plyr); library(dplyr)

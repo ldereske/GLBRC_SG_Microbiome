@@ -1,3 +1,18 @@
+## ---------------------------
+##
+## Script name: Temporal charaterization og the similarity between root and soil communities 
+## across the Lux Arbor Growing Season
+##
+## Purpose of script: Modelling and graphing of the similarity of roots and soil communities of 
+## switchgrass (Panicum virgatum) to determine the timing of peak similarity
+##
+## Author: Lukas Bell-Dereske
+##
+## Email: lukas.dereske@gmail.com
+##
+## ---------------------------
+
+
 library(here)
 #here::i_am("R_code/OTU_bacterial_fungal_community_analyses_202110011.R")
 library(phyloseq)

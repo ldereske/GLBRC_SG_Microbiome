@@ -1,3 +1,19 @@
+## ---------------------------
+##
+## Script name: Generalized dissimilarity modelling of switchgrass microbiomes of 
+## the Marginal Lands Experiment
+##
+## Purpose of script: Modelling of the community change in the bacteria and fungi
+## of roots and soils of switchgrass (Panicum virgatum) 
+## using generalized dissimilarity models (GDMS)
+##
+## Author: Lukas Bell-Dereske
+##
+## Email: lukas.dereske@gmail.com
+##
+## ---------------------------
+
+
 library(here)
 #here::i_am("R_code/OTU_bacterial_fungal_community_analyses_202110011.R")
 library(phyloseq)

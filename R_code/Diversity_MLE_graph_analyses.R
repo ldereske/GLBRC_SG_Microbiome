@@ -1,3 +1,18 @@
+## ---------------------------
+##
+## Script name: Community richness and diversity of the switchgrass microbiomes of 
+## the Marginal Lands Experiment
+##
+## Purpose of script: Estimating and graphing the richness and diversity of the bacteria and fungi
+## of roots and soils of switchgrass (Panicum virgatum)
+##
+## Author: Lukas Bell-Dereske
+##
+## Email: lukas.dereske@gmail.com
+##
+## ---------------------------
+
+
 library(here)
 #here::i_am("R_code/OTU_bacterial_fungal_community_analyses_202110011.R")
 library(phyloseq)

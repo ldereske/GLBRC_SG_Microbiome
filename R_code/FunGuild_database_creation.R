@@ -1,3 +1,18 @@
+## ---------------------------
+##
+## Script name: Creation of taxonomic table for classification with FunGuild
+##
+## Purpose of script: Creation and formatting of the fungal taxonomic table
+## for using in characterization of the functional profile of the community using 
+## FunGuild. Finally, the formatting of the FunGuild table.
+##
+## Author: Lukas Bell-Dereske
+##
+## Email: lukas.dereske@gmail.com
+##
+## ---------------------------
+
+
 library(here)
 library(stringr)
 

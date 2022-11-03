@@ -1,3 +1,20 @@
+
+## ---------------------------
+##
+## Script name: Community dispersion of the switchgrass microbiomes cross 
+## the Lux Arbor Growing Season
+##
+## Purpose of script: Graphing and characterization of the dispersion in 
+## bacterial and fungal communities 
+## of roots and soils of switchgrass (Panicum virgatum)
+##
+## Author: Lukas Bell-Dereske
+##
+## Email: lukas.dereske@gmail.com
+##
+## ---------------------------
+
+
 library(here)
 #here::i_am("R_code/OTU_bacterial_fungal_community_analyses_202110011.R")
 library(phyloseq)

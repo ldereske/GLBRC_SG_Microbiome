@@ -1,3 +1,18 @@
+## ---------------------------
+##
+## Script name: Community correlation between bacteria and fungi in the switchgrass microbiomes of 
+## the Marginal Lands Experiment
+##
+## Purpose of script: Analysis and graphing of the correspondence between bacteria and fungi
+## in roots and soils of switchgrass (Panicum virgatum)
+##
+## Author: Lukas Bell-Dereske
+##
+## Email: lukas.dereske@gmail.com
+##
+## ---------------------------
+
+
 library(here)
 #here::i_am("R_code/OTU_bacterial_fungal_community_analyses_202110011.R")
 library(phyloseq)

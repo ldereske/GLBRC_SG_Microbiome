@@ -1,3 +1,17 @@
+## ---------------------------
+##
+## Script name: Core Taxa from switchgrass microbiomes across the Lux Arbor Growing Season
+##
+## Purpose of script: Identification and graphing of Core taxa from the bacterial and fungal communities 
+## of roots and soils of switchgrass (Panicum virgatum)
+##
+## Author: Lukas Bell-Dereske
+##
+## Email: lukas.dereske@gmail.com
+##
+## ---------------------------
+
+
 library(here)
 #here::i_am("R_code/OTU_bacterial_fungal_community_analyses_202110011.R")
 library(phyloseq)
