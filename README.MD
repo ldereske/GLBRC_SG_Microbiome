@@ -1,4 +1,4 @@
-# Here is the repository for the analyses of the GLBRC fungal and bacterial community of roots and soils in G5 Switchgrass plots
+# Code for the analysis of spatiotemporal dynamics in switchgrass root and soil microbiomes
 
 This is a manuscript that is currently under review. The project explored the spatiotemporal structure of the switchgrass microbiome of the [GLBRC Marginal Lands Experiment](https://lter.kbs.msu.edu/research/long-term-experiments/marginal-land-experiment/). 
 
