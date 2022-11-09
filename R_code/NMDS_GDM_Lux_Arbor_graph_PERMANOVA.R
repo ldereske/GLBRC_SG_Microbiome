@@ -24,6 +24,7 @@ library(cowplot)
 library(vegan)
 library(gdm)
 library(ggnewscale)
+library(otuSummary)
 "%w/o%" <- function(x,y)!('%in%'(x,y))
 Sys.setenv("LANGUAGE"="En")
 Sys.setlocale("LC_ALL", "English")
@@ -384,7 +385,6 @@ colnames(root_bact_comb_splin_uncert)
 colnames(soil_bact_comb_splin_uncert)
 root_soil_bact_comb_splin_uncert=rbind(root_bact_comb_splin_uncert,soil_bact_comb_splin_uncert)
 
-saveRDS(root_soil_bact_comb_splin_uncert,here::here("R_files","GLBRC018_OTU_bact_MMPRNT_splines_uncertainy.rds"))
 
 
 #Fungi
@@ -518,16 +518,6 @@ colnames(root_fung_comb_splin_uncert)
 colnames(soil_fung_comb_splin_uncert)
 root_soil_fung_comb_splin_uncert=rbind(root_fung_comb_splin_uncert,soil_fung_comb_splin_uncert)
 
-saveRDS(root_soil_fung_comb_splin_uncert,here::here("R_files","GLBRC018_OTU_fung_MMPRNT_splines_uncertainy.rds"))
-
-
-
-
-
-
-root_soil_bact_comb_splin_uncert=readRDS(here::here("R_files","GLBRC018_OTU_bact_MMPRNT_splines_uncertainy.rds"))
-root_soil_fung_comb_splin_uncert=readRDS(here::here("R_files","GLBRC018_OTU_fung_MMPRNT_splines_uncertainy.rds"))
-
 
 #Mark the actual sampling dates
 
@@ -554,14 +544,14 @@ GLBRC018_OTU_bact_MMPRNT_LUX_G5_soil_dis <-
                 colname = c("sample1", "sample2", "distance"))#total distance 
 
 GLBRC018_OTU_bact_MMPRNT_LUX_G5_soil_dis_m2=merge(GLBRC018_OTU_bact_MMPRNT_LUX_G5_soil_dis,
-                                                  sample_data(GLBRC018_OTU_bact_MMPRNT_LUX_G5_soil_MR)[,c("plotRep")],
+                                                  sample_data(GLBRC018_OTU_bact_MMPRNT_LUX_G5_soil)[,c("plotRep")],
                                                   by.x = "sample1",by.y="row.names")
 head(GLBRC018_OTU_bact_MMPRNT_LUX_G5_soil_dis_m2)
 colnames(GLBRC018_OTU_bact_MMPRNT_LUX_G5_soil_dis_m2)[colnames(GLBRC018_OTU_bact_MMPRNT_LUX_G5_soil_dis_m2)=="plotRep"]="s1_plotRep"
 
 
 GLBRC018_OTU_bact_MMPRNT_LUX_G5_soil_dis_m=merge(GLBRC018_OTU_bact_MMPRNT_LUX_G5_soil_dis_m2,
-                                                 sample_data(GLBRC018_OTU_bact_MMPRNT_LUX_G5_soil_MR)[,c("plotRep")],
+                                                 sample_data(GLBRC018_OTU_bact_MMPRNT_LUX_G5_soil)[,c("plotRep")],
                                                  by.x = "sample2",by.y="row.names")
 
 head(GLBRC018_OTU_bact_MMPRNT_LUX_G5_soil_dis_m)
