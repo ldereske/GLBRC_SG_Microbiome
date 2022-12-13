@@ -19,7 +19,7 @@ nano fasta_info_fq.sh
 !#/bin/bash
 for fq in *.fastq
 do
-/mnt/research/rdp/public/thirdParty/usearch10.0.240_i86linux64 -fastx_info $fq -output fastq_info/$fq
+usearch10.0.240 -fastx_info $fq -output fastq_info/$fq
 done
 ```
 
@@ -64,7 +64,7 @@ cd MMPRNT018
 mkdir 20190617_16S-V4_PE250
 cd /mnt/research/EvansLab/MMPRNT_2018/20190617_16S-V4_PE250/
 
-/mnt/research/rdp/public/thirdParty/usearch10.0.240_i86linux64 -fastq_mergepairs *R1*.fastq -relabel @ -fastqout /mnt/research/EvansLab/Lukas/MMPRNT018/20190617_16S-V4_PE250/combined_merged_20190617_16S-V4_PE250.fastq  -tabbedout /mnt/research/EvansLab/Lukas/MMPRNT018/20190617_16S-V4_PE250/combined_merged_20190617_16S-V4_PE250_pair_report.txt -alnout /mnt/research/EvansLab/Lukas/MMPRNT018/20190617_16S-V4_PE250/combined_merged_20190617_16S-V4_PE250_pair_aln.txt
+usearch10.0.240 -fastq_mergepairs *R1*.fastq -relabel @ -fastqout /mnt/research/EvansLab/Lukas/MMPRNT018/20190617_16S-V4_PE250/combined_merged_20190617_16S-V4_PE250.fastq  -tabbedout /mnt/research/EvansLab/Lukas/MMPRNT018/20190617_16S-V4_PE250/combined_merged_20190617_16S-V4_PE250_pair_report.txt -alnout /mnt/research/EvansLab/Lukas/MMPRNT018/20190617_16S-V4_PE250/combined_merged_20190617_16S-V4_PE250_pair_aln.txt
 
 ```
 09:09 722Mb   100.0% 61.8% merged
@@ -99,7 +99,7 @@ nano rev_trunc.sh
 
 for fq in *R2_001.fastq
 do
-  /mnt/research/rdp/public/thirdParty/usearch10.0.240_i86linux64 -fastx_truncate $fq -stripright 80 -fastqout trim_reverse_20190617_16S-V4_PE250/$fq
+  usearch10.0.240 -fastx_truncate $fq -stripright 80 -fastqout trim_reverse_20190617_16S-V4_PE250/$fq
 
 done
 ```
@@ -115,7 +115,7 @@ chmod +x rev_trunc.sh
 Now try to merge the sequences again with the truncated reverse reads.
 
 ```
-/mnt/research/rdp/public/thirdParty/usearch10.0.240_i86linux64 -fastq_mergepairs *R1*.fastq -reverse trim_reverse_20190617_16S-V4_PE250/*R2* -relabel @ -fastqout /mnt/research/EvansLab/Lukas/MMPRNT018/20190617_16S-V4_PE250/combined_merged_20190617_16S-V4_PE250_trunc.fastq  -tabbedout /mnt/research/EvansLab/Lukas/MMPRNT018/20190617_16S-V4_PE250/combined_merged_20190617_16S-V4_PE250_trunc_pair_report.txt -alnout /mnt/research/EvansLab/Lukas/MMPRNT018/20190617_16S-V4_PE250/combined_merged_20190617_16S-V4_PE250_trunc_pair_aln.txt
+usearch10.0.240 -fastq_mergepairs *R1*.fastq -reverse trim_reverse_20190617_16S-V4_PE250/*R2* -relabel @ -fastqout /mnt/research/EvansLab/Lukas/MMPRNT018/20190617_16S-V4_PE250/combined_merged_20190617_16S-V4_PE250_trunc.fastq  -tabbedout /mnt/research/EvansLab/Lukas/MMPRNT018/20190617_16S-V4_PE250/combined_merged_20190617_16S-V4_PE250_trunc_pair_report.txt -alnout /mnt/research/EvansLab/Lukas/MMPRNT018/20190617_16S-V4_PE250/combined_merged_20190617_16S-V4_PE250_trunc_pair_aln.txt
 ```
 Good merging 
 ```
@@ -141,7 +141,7 @@ Totals:
 ### 2b) let's check sequence quality of the merged seqs using USEARCH's [fastq_eestats2](https://www.drive5.com/usearch/manual/cmd_fastq_eestats2.html).
 
 ```
-/mnt/research/rdp/public/thirdParty/usearch11.0.667_i86linux64 -fastq_eestats2 /mnt/research/EvansLab/Lukas/MMPRNT018/20190617_16S-V4_PE250/combined_merged_20190617_16S-V4_PE250_trunc.fastq -output /mnt/research/EvansLab/Lukas/MMPRNT018/20190617_16S-V4_PE250/combined_merged_20190617_16S-V4_PE250_trunc_eestats2.txt
+usearch11.0.667 -fastq_eestats2 /mnt/research/EvansLab/Lukas/MMPRNT018/20190617_16S-V4_PE250/combined_merged_20190617_16S-V4_PE250_trunc.fastq -output /mnt/research/EvansLab/Lukas/MMPRNT018/20190617_16S-V4_PE250/combined_merged_20190617_16S-V4_PE250_trunc_eestats2.txt
 ```
 Quality and length look good
 ```
@@ -201,7 +201,7 @@ less /mnt/research/EvansLab/Lukas/MMPRNT018/20190617_16S-V4_PE250/renamed_cut_co
 ```
 Get sample names to check that all of the samples are present
 ```
-/mnt/research/rdp/public/thirdParty/usearch10.0.240_i86linux64 -fastx_get_sample_names /mnt/research/EvansLab/Lukas/MMPRNT018/20190617_16S-V4_PE250/renamed_cut_combined_merged_20190617_16S-V4_PE250_trunc.fastq -output /mnt/research/EvansLab/Lukas/MMPRNT018/20190617_16S-V4_PE250/renamed_cut_combined_merged_20190617_16S-V4_PE250_trunc_samples.txt
+usearch10.0.240 -fastx_get_sample_names /mnt/research/EvansLab/Lukas/MMPRNT018/20190617_16S-V4_PE250/renamed_cut_combined_merged_20190617_16S-V4_PE250_trunc.fastq -output /mnt/research/EvansLab/Lukas/MMPRNT018/20190617_16S-V4_PE250/renamed_cut_combined_merged_20190617_16S-V4_PE250_trunc_samples.txt
 ```
 ```
 00:30 37Mb    100.0% 317 samples found
@@ -232,7 +232,7 @@ nano fasta_info_fq.sh
 !#/bin/bash
 for fq in *.fastq
 do
-/mnt/research/rdp/public/thirdParty/usearch10.0.240_i86linux64 -fastx_info $fq -output fastq_info/$fq
+usearch10.0.240 -fastx_info $fq -output fastq_info/$fq
 done
 ```
 
@@ -277,7 +277,7 @@ cd /mnt/research/EvansLab/Lukas/MMPRNT018
 mkdir 20190614_16S-V4_PE250
 cd /mnt/research/EvansLab/MMPRNT_2018/20190614_16S-V4_PE250/
 
-/mnt/research/rdp/public/thirdParty/usearch10.0.240_i86linux64 -fastq_mergepairs *R1*.fastq -relabel @ -fastqout /mnt/research/EvansLab/Lukas/MMPRNT018/20190614_16S-V4_PE250/combined_20190614_16S-V4_PE250.fastq  -tabbedout /mnt/research/EvansLab/Lukas/MMPRNT018/20190614_16S-V4_PE250/combined_merged_20190614_16S-V4_PE250_pair_report.txt -alnout /mnt/research/EvansLab/Lukas/MMPRNT018/20190614_16S-V4_PE250/combined_merged_20190614_16S-V4_PE250_pair_aln.txt
+usearch10.0.240 -fastq_mergepairs *R1*.fastq -relabel @ -fastqout /mnt/research/EvansLab/Lukas/MMPRNT018/20190614_16S-V4_PE250/combined_20190614_16S-V4_PE250.fastq  -tabbedout /mnt/research/EvansLab/Lukas/MMPRNT018/20190614_16S-V4_PE250/combined_merged_20190614_16S-V4_PE250_pair_report.txt -alnout /mnt/research/EvansLab/Lukas/MMPRNT018/20190614_16S-V4_PE250/combined_merged_20190614_16S-V4_PE250_pair_aln.txt
 
 ```
 07:42 722Mb   100.0% 72.3% merged
@@ -307,7 +307,7 @@ Looks like an okay merge
 ### 2b) let's check sequence quality of the merged seqs using USEARCH's [fastq_eestats2](https://www.drive5.com/usearch/manual/cmd_fastq_eestats2.html).
 
 ```
-/mnt/research/rdp/public/thirdParty/usearch11.0.667_i86linux64 -fastq_eestats2 /mnt/research/EvansLab/Lukas/MMPRNT018/20190614_16S-V4_PE250/combined_20190614_16S-V4_PE250.fastq -output /mnt/research/EvansLab/Lukas/MMPRNT018/20190614_16S-V4_PE250/combined_20190614_16S-V4_PE250_eestats2.txt
+usearch11.0.667 -fastq_eestats2 /mnt/research/EvansLab/Lukas/MMPRNT018/20190614_16S-V4_PE250/combined_20190614_16S-V4_PE250.fastq -output /mnt/research/EvansLab/Lukas/MMPRNT018/20190614_16S-V4_PE250/combined_20190614_16S-V4_PE250_eestats2.txt
 ```
 Quality and length look good
 ```
@@ -369,7 +369,7 @@ less /mnt/research/EvansLab/Lukas/MMPRNT018/20190614_16S-V4_PE250/renamed_cut_co
 ```
 Get sample names to check that all of the samples are present
 ```
-/mnt/research/rdp/public/thirdParty/usearch10.0.240_i86linux64 -fastx_get_sample_names /mnt/research/EvansLab/Lukas/MMPRNT018/20190614_16S-V4_PE250/renamed_cut_combined_20190614_16S-V4_PE250.fastq -output /mnt/research/EvansLab/Lukas/MMPRNT018/20190614_16S-V4_PE250/renamed_cut_combined_20190614_16S-V4_PE250_samples.txt
+usearch10.0.240 -fastx_get_sample_names /mnt/research/EvansLab/Lukas/MMPRNT018/20190614_16S-V4_PE250/renamed_cut_combined_20190614_16S-V4_PE250.fastq -output /mnt/research/EvansLab/Lukas/MMPRNT018/20190614_16S-V4_PE250/renamed_cut_combined_20190614_16S-V4_PE250_samples.txt
 ```
 ```
 00:25 37Mb    100.0% 315 samples found
@@ -398,7 +398,7 @@ nano fasta_info_fq.sh
 #!/bin/bash --login
 for fq in *.fastq
 do
-/mnt/research/rdp/public/thirdParty/usearch10.0.240_i86linux64 -fastx_info $fq -output fastq_info/$fq
+usearch10.0.240 -fastx_info $fq -output fastq_info/$fq
 done
 ```
 
@@ -445,7 +445,7 @@ cd /mnt/research/EvansLab/Lukas/MMPRNT018
 mkdir 20190621_16S-V4_PE250
 cd /mnt/research/EvansLab/MMPRNT_2018/20190621_16S-V4_PE250/
 
-/mnt/research/rdp/public/thirdParty/usearch10.0.240_i86linux64 -fastq_mergepairs *R1*.fastq -relabel @ -fastqout /mnt/research/EvansLab/Lukas/MMPRNT018/20190621_16S-V4_PE250/combined_20190621_16S-V4_PE250.fastq  -tabbedout /mnt/research/EvansLab/Lukas/MMPRNT018/20190621_16S-V4_PE250/combined_merged_20190621_16S-V4_PE250_pair_report.txt -alnout /mnt/research/EvansLab/Lukas/MMPRNT018/20190621_16S-V4_PE250/combined_merged_20190621_16S-V4_PE250_pair_aln.txt
+usearch10.0.240 -fastq_mergepairs *R1*.fastq -relabel @ -fastqout /mnt/research/EvansLab/Lukas/MMPRNT018/20190621_16S-V4_PE250/combined_20190621_16S-V4_PE250.fastq  -tabbedout /mnt/research/EvansLab/Lukas/MMPRNT018/20190621_16S-V4_PE250/combined_merged_20190621_16S-V4_PE250_pair_report.txt -alnout /mnt/research/EvansLab/Lukas/MMPRNT018/20190621_16S-V4_PE250/combined_merged_20190621_16S-V4_PE250_pair_aln.txt
 
 ```
 07:16 307Mb   100.0% 48.7% merged
@@ -483,7 +483,7 @@ nano rev_trunc.sh
 
 for fq in *R2_001.fastq
 do
-  /mnt/research/rdp/public/thirdParty/usearch10.0.240_i86linux64 -fastx_truncate $fq -stripright 80 -fastqout trim_reverse_20190621_16S-V4_PE250/$fq
+  usearch10.0.240 -fastx_truncate $fq -stripright 80 -fastqout trim_reverse_20190621_16S-V4_PE250/$fq
 
 done
 ```
@@ -499,7 +499,7 @@ chmod +x rev_trunc.sh
 Now try to merge the sequences again with the truncated reverse reads.
 
 ```
-/mnt/research/rdp/public/thirdParty/usearch10.0.240_i86linux64 -fastq_mergepairs *R1*.fastq -reverse trim_reverse_20190621_16S-V4_PE250/*R2* -relabel @ -fastqout /mnt/research/EvansLab/Lukas/MMPRNT018/20190621_16S-V4_PE250/combined_merged_20190621_16S-V4_PE250_trunc.fastq  -tabbedout /mnt/research/EvansLab/Lukas/MMPRNT018/20190621_16S-V4_PE250/combined_merged_20190621_16S-V4_PE250_trunc_pair_report.txt -alnout /mnt/research/EvansLab/Lukas/MMPRNT018/20190621_16S-V4_PE250/combined_merged_20190621_16S-V4_PE250_trunc_pair_aln.txt
+usearch10.0.240 -fastq_mergepairs *R1*.fastq -reverse trim_reverse_20190621_16S-V4_PE250/*R2* -relabel @ -fastqout /mnt/research/EvansLab/Lukas/MMPRNT018/20190621_16S-V4_PE250/combined_merged_20190621_16S-V4_PE250_trunc.fastq  -tabbedout /mnt/research/EvansLab/Lukas/MMPRNT018/20190621_16S-V4_PE250/combined_merged_20190621_16S-V4_PE250_trunc_pair_report.txt -alnout /mnt/research/EvansLab/Lukas/MMPRNT018/20190621_16S-V4_PE250/combined_merged_20190621_16S-V4_PE250_trunc_pair_aln.txt
 ```
 Okay merging 
 ```
@@ -527,7 +527,7 @@ Totals:
 ### 2b) let's check sequence quality of the merged seqs using USEARCH's [fastq_eestats2](https://www.drive5.com/usearch/manual/cmd_fastq_eestats2.html).
 
 ```
-/mnt/research/rdp/public/thirdParty/usearch11.0.667_i86linux64 -fastq_eestats2 /mnt/research/EvansLab/Lukas/MMPRNT018/20190621_16S-V4_PE250/combined_merged_20190621_16S-V4_PE250_trunc.fastq -output /mnt/research/EvansLab/Lukas/MMPRNT018/20190621_16S-V4_PE250/combined_merged_20190621_16S-V4_PE250_trunc_eestats2.txt
+usearch11.0.667 -fastq_eestats2 /mnt/research/EvansLab/Lukas/MMPRNT018/20190621_16S-V4_PE250/combined_merged_20190621_16S-V4_PE250_trunc.fastq -output /mnt/research/EvansLab/Lukas/MMPRNT018/20190621_16S-V4_PE250/combined_merged_20190621_16S-V4_PE250_trunc_eestats2.txt
 ```
 Quality and length look good
 ```
@@ -588,7 +588,7 @@ less /mnt/research/EvansLab/Lukas/MMPRNT018/20190621_16S-V4_PE250/rename_cut_com
 ```
 Get sample names to check that all of the samples are present
 ```
-/mnt/research/rdp/public/thirdParty/usearch10.0.240_i86linux64 -fastx_get_sample_names /mnt/research/EvansLab/Lukas/MMPRNT018/20190621_16S-V4_PE250/rename_cut_combined_merged_20190621_16S-V4_PE250_trunc.fastq -output /mnt/research/EvansLab/Lukas/MMPRNT018/20190621_16S-V4_PE250/rename_cut_combined_merged_20190621_16S-V4_PE250_trunc_samples.txt
+usearch10.0.240 -fastx_get_sample_names /mnt/research/EvansLab/Lukas/MMPRNT018/20190621_16S-V4_PE250/rename_cut_combined_merged_20190621_16S-V4_PE250_trunc.fastq -output /mnt/research/EvansLab/Lukas/MMPRNT018/20190621_16S-V4_PE250/rename_cut_combined_merged_20190621_16S-V4_PE250_trunc_samples.txt
 ```
 ```
 00:25 37Mb    100.0% 315 samples found
@@ -705,7 +705,7 @@ nano fasta_info_fq.sh
 #!/bin/bash --login
 for fq in *.fastq
 do
-/mnt/research/rdp/public/thirdParty/usearch10.0.240_i86linux64 -fastx_info $fq -output fastq_info/$fq
+usearch10.0.240 -fastx_info $fq -output fastq_info/$fq
 done
 ```
 
@@ -762,7 +762,7 @@ nano merg_seq_Lib1_GLBRC018_soil_bact.sbatch
 
 cd /mnt/research/EvansLab/GLBRC_SG_Roots/Field2018_Bac/Lib_1_backup_Bac/QIIME2_demux/output/demultiplexed-seqs
 
-/mnt/research/rdp/public/thirdParty/usearch11.0.667_i86linux64 -fastq_mergepairs *_R1*.fastq -relabel @ -fastqout /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Bacterial_libs/Lib1_bact/merged_Lib1_16S.fastq  -tabbedout /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Bacterial_libs/Lib1_bact/merged_Lib1_16S_pair_report.txt -fastqout_notmerged_fwd /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Bacterial_libs/Lib1_bact/NO_Match_16S_Amplicon_PE300_ITS1_for.fastq -fastqout_notmerged_rev /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Bacterial_libs/Lib1_bact/NO_Match_16S_Amplicon_PE300_ITS1_rev.fastq
+usearch11.0.667 -fastq_mergepairs *_R1*.fastq -relabel @ -fastqout /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Bacterial_libs/Lib1_bact/merged_Lib1_16S.fastq  -tabbedout /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Bacterial_libs/Lib1_bact/merged_Lib1_16S_pair_report.txt -fastqout_notmerged_fwd /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Bacterial_libs/Lib1_bact/NO_Match_16S_Amplicon_PE300_ITS1_for.fastq -fastqout_notmerged_rev /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Bacterial_libs/Lib1_bact/NO_Match_16S_Amplicon_PE300_ITS1_rev.fastq
 
 ###End
 
@@ -799,7 +799,7 @@ Totals:
 ###Check sample names to make sure all of the samples are present
 
 ```
-/mnt/research/rdp/public/thirdParty/usearch11.0.667_i86linux64 -fastx_get_sample_names /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Bacterial_libs/Lib1_bact/merged_Lib1_16S.fastq -output /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Bacterial_libs/Lib1_bact/merged_merged_Lib1_16S_samples.txt
+usearch11.0.667 -fastx_get_sample_names /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Bacterial_libs/Lib1_bact/merged_Lib1_16S.fastq -output /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Bacterial_libs/Lib1_bact/merged_merged_Lib1_16S_samples.txt
 ```
 ```
 #Should be 368 samples
@@ -922,7 +922,7 @@ nano fasta_info_fq.sh
 #!/bin/bash --login
 for fq in *.fastq
 do
-/mnt/research/rdp/public/thirdParty/usearch10.0.240_i86linux64 -fastx_info $fq -output fastq_info/$fq
+usearch10.0.240 -fastx_info $fq -output fastq_info/$fq
 done
 ```
 
@@ -979,7 +979,7 @@ nano merg_seq_Lib2_GLBRC018_soil_bact.sbatch
 
 cd /mnt/research/EvansLab/GLBRC_SG_Roots/Field2018_Bac/Lib_2_backup_Bac/QIIME2_demux/output/demultiplexed-seqs
 
-/mnt/research/rdp/public/thirdParty/usearch11.0.667_i86linux64 -fastq_mergepairs *_R1*.fastq -relabel @ -fastqout /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Bacterial_libs/Lib2_bact/merged_Lib2_16S.fastq  -tabbedout /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Bacterial_libs/Lib2_bact/merged_Lib2_16S_pair_report.txt -fastqout_notmerged_fwd /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Bacterial_libs/Lib2_bact/NO_Match_16S_Amplicon_PE300_ITS1_for.fastq -fastqout_notmerged_rev /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Bacterial_libs/Lib2_bact/NO_Match_16S_Amplicon_PE300_ITS1_rev.fastq
+usearch11.0.667 -fastq_mergepairs *_R1*.fastq -relabel @ -fastqout /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Bacterial_libs/Lib2_bact/merged_Lib2_16S.fastq  -tabbedout /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Bacterial_libs/Lib2_bact/merged_Lib2_16S_pair_report.txt -fastqout_notmerged_fwd /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Bacterial_libs/Lib2_bact/NO_Match_16S_Amplicon_PE300_ITS1_for.fastq -fastqout_notmerged_rev /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Bacterial_libs/Lib2_bact/NO_Match_16S_Amplicon_PE300_ITS1_rev.fastq
 
 ###End
 
@@ -1013,7 +1013,7 @@ Totals:
 ###Check sample names to make sure all of the samples are present
 
 ```
-/mnt/research/rdp/public/thirdParty/usearch11.0.667_i86linux64 -fastx_get_sample_names /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Bacterial_libs/Lib2_bact/merged_Lib2_16S.fastq -output /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Bacterial_libs/Lib2_bact/merged_merged_Lib2_16S_samples.txt
+usearch11.0.667 -fastx_get_sample_names /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Bacterial_libs/Lib2_bact/merged_Lib2_16S.fastq -output /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Bacterial_libs/Lib2_bact/merged_merged_Lib2_16S_samples.txt
 ```
 ```
 #Should be 408 samples 
@@ -1159,7 +1159,7 @@ Before we continue, you may want to check if the sample names are formatted corr
 Additionally, this is a good opportunity to double check that all of your samples merged and have unique IDs using [fastx_get_sample_names](https://www.drive5.com/usearch/manual/cmd_fastx_get_sample_names.html)
 
 ```
-/mnt/research/rdp/public/thirdParty/usearch11.0.667_i86linux64 -fastx_get_sample_names combined_soil_roots_merged_16S_GLBRC018.fastq -output combined_soil_roots_merged_16S_GLBRC018_samples.txt
+usearch11.0.667 -fastx_get_sample_names combined_soil_roots_merged_16S_GLBRC018.fastq -output combined_soil_roots_merged_16S_GLBRC018_samples.txt
 ```
 ```
 #Shoud be 317 + 315 + 315 + 368 + 388 = 1703
@@ -1192,9 +1192,9 @@ nano filter_comb_GLBRC018_root_bact.sbatch
 
 cd  /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Bacterial_libs/ 
 
-/mnt/research/rdp/public/thirdParty/usearch11.0.667_i86linux64 -fastq_filter combined_soil_roots_merged_16S_GLBRC018.fastq -fastq_maxee 0.1 -fastq_trunclen 250 -fastaout combined_soil_roots_merged_16S_GLBRC018_fil.fasta
+usearch11.0.667 -fastq_filter combined_soil_roots_merged_16S_GLBRC018.fastq -fastq_maxee 0.1 -fastq_trunclen 250 -fastaout combined_soil_roots_merged_16S_GLBRC018_fil.fasta
 
-/mnt/research/rdp/public/thirdParty/usearch11.0.667_i86linux64 -filter_phix combined_soil_roots_merged_16S_GLBRC018_fil.fasta -output combined_soil_roots_merged_16S_GLBRC018_phix_fil.fasta  -alnout combined_soil_roots_merged_16S_GLBRC018_phix_hits.txt
+usearch11.0.667 -filter_phix combined_soil_roots_merged_16S_GLBRC018_fil.fasta -output combined_soil_roots_merged_16S_GLBRC018_phix_fil.fasta  -alnout combined_soil_roots_merged_16S_GLBRC018_phix_hits.txt
 
 
 
@@ -1249,9 +1249,9 @@ nano derep_OTU_B_clustering_GLBRC018.sbatch
 #SBATCH --mail-user=belldere@msu.edu
 cd  /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Bacterial_libs/ 
 
-/mnt/research/rdp/public/thirdParty/usearch11.0.667_i86linux64 -fastx_uniques combined_soil_roots_merged_16S_GLBRC018_phix_fil.fasta  -fastaout uniques_combined_soil_roots_merged_16S_GLBRC018_phix_fil.fa -sizeout
+usearch11.0.667 -fastx_uniques combined_soil_roots_merged_16S_GLBRC018_phix_fil.fasta  -fastaout uniques_combined_soil_roots_merged_16S_GLBRC018_phix_fil.fa -sizeout
 
-/mnt/research/rdp/public/thirdParty/usearch11.0.667_i86linux64 -cluster_otus uniques_combined_soil_roots_merged_16S_GLBRC018_phix_fil.fa -otus rep_set_combined_soil_roots_merged_16S_GLBRC018_otus.fasta -uparseout combined_soil_roots_merged_16S_GLBRC018_otus_uparse.txt -relabel OTU
+usearch11.0.667 -cluster_otus uniques_combined_soil_roots_merged_16S_GLBRC018_phix_fil.fa -otus rep_set_combined_soil_roots_merged_16S_GLBRC018_otus.fasta -uparseout combined_soil_roots_merged_16S_GLBRC018_otus_uparse.txt -relabel OTU
 
 
 
@@ -1302,7 +1302,7 @@ nano OTU_mapping_GLBRC018_16S.sbatch
 
 cd  /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Bacterial_libs/ 
 
-/mnt/research/rdp/public/thirdParty/usearch11.0.667_i86linux64 -otutab combined_soil_roots_merged_16S_GLBRC018.fastq -otus rep_set_combined_soil_roots_merged_16S_GLBRC018_otus.fasta -otutabout combined_soil_roots_merged_16S_GLBRC018_OTU_table.txt -notmatchedfq combined_soil_roots_merged_16S_GLBRC018_otu_unmapped.fq
+usearch11.0.667 -otutab combined_soil_roots_merged_16S_GLBRC018.fastq -otus rep_set_combined_soil_roots_merged_16S_GLBRC018_otus.fasta -otutabout combined_soil_roots_merged_16S_GLBRC018_OTU_table.txt -notmatchedfq combined_soil_roots_merged_16S_GLBRC018_otu_unmapped.fq
 
 
 
@@ -1348,9 +1348,9 @@ nano taxa_class_OTU_B_GLBRC018.sbatch
 
 cd  /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Bacterial_libs/ 
 
-/mnt/research/rdp/public/thirdParty/usearch11.0.667_i86linux64 -sintax rep_set_combined_soil_roots_merged_16S_GLBRC018_otus.fasta -db /mnt/research/EvansLab/Databases/Silva132_release/silva_16s_v123.fa -tabbedout combined_soil_roots_merged_16S_GLBRC018_otus_silva123_taxonomy.sintax -strand both
+usearch11.0.667 -sintax rep_set_combined_soil_roots_merged_16S_GLBRC018_otus.fasta -db /mnt/research/EvansLab/Databases/Silva132_release/silva_16s_v123.fa -tabbedout combined_soil_roots_merged_16S_GLBRC018_otus_silva123_taxonomy.sintax -strand both
 
-/mnt/research/rdp/public/thirdParty/usearch11.0.667_i86linux64 -sintax rep_set_combined_soil_roots_merged_16S_GLBRC018_otus.fasta -db /mnt/research/EvansLab/Databases/RDP_16S_v16_usearch/rdp_16s_v16.fa -tabbedout combined_soil_roots_merged_16S_GLBRC018_otus_RDP_v16_taxonomy.sintax -strand both
+usearch11.0.667 -sintax rep_set_combined_soil_roots_merged_16S_GLBRC018_otus.fasta -db /mnt/research/EvansLab/Databases/RDP_16S_v16_usearch/rdp_16s_v16.fa -tabbedout combined_soil_roots_merged_16S_GLBRC018_otus_RDP_v16_taxonomy.sintax -strand both
 
 ###end of .sbatch
 
