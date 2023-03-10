@@ -302,10 +302,10 @@ Date_F <- function(x){
 
 plot_grid(beta_lux_2panel,get_legend(lux_bact_betadisp_p3),ncol = 2,rel_widths = c(4,1))
 
-
+#NOT INCLUDED IN REPOSITORY
 ggsave(plot_grid(beta_lux_2panel,get_legend(lux_bact_betadisp_p3),ncol = 2,rel_widths = c(4,1)),
        filename = "Betadisp_boxplot_Lux_Arbor_date_color_p.png",path = here::here("Manuscript","Lux_Arbor_comm_figs"),width = 17,height =10)
 
 ggsave(plot_grid(beta_lux_2panel,get_legend(lux_bact_betadisp_p3),ncol = 2,rel_widths = c(4,1)),
        filename = "Betadisp_boxplot_Lux_Arbor_date_color_p.svg",path = here::here("Manuscript","Lux_Arbor_comm_figs"),width = 17,height =10)
-
+#NOT INCLUDED IN REPOSITORY

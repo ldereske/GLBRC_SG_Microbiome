@@ -72,7 +72,7 @@ dim(GLBRC_CON_FunGuild_raw_F)
 
 unique(GLBRC_CON_FunGuild_raw_F$confidenceRanking)
 unique(GLBRC_CON_FunGuild_raw_F$guild)
-#Creation of a summarized guild from taxa with multiple classications. 
+#Creation of a summarized guild from taxa with multiple classifications. 
 GLBRC_CON_FunGuild_raw_F$simp_guild=
   with(GLBRC_CON_FunGuild_raw_F,
        ifelse(guild=="Endophyte-Litter Saprotroph-Soil Saprotroph-Undefined Saprotroph"|

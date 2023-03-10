@@ -480,13 +480,14 @@ plot_grid(lux_fung_root_invSimp_p2,lux_fung_soil_invSimp_p2)
 
 plot_grid(rich_invSimp_LUX_4panel,get_legend(lux_bact_invsimp_p3.1),ncol = 2,rel_widths = c(4,1.5))
 
+
+#NOT INCLUDED IN REPOSITORY
 ggsave(plot_grid(rich_invSimp_LUX_4panel,get_legend(lux_bact_invsimp_p3.1),ncol = 2,rel_widths = c(4,1)),
        filename = "richness_invSimpson_boxplot_Lux_Arbor.png",path = here::here("Manuscript","Lux_Arbor_comm_figs"),width = 15,height =15)
 
 ggsave(plot_grid(rich_invSimp_LUX_4panel,get_legend(lux_bact_invsimp_p3.1),ncol = 2,rel_widths = c(4,1.5)),
        filename = "richness_invSimpson_boxplot_Lux_Arbor.svg",path = here::here("Manuscript","Lux_Arbor_comm_figs"),width = 15,height =15)
-
-
+#NOT INCLUDED IN REPOSITORY
 
 
 
