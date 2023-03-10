@@ -1,21 +1,29 @@
-Bact_demux_map_files/
-Fung_demux_map_files/
-Manuscript/
+
+## R Environment files that are not need for analyses
 .RData
 .Rhistory
-Bact_HPCC_out/Pedro_run/
-Bact_HPCC_out/Raw_qual_files/
-Fung_HPCC_out/Pedro_run/
-Fung_HPCC_out/Raw_qual_file/
-R_files/
-R_code/old_code/
 .Rproj.user/
+
+## Folders with data that is available on osf or is not needed for anlayses
+Publish_data/
+Bact_demux_map_files/
+Fung_demux_map_files/
 Bact_HPCC_out/
 Fung_HPCC_out/
 ABIOTIC_data/
-Publish_data/
-R_code/Bell-Dereske_etal_FungiBactSwitchgrass/
-R_files/GLBRC018_OTU_bact_MMPRNT_mock_bact_rar.RData
-R_files/GLBRC018_OTU_fung_MMPRNT_mock_fung_rar.RData
+
+## Folder with mock communitiy analyses that were beyond this manuscript
 Bacterial_mock/ 
 Fungal_mock/
+
+## Folder with files that were created during analyses but are not necessary for the paper
+R_files/
+
+## Subfolders of R_code where I keep past versions of code and test code
+R_code/old_code/
+R_code/R_functions/
+R_code/old_code/
+R_code/Bell-Dereske_etal_FungiBactSwitchgrass/
+
+## Folder with drafts of my manuscript
+Manuscript/
