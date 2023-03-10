@@ -12,7 +12,7 @@ FitNeutral <- function(otu_core) {
   spp <- t(otu_core[[5]])
   occ_abun <- otu_core[[4]]
   names(occ_abun)[names(occ_abun) == "otu"] <- "OTU_ID"
-  occ_abun %T>% print()
+  occ_abun %>% print()
   # source community pool
   meta <- otu_core[[6]]
   # using root as the pool gave weird results

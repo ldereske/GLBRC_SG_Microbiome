@@ -23,16 +23,16 @@ ExtractCoreFlex <- function(physeq, Var, method, Group=NULL, Level=NULL){
   if (min(sample_sums(physeq)) == max(sample_sums(physeq))) {
     print("Dataset is rarefied at a depth of:")
     nReads = min(sample_sums(physeq))
-    nReads %T>% print()
+    nReads %>% print()
     rare <- physeq
-    rare %T>% print()
+    rare %>% print()
     taxon <- as(tax_table(rare), "matrix")
     taxon <- as.data.frame(taxon)
-    dim(taxon)  %T>% print()
+    dim(taxon)  %>% print()
   } else {
     print("Performing Rarefaction. Minimum depth:")
     nReads = min(sample_sums(physeq))
-    nReads %T>% print()
+    nReads %>% print()
     rare <-
       rarefy_even_depth(
         physeq, sample.size = nReads,
@@ -59,14 +59,14 @@ ExtractCoreFlex <- function(physeq, Var, method, Group=NULL, Level=NULL){
     otu <- physeq1@otu_table %>% as("matrix")
     map <- physeq1@sam_data %>% as("data.frame")
     print("Grouping Factor")
-    map[,Group] %T>% print()
+    map[,Group] %>% print()
     taxon <- as(tax_table(physeq1), "matrix")
     taxon <- as.data.frame(taxon)
   }
   map$SampleID <- rownames(map)
   print("Check: dimension of datframe and metadata")
-  dim(otu) %T>% print() # funcitons form magrittr package
-  dim(map) %T>% print() 
+  dim(otu) %>% print() # funcitons form magrittr package
+  dim(map) %>% print() 
   # calculating occupancy and abundance
   otu_PA <-
     1 * ((otu > 0) == 1)                                             # presence-absence data
@@ -98,14 +98,14 @@ ExtractCoreFlex <- function(physeq, Var, method, Group=NULL, Level=NULL){
       sumG = sum(coreTime),
       nS = length(!!Var)* 2,
       Index = (sumF + sumG) / nS) # calculating weighting Index based on number of points detected
-  # PresenceSum %T>% print()
+  # PresenceSum %>% print()
   # ranking otus
   otu_ranked <- occ_abun %>%
     left_join(PresenceSum, by = "otu") %>%
     transmute(otu = otu,
               rank = Index) %>%
     arrange(desc(rank))
-  #otu_ranked %T>% print()
+  #otu_ranked %>% print()
   # calculating BC dissimilarity based on the 1st ranked OTU
   otu_start = otu_ranked$otu[1]
   start_matrix <- as.matrix(otu[otu_start, ])
@@ -161,7 +161,7 @@ ExtractCoreFlex <- function(physeq, Var, method, Group=NULL, Level=NULL){
     arrange(desc(-MeanBC)) %>%
     # Calculate proportion of the dissimilarity explained by the n number of ranked OTUs 
     mutate(proportionBC=MeanBC/max(MeanBC))
-  #BC_ranked %T>% print()
+  #BC_ranked %>% print()
   # Calculating the increase BC
   Increase=BC_ranked$MeanBC[-1]/BC_ranked$MeanBC[-length(BC_ranked$MeanBC)]
   increaseDF <- data.frame(IncreaseBC=c(0,(Increase)), rank=factor(c(1:(length(Increase)+1))))
@@ -176,7 +176,7 @@ ExtractCoreFlex <- function(physeq, Var, method, Group=NULL, Level=NULL){
     BC_ranked$fo_diffs <- sapply(1:nrow(BC_ranked), fo_difference)
     elbow <- which.max(BC_ranked$fo_diffs)
     core_otus <- otu_ranked$otu[1:elbow]
-    core_otus %T>% print()
+    core_otus %>% print()
   }
   # Creating threshold for core inclusion - last call method using a
   # final increase in BC similarity of equal or greater than number set by method
@@ -186,7 +186,7 @@ ExtractCoreFlex <- function(physeq, Var, method, Group=NULL, Level=NULL){
         subset(BC_ranked, IncreaseBC >= 1+(method*0.01))$rank)))
     # lastCall <- last(as.numeric(BC_ranked$rank[(BC_ranked$IncreaseBC>=1.02)]))
     core_otus <- otu_ranked$otu[1:lastCall]
-    core_otus %T>% print()
+    core_otus %>% print()
   }
   # Adding Core otus for reating occupancy abundance plot
   occ_abun$fill <- 'no'

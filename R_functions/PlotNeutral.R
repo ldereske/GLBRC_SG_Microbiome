@@ -27,17 +27,15 @@ PlotNeutral <- function(obs){
     geom_line(color='black', lty='twodash', size=0.7, data=obs1, aes(y=obs1$pred.upr, x=log10(obs1$p)), alpha=0.25)+
     geom_line(color='black', lty='twodash', size=0.7, data=obs1, aes(y=obs1$pred.lwr, x=log10(obs1$p)), alpha=0.25)+
     labs(x="Log10(mean abundance)", y="Occupancy") + #mean relative abundance
-    theme_classic() +
-    theme(plot.title = element_text(size = 8, face = "bold", hjust = 0.5)) +
-    theme(axis.title = element_text(angle = 0, size = 7, face = "bold")) +
-    theme(axis.text.x = element_text(angle = 0, size = 7, hjust = 0.5, vjust = 0.5)) +
-    theme(axis.text.y = element_text(angle = 0, size = 7, hjust = 0.5, vjust = 0.5)) +
+    theme(axis.title = element_text(angle = 0, face = "bold")) +
+    theme(axis.text.x = element_text(angle = 0, hjust = 0.5, vjust = 0.5)) +
+    theme(axis.text.y = element_text(angle = 0, hjust = 0.5, vjust = 0.5)) +
     theme(legend.key.height = unit(0.2, "cm"), legend.key.width = unit(0.3, "cm")) +
     theme(legend.title = element_text(size = 7, face = "bold"), legend.text = element_text(size = 7)) +
     theme(legend.position = "right") +
     annotate("text", -Inf, Inf, label = paste("italic(R)^2 ==", round(obs2$Rsqr, 3)),
-             parse = TRUE, size = 2.2, hjust = -0.2, vjust = 1.2) +
+             parse = TRUE, size = 8, hjust = -0.2, vjust = 1.2) +
     annotate("text", -Inf, Inf, label = paste("italic(m) ==", round(obs2$m, 3)),
-             parse = TRUE, size = 2.2, hjust = -0.2, vjust = 3.2)
+             parse = TRUE, size = 8, hjust = -0.2, vjust = 3.2)+theme_cowplot(font_size = 26)
   return(plotn)
 }
