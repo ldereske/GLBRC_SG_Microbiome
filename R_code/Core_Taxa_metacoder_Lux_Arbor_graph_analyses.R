@@ -186,7 +186,7 @@ GLBRC018_OTU_fung_MMPRNT_LUX_G5_soil=prune_taxa(taxa_sums(GLBRC018_OTU_fung_MMPR
 GLBRC018_OTU_bact_MMPRNT_LUX_G5_soil_core_5=ExtractCoreFlex(GLBRC018_OTU_bact_MMPRNT_LUX_G5_soil, "collectionDate", 5, Group=NULL, Level=NULL)
 
 #Plotting the effects of BC thresholds on OTU inclusion
-PlotBCincreaseFlex(GLBRC018_OTU_bact_MMPRNT_LUX_G5_soil_core_2,1000,5)
+PlotBCincreaseFlex(GLBRC018_OTU_bact_MMPRNT_LUX_G5_soil_core_2,1000,5,100,150)
 
 #Fit the neutral model to the core taxa
 GLBRC018_OTU_bact_MMPRNT_LUX_G5_soil_core_5_Neut=FitNeutral(GLBRC018_OTU_bact_MMPRNT_LUX_G5_soil_core_5)
@@ -202,7 +202,7 @@ PlotNeutral(GLBRC018_OTU_bact_MMPRNT_LUX_G5_soil_core_5_Neut)
 GLBRC018_OTU_bact_MMPRNT_LUX_G5_root_core_5=ExtractCoreFlex(GLBRC018_OTU_bact_MMPRNT_LUX_G5_root, "collectionDate", 5, Group=NULL, Level=NULL)
 
 #Plotting the effects of BC thresholds on OTU inclusion
-PlotBCincreaseFlex(GLBRC018_OTU_bact_MMPRNT_LUX_G5_root_core_5,1000,5)
+PlotBCincreaseFlex(GLBRC018_OTU_bact_MMPRNT_LUX_G5_root_core_5,1000,5,100,150)
 
 #Fit the neutral model to the core taxa
 GLBRC018_OTU_bact_MMPRNT_LUX_G5_root_core_5_Neut=FitNeutral(GLBRC018_OTU_bact_MMPRNT_LUX_G5_root_core_5)
@@ -212,36 +212,29 @@ PlotNeutral(GLBRC018_OTU_bact_MMPRNT_LUX_G5_root_core_5_Neut)
 
 
 
-plot_grid(PlotNeutral(GLBRC018_OTU_bact_MMPRNT_LUX_G5_root_core_5_Neut),
-          PlotBCincreaseFlex(GLBRC018_OTU_bact_MMPRNT_LUX_G5_root_core_5,1000,5),
-          PlotNeutral(GLBRC018_OTU_bact_MMPRNT_LUX_G5_soil_core_5_Neut),
-          PlotBCincreaseFlex(GLBRC018_OTU_bact_MMPRNT_LUX_G5_soil_core_5,1000,5),
-          ncol = 2,
-          labels = c("a)","b)","c)","d)"))
-
-ggsave(plot_grid(PlotNeutral(GLBRC018_OTU_bact_MMPRNT_LUX_G5_root_core_5_Neut),
-                 PlotBCincreaseFlex(GLBRC018_OTU_bact_MMPRNT_LUX_G5_root_core_5,1000,5),
+#NOT INCLUDED IN REPOSITORY
+ggsave(plot_grid(PlotNeutral(GLBRC018_OTU_bact_MMPRNT_LUX_G5_root_core_5_Neut)+
+                   theme(axis.title.x = element_blank()),
+                 PlotBCincreaseFlex(GLBRC018_OTU_bact_MMPRNT_LUX_G5_root_core_5,1000,5,100,150)+
+                   theme(axis.title.x = element_blank()),
                  PlotNeutral(GLBRC018_OTU_bact_MMPRNT_LUX_G5_soil_core_5_Neut),
-                 PlotBCincreaseFlex(GLBRC018_OTU_bact_MMPRNT_LUX_G5_soil_core_5,1000,5),
+                 PlotBCincreaseFlex(GLBRC018_OTU_bact_MMPRNT_LUX_G5_soil_core_5,1000,5,100,150),
                  ncol = 2,
-                 labels = c("a)","b)","c)","d)")), 
+                 labels = c("a)","b)","c)","d)"),label_size = 32, label_x = c(-0.01,-0.01)), 
        filename = "Lux_Arbor_bacteria_core_fit.png",path = here::here("Manuscript","Core_comm_figs"),width = 20,height = 15)
+#NOT INCLUDED IN REPOSITORY
 
-plot_grid(PlotBCThreshold_Rich(GLBRC018_OTU_bact_MMPRNT_LUX_G5_root_core_5,20,5),
-          PlotBCThreshold_Abun(GLBRC018_OTU_bact_MMPRNT_LUX_G5_root_core_5,20,5),
-          PlotBCThreshold_Rich(GLBRC018_OTU_bact_MMPRNT_LUX_G5_soil_core_5,20,5),
-          PlotBCThreshold_Abun(GLBRC018_OTU_bact_MMPRNT_LUX_G5_soil_core_5,20,5),
-          ncol = 2,
-          labels = c("a)","b)","c)","d)"))
-
-
-ggsave(plot_grid(PlotBCThreshold_Rich(GLBRC018_OTU_bact_MMPRNT_LUX_G5_root_core_5,20,5),
-                 PlotBCThreshold_Abun(GLBRC018_OTU_bact_MMPRNT_LUX_G5_root_core_5,20,5),
+#NOT INCLUDED IN REPOSITORY
+ggsave(plot_grid(PlotBCThreshold_Rich(GLBRC018_OTU_bact_MMPRNT_LUX_G5_root_core_5,20,5)+
+                   theme(axis.title.x = element_blank()),
+                 PlotBCThreshold_Abun(GLBRC018_OTU_bact_MMPRNT_LUX_G5_root_core_5,20,5)+
+                   theme(axis.title.x = element_blank()),
                  PlotBCThreshold_Rich(GLBRC018_OTU_bact_MMPRNT_LUX_G5_soil_core_5,20,5),
                  PlotBCThreshold_Abun(GLBRC018_OTU_bact_MMPRNT_LUX_G5_soil_core_5,20,5),
                  ncol = 2,
-                 labels = c("a)","b)","c)","d)")), filename = "Lux_Arbor_bacteria_core_diagnostic.png",path = here::here("Manuscript","Core_comm_figs"),width = 20,height = 15)
-
+                 labels = c("a)","b)","c)","d)"),label_size = 32, label_x = c(-0.01,-0.01)), 
+       filename = "Lux_Arbor_bacteria_core_diagnostic.png",path = here::here("Manuscript","Core_comm_figs"),width = 20,height = 15)
+#NOT INCLUDED IN REPOSITORY
 
 
 #####Fungi Lux Temporal Core Taxa####
@@ -256,7 +249,7 @@ ggsave(plot_grid(PlotBCThreshold_Rich(GLBRC018_OTU_bact_MMPRNT_LUX_G5_root_core_
 GLBRC018_OTU_fung_MMPRNT_LUX_G5_soil_core_5=ExtractCoreFlex(GLBRC018_OTU_fung_MMPRNT_LUX_G5_soil, "collectionDate", 5, Group=NULL, Level=NULL)
 
 #Plotting the effects of BC thresholds on OTU inclusion
-PlotBCincreaseFlex(GLBRC018_OTU_fung_MMPRNT_LUX_G5_soil_core_5,1000,5)
+PlotBCincreaseFlex(GLBRC018_OTU_fung_MMPRNT_LUX_G5_soil_core_5,1000,5,100,150)
 
 #Fit the neutral model to the core taxa
 GLBRC018_OTU_fung_MMPRNT_LUX_G5_soil_core_5_Neut=FitNeutral(GLBRC018_OTU_fung_MMPRNT_LUX_G5_soil_core_5)
@@ -274,7 +267,7 @@ PlotNeutral(GLBRC018_OTU_fung_MMPRNT_LUX_G5_soil_core_5_Neut)
 GLBRC018_OTU_fung_MMPRNT_LUX_G5_root_core_5=ExtractCoreFlex(GLBRC018_OTU_fung_MMPRNT_LUX_G5_root, "collectionDate", 5, Group=NULL, Level=NULL)
 
 #Plotting the effects of BC thresholds on OTU inclusion
-PlotBCincreaseFlex(GLBRC018_OTU_fung_MMPRNT_LUX_G5_root_core_2,1000,5)
+PlotBCincreaseFlex(GLBRC018_OTU_fung_MMPRNT_LUX_G5_root_core_2,1000,5,100,150)
 
 #Fit the neutral model to the core taxa
 GLBRC018_OTU_fung_MMPRNT_LUX_G5_root_core_5_neut=FitNeutral(GLBRC018_OTU_fung_MMPRNT_LUX_G5_root_core_5)
@@ -282,37 +275,28 @@ GLBRC018_OTU_fung_MMPRNT_LUX_G5_root_core_5_neut=FitNeutral(GLBRC018_OTU_fung_MM
 PlotNeutral(GLBRC018_OTU_fung_MMPRNT_LUX_G5_root_core_5_neut)
 
 
-plot_grid(PlotNeutral(GLBRC018_OTU_fung_MMPRNT_LUX_G5_root_core_5_neut),
-          PlotBCincreaseFlex(GLBRC018_OTU_fung_MMPRNT_LUX_G5_root_core_5,1000,5),
-          PlotNeutral(GLBRC018_OTU_fung_MMPRNT_LUX_G5_soil_core_5_Neut),
-          PlotBCincreaseFlex(GLBRC018_OTU_fung_MMPRNT_LUX_G5_soil_core_5,1000,5),
-          ncol = 2,
-          labels = c("a)","b)","c)","d)"))
-
-
-ggsave(plot_grid(PlotNeutral(GLBRC018_OTU_fung_MMPRNT_LUX_G5_root_core_5_neut),
-                 PlotBCincreaseFlex(GLBRC018_OTU_fung_MMPRNT_LUX_G5_root_core_5,1000,5),
+#NOT INCLUDED IN REPOSITORY
+ggsave(plot_grid(PlotNeutral(GLBRC018_OTU_fung_MMPRNT_LUX_G5_root_core_5_neut)+
+                   theme(axis.title.x = element_blank()),
+                 PlotBCincreaseFlex(GLBRC018_OTU_fung_MMPRNT_LUX_G5_root_core_5,1000,5,100,150)+
+                   theme(axis.title.x = element_blank()),
                  PlotNeutral(GLBRC018_OTU_fung_MMPRNT_LUX_G5_soil_core_5_Neut),
-                 PlotBCincreaseFlex(GLBRC018_OTU_fung_MMPRNT_LUX_G5_soil_core_5,1000,5),
+                 PlotBCincreaseFlex(GLBRC018_OTU_fung_MMPRNT_LUX_G5_soil_core_5,1000,5,100,150),
                  ncol = 2,
-                 labels = c("a)","b)","c)","d)")), 
+                 labels = c("a)","b)","c)","d)"),label_size = 32, label_x = c(-0.01,-0.01)), 
        filename = "Lux_Arbor_fungi_core_fit.png",path = here::here("Manuscript","Core_comm_figs"),width = 20,height = 15)
 
-plot_grid(PlotBCThreshold_Rich(GLBRC018_OTU_fung_MMPRNT_LUX_G5_root_core_5,20,5),
-          PlotBCThreshold_Abun(GLBRC018_OTU_fung_MMPRNT_LUX_G5_root_core_5,20,5),
-          PlotBCThreshold_Rich(GLBRC018_OTU_fung_MMPRNT_LUX_G5_soil_core_5,20,5),
-          PlotBCThreshold_Abun(GLBRC018_OTU_fung_MMPRNT_LUX_G5_soil_core_5,20,5),
-          ncol = 2,
-          labels = c("a)","b)","c)","d)"))
-
-
-ggsave(plot_grid(PlotBCThreshold_Rich(GLBRC018_OTU_fung_MMPRNT_LUX_G5_root_core_5,20,5),
-                 PlotBCThreshold_Abun(GLBRC018_OTU_fung_MMPRNT_LUX_G5_root_core_5,20,5),
+#NOT INCLUDED IN REPOSITORY
+ggsave(plot_grid(PlotBCThreshold_Rich(GLBRC018_OTU_fung_MMPRNT_LUX_G5_root_core_5,20,5)+
+                   theme(axis.title.x = element_blank()),
+                 PlotBCThreshold_Abun(GLBRC018_OTU_fung_MMPRNT_LUX_G5_root_core_5,20,5)+
+                   theme(axis.title.x = element_blank()),
                  PlotBCThreshold_Rich(GLBRC018_OTU_fung_MMPRNT_LUX_G5_soil_core_5,20,5),
                  PlotBCThreshold_Abun(GLBRC018_OTU_fung_MMPRNT_LUX_G5_soil_core_5,20,5),
                  ncol = 2,
-                 labels = c("a)","b)","c)","d)")), filename = "Lux_Arbor_fungi_core_diagnostic.png",path = here::here("Manuscript","Core_comm_figs"),width = 20,height = 15)
-
+                 labels = c("a)","b)","c)","d)"),label_size = 32, label_x = c(-0.01,-0.01)), 
+       filename = "Lux_Arbor_fungi_core_diagnostic.png",path = here::here("Manuscript","Core_comm_figs"),width = 20,height = 15)
+#NOT INCLUDED IN REPOSITORY
 
 
 
@@ -718,7 +702,7 @@ plot_grid(o_LUX__bact_root_color2,o_LUX__bact_soil_color2,nrow = 2,labels = c("a
 
 GLBRC018_OTU_fung_MMPRNT_LUX_G5_soil_core_phyl=prune_taxa(subset(GLBRC018_OTU_fung_MMPRNT_LUX_G5_soil_core_5[[4]],fill=="core")$otu,
                                                           GLBRC018_OTU_fung_MMPRNT_LUX_G5_soil)
-#I am getting a lot of Unknown phyla with sintax so I am going to use CONSTAX 
+#Using CONSTAX2 classified taxon
 
 
 GLBRC018_OTU_fung_MMPRNT_LUX_G5_soil_core_phyl=phyloseq(otu_table(GLBRC018_OTU_fung_MMPRNT_LUX_G5_soil_core_phyl),
@@ -856,7 +840,7 @@ LUX_fung_soil_O_order_color=c("Ascomycota.Archaeorhizomycetales"="#D95F02","Asco
 
 GLBRC018_OTU_fung_MMPRNT_LUX_G5_root_core_phyl=prune_taxa(subset(GLBRC018_OTU_fung_MMPRNT_LUX_G5_root_core_5[[4]],fill=="core")$otu,
                                                           GLBRC018_OTU_fung_MMPRNT_LUX_G5_root)
-
+#Using CONSTAX2 classified taxon
 GLBRC018_OTU_fung_MMPRNT_LUX_G5_root_core_phyl=phyloseq(otu_table(GLBRC018_OTU_fung_MMPRNT_LUX_G5_root_core_phyl),
                                                         sample_data(GLBRC018_OTU_fung_MMPRNT_LUX_G5_root_core_phyl),
                                                         tax_table(as.matrix(GLBRC018_fung_raw_CONSTAX_UNITE8.2_consensus)))
@@ -1050,6 +1034,7 @@ plot_grid(o_LUX__fung_root_color2,o_LUX__fung_soil_color2,nrow = 2,labels = c("a
 plot_grid(o_LUX__bact_root_color2,o_LUX__fung_root_color2,o_LUX__bact_soil_color2,o_LUX__fung_soil_color2,nrow = 2,labels = c("a)","b)","c)","d)"),
           align = "v")
 
+#NOT INCLUDED IN REPOSITORY
 ggsave(plot_grid(o_LUX__bact_root_color2,o_LUX__fung_root_color2,o_LUX__bact_soil_color2,o_LUX__fung_soil_color2,
                  nrow = 2,labels = c("a)","b)","c)","d)"),label_size = 48,label_x = c(-0.02,-0.02,-0.02,-0.02),
                  align = "v"), filename = "Lux_temporal_bacteria_fungi_root_soil_core_stack_order_p.png",path = here::here("Manuscript","Core_comm_figs"),width = 30,height = 15)
@@ -1057,7 +1042,7 @@ ggsave(plot_grid(o_LUX__bact_root_color2,o_LUX__fung_root_color2,o_LUX__bact_soi
 ggsave(plot_grid(o_LUX__bact_root_color2,o_LUX__fung_root_color2,o_LUX__bact_soil_color2,o_LUX__fung_soil_color2,
                  nrow = 2,labels = c("a)","b)","c)","d)"),label_size = 48,label_x = c(-0.02,-0.02,-0.02,-0.02),
                  align = "v"), filename = "Lux_temporal_bacteria_fungi_root_soil_core_stack_order_p.svg",path = here::here("Manuscript","Core_comm_figs"),width = 30,height = 15)
-
+#NOT INCLUDED IN REPOSITORY
 
 ####LUX metacoder Soil versus Root Bacteria  Core Taxa####
 
@@ -1823,12 +1808,13 @@ plot_grid(ggplot(),get_title(Bact_title),get_title(Fung_title),
           rel_widths = c(0.1,1,1),rel_heights = c(0.1,1,1),ncol = 3)
 
 
-
+#NOT INCLUDED IN REPOSITORY
 ggsave(plot_grid(ggplot()+theme_void(),get_title(Bact_title),get_title(Fung_title),
                  get_title(Root_90_title),Bact_LUX_core_ROOT_metaHeat_P2,Fung_LUX_core_ROOT_metaHeat_P2,
                  get_title(Soil_90_title),Bact_LUX_core_SOIL_metaHeat_P2,Fung_LUX_core_SOIL_metaHeat_P2,
                  rel_widths = c(0.1,1,1),rel_heights = c(0.2,1,1),ncol = 3), 
        filename = "LUX_Heat_tree_Bact_Fung_Root_Soil_core_comm.png",path = here::here("Manuscript","Core_comm_figs"),width = 15,height = 10)
+#NOT INCLUDED IN REPOSITORY
 
 
 
@@ -1838,8 +1824,7 @@ ggsave(plot_grid(ggplot()+theme_void(),get_title(Bact_title),get_title(Fung_titl
 
 
 
-
-######Lux Arbor CORE FunGuild Fig#### 
+#####Lux Arbor CORE FunGuild Fig#### 
 
 
 #Extract OTU Table
@@ -1898,6 +1883,47 @@ GLBRC018_OTU_LUX_fung_root_core_facet_otus_FunG=merge(GLBRC018_OTU_LUX_fung_root
 summary(GLBRC018_OTU_LUX_fung_root_core_facet_otus_FunG)
 unique(GLBRC018_OTU_LUX_fung_root_core_facet_otus_FunG$simp_guild)
 GLBRC018_OTU_LUX_fung_root_core_facet_otus_FunG[is.na(GLBRC018_OTU_LUX_fung_root_core_facet_otus_FunG)]="Unknown"
+
+
+GLBRC018_OTU_LUX_fung_soil_core_facet_otus_FunG|>
+  group_by(simp_guild)|>
+  summarise(n())
+#1 Animal Pathogen                     2
+#2 Arbuscular Mycorrhizal             13
+#3 Ectomycorrhizal                     1
+#4 Endophyte                           1
+#5 Multiple Saprotroph                 2
+#6 Pathogen-Saprotroph                 6
+#7 Plant Pathogen                      3
+#8 Soil Saprotroph                     1
+#9 Symbiotroph-Pathogen                2
+#10 Symbiotroph-Pathogen-Saprotroph     4
+#11 Symbiotroph-Saprotroph             19
+#12 Undefined Saprotroph               17
+#13 Unknown                            81
+#14 Wood Saprotroph                     2
+
+GLBRC018_OTU_LUX_fung_root_core_facet_otus_FunG|>
+  group_by(simp_guild)|>
+  summarise(n())
+#1 Arbuscular Mycorrhizal    18
+#2 Endophyte                  1
+#3 Multiple Saprotroph        1
+#4 Pathogen-Saprotroph        3
+#5 Symbiotroph-Saprotroph     2
+#6 Undefined Saprotroph       5
+#7 Unknown                   30
+
+LUX_fung_root_soil_core_facet_otus_FunG=rbind(GLBRC018_OTU_LUX_fung_soil_core_facet_otus_FunG[,c("Row.names","simp_guild")],
+                                          GLBRC018_OTU_LUX_fung_root_core_facet_otus_FunG[,c("Row.names","simp_guild")])
+dim(LUX_fung_root_soil_core_facet_otus_FunG)
+#214   2
+
+LUX_fung_root_soil_core_facet_otus_FunG[!duplicated(LUX_fung_root_soil_core_facet_otus_FunG$Row.names),]|>
+  group_by(simp_guild)|>
+  summarise(n())
+#13 Unknown                            95
+
 #Simplified Guild 
 
 GLBRC018_OTU_LUX_fung_root_core_facet_otus_FunG_sum=GLBRC018_OTU_LUX_fung_root_core_facet_otus_FunG%>%
@@ -1993,8 +2019,9 @@ plot_grid(FunGuild_LUX__fung_root_color2,FunGuild_LUX__fung_soil_color2,
           nrow = 2,labels = c("a)","b)"),axis = "lr",
           align = "v",label_size = 48,label_x = c(-0.02,-0.02))
 
+#NOT INCLUDED IN REPOSITORY
 ggsave(plot_grid(FunGuild_LUX__fung_root_color2,FunGuild_LUX__fung_soil_color2,
                  nrow = 2,labels = c("a)","b)"),axis = "lr",
                  align = "v",label_size = 48,label_x = c(-0.02,-0.02)), 
        filename = "Lux_temporal_fungi_FunGuils_root_soil_core_stack_order_sep_color.png",path = here::here("Manuscript","Core_comm_figs"),width = 16,height = 15)
-
+#NOT INCLUDED IN REPOSITORY
