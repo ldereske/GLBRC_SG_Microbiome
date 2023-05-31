@@ -3,7 +3,7 @@
 This is the code for a [**Regional biogeography versus intra-annual dynamics of the root and soil microbiome**]( https://doi.org/10.1186/s40793-023-00504-x) published in Environmental Microbiome. The project explored the spatiotemporal structure of the switchgrass microbiome of the [GLBRC Marginal Lands Experiment](https://lter.kbs.msu.edu/research/long-term-experiments/marginal-land-experiment/). 
 
 
-## Data necessary for the analyses can be found at [DOI 10.17605/OSF.IO/5VW9C](https://osf.io/5vw9c/)
+### Data necessary for the analyses can be found at [DOI 10.17605/OSF.IO/5VW9C](https://osf.io/5vw9c/)
 You can download the data into your R environment by running the below code
 
 ```
