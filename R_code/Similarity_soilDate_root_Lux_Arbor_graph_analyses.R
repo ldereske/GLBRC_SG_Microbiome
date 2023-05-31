@@ -461,6 +461,7 @@ plot_grid(plot_grid(bact_pairwise_dist_soil_root_time,fung_pairwise_dist_soil_ro
                     labels = c("a)","b)"),label_size = 36,rel_heights = c(1,1.1),ncol = 1),
           LENGEND_pairwise_dist_soil_root_time,rel_widths = c(2,0.5))
 
+#NOT INCLUDED IN REPOSITORY
 ggsave(plot_grid(plot_grid(bact_pairwise_dist_soil_root_time,fung_pairwise_dist_soil_root_time,
                            labels = c("a)","b)"),label_size = 36,rel_heights = c(1,1.1),ncol = 1),
                  LENGEND_pairwise_dist_soil_root_time,rel_widths = c(2,0.5)),
@@ -470,4 +471,4 @@ ggsave(plot_grid(plot_grid(bact_pairwise_dist_soil_root_time,fung_pairwise_dist_
                            labels = c("a)","b)"),label_size = 36,rel_heights = c(1,1.1),ncol = 1),
                  LENGEND_pairwise_dist_soil_root_time,rel_widths = c(2,0.5)),
        filename = "LUX_pairwise_dist_soil_root_time_p.svg",path = here::here("Manuscript","Lux_Arbor_comm_figs"),width = 13,height =10)
-
+#NOT INCLUDED IN REPOSITORY

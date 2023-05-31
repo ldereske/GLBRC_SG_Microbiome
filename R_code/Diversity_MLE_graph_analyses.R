@@ -1,7 +1,7 @@
 ## ---------------------------
 ##
 ## Script name: Community richness and diversity of the switchgrass microbiomes of 
-## the Marginal Lands Experiment
+## the Marginal Lands Experiment (MLE)
 ##
 ## Purpose of script: Estimating and graphing the richness and diversity of the bacteria and fungi
 ## of roots and soils of switchgrass (Panicum virgatum)
@@ -86,10 +86,10 @@ rm(GLBRC018_OTU_fung_MMPRNT_mock_fung_rar_tax_tab)
 rm(GLBRC018_OTU_fung_MMPRNT_mock_fung_rar_metadata)
 
 
-#####All Sites community composition####
+#####MLE community composition####
 
 
-#All Sites is defined as the July overlap in root and soil sampling
+#MLE is defined as the July overlap in root and soil sampling
 
 unique(sample_data(subset_samples(GLBRC018_OTU_bact_MMPRNT_mock_bact_rar,Root_soil=="Root"&siteID=="LUX"))$collectionDate)
 #"5/29/2018" "9/17/2018" "8/20/2018" "7/30/2018" "6/25/2018" "10/3/2018"
@@ -97,25 +97,25 @@ unique(sample_data(subset_samples(GLBRC018_OTU_bact_MMPRNT_mock_bact_rar,Root_so
 #"7/10/2018"
 
 
-GLBRC018_OTU_bact_MMPRNT_All_sites=subset_samples(GLBRC018_OTU_bact_MMPRNT_mock_bact_rar,siteID!="LUX"|collectionDate=="7/30/2018")
-nsamples(GLBRC018_OTU_bact_MMPRNT_All_sites)
+GLBRC018_OTU_bact_MMPRNT_MLE=subset_samples(GLBRC018_OTU_bact_MMPRNT_mock_bact_rar,siteID!="LUX"|collectionDate=="7/30/2018")
+nsamples(GLBRC018_OTU_bact_MMPRNT_MLE)
 #513
-unique(sample_data(subset_samples(GLBRC018_OTU_bact_MMPRNT_All_sites,Root_soil=="Root"&siteID=="LUX"))$collectionDate)
+unique(sample_data(subset_samples(GLBRC018_OTU_bact_MMPRNT_MLE,Root_soil=="Root"&siteID=="LUX"))$collectionDate)
 
-GLBRC018_OTU_bact_MMPRNT_All_sites=subset_samples(GLBRC018_OTU_bact_MMPRNT_All_sites,siteID!="LC"|collectionDate=="7/10/2018")
-nsamples(GLBRC018_OTU_bact_MMPRNT_All_sites)
+GLBRC018_OTU_bact_MMPRNT_MLE=subset_samples(GLBRC018_OTU_bact_MMPRNT_MLE,siteID!="LC"|collectionDate=="7/10/2018")
+nsamples(GLBRC018_OTU_bact_MMPRNT_MLE)
 #323
-unique(sample_data(subset_samples(GLBRC018_OTU_bact_MMPRNT_All_sites,Root_soil=="Root"&siteID=="LC"))$collectionDate)
+unique(sample_data(subset_samples(GLBRC018_OTU_bact_MMPRNT_MLE,Root_soil=="Root"&siteID=="LC"))$collectionDate)
 
 #Let's use only G5 since there is overlap in sampling between roots and soil
 
-GLBRC018_OTU_bact_MMPRNT_All_sites_G5=subset_samples(GLBRC018_OTU_bact_MMPRNT_All_sites,plotType=="G5")
-nsamples(GLBRC018_OTU_bact_MMPRNT_All_sites_G5)
+GLBRC018_OTU_bact_MMPRNT_MLE_G5=subset_samples(GLBRC018_OTU_bact_MMPRNT_MLE,plotType=="G5")
+nsamples(GLBRC018_OTU_bact_MMPRNT_MLE_G5)
 #227
-rm(GLBRC018_OTU_bact_MMPRNT_All_sites)
+rm(GLBRC018_OTU_bact_MMPRNT_MLE)
 rm(GLBRC018_OTU_bact_MMPRNT_mock_bact_rar)
 
-#I am going to define All Sites as the July overlap in root and soil sampling
+#I am going to define MLE as the July overlap in root and soil sampling
 
 unique(sample_data(subset_samples(GLBRC018_OTU_fung_MMPRNT_mock_fung_rar,Root_soil=="Root"&siteID=="LUX"))$collectionDate)
 #"5/29/2018" "9/17/2018" "8/20/2018" "7/30/2018" "6/25/2018" "10/3/2018"
@@ -124,39 +124,39 @@ unique(sample_data(subset_samples(GLBRC018_OTU_fung_MMPRNT_mock_fung_rar,Root_so
 nsamples(GLBRC018_OTU_fung_MMPRNT_mock_fung_rar)
 #1086
 
-GLBRC018_OTU_fung_MMPRNT_All_sites=subset_samples(GLBRC018_OTU_fung_MMPRNT_mock_fung_rar,siteID!="LUX"|collectionDate=="7/30/2018")
-nsamples(GLBRC018_OTU_fung_MMPRNT_All_sites)
+GLBRC018_OTU_fung_MMPRNT_MLE=subset_samples(GLBRC018_OTU_fung_MMPRNT_mock_fung_rar,siteID!="LUX"|collectionDate=="7/30/2018")
+nsamples(GLBRC018_OTU_fung_MMPRNT_MLE)
 #501
-unique(sample_data(subset_samples(GLBRC018_OTU_fung_MMPRNT_All_sites,Root_soil=="Root"&siteID=="LUX"))$collectionDate)
+unique(sample_data(subset_samples(GLBRC018_OTU_fung_MMPRNT_MLE,Root_soil=="Root"&siteID=="LUX"))$collectionDate)
 
-GLBRC018_OTU_fung_MMPRNT_All_sites=subset_samples(GLBRC018_OTU_fung_MMPRNT_All_sites,siteID!="LC"|collectionDate=="7/10/2018")
-nsamples(GLBRC018_OTU_fung_MMPRNT_All_sites)
+GLBRC018_OTU_fung_MMPRNT_MLE=subset_samples(GLBRC018_OTU_fung_MMPRNT_MLE,siteID!="LC"|collectionDate=="7/10/2018")
+nsamples(GLBRC018_OTU_fung_MMPRNT_MLE)
 #319
-unique(sample_data(subset_samples(GLBRC018_OTU_fung_MMPRNT_All_sites,Root_soil=="Root"&siteID=="LC"))$collectionDate)
+unique(sample_data(subset_samples(GLBRC018_OTU_fung_MMPRNT_MLE,Root_soil=="Root"&siteID=="LC"))$collectionDate)
 
 #Let's use only G5 since there is overlap in sampling between roots and soil
 
-GLBRC018_OTU_fung_MMPRNT_All_sites_G5=subset_samples(GLBRC018_OTU_fung_MMPRNT_All_sites,plotType=="G5")
-nsamples(GLBRC018_OTU_fung_MMPRNT_All_sites_G5)
+GLBRC018_OTU_fung_MMPRNT_MLE_G5=subset_samples(GLBRC018_OTU_fung_MMPRNT_MLE,plotType=="G5")
+nsamples(GLBRC018_OTU_fung_MMPRNT_MLE_G5)
 #223
-rm(GLBRC018_OTU_fung_MMPRNT_All_sites)
+rm(GLBRC018_OTU_fung_MMPRNT_MLE)
 rm(GLBRC018_OTU_fung_MMPRNT_mock_fung_rar)
 
 #####Calculate Diversity metrics####
-GLBRC018_OTU_bact_MMPRNT_All_sites_G5_map=sample_data(GLBRC018_OTU_bact_MMPRNT_All_sites_G5)
-GLBRC018_OTU_fung_MMPRNT_All_sites_G5_map=sample_data(GLBRC018_OTU_fung_MMPRNT_All_sites_G5)
+GLBRC018_OTU_bact_MMPRNT_MLE_G5_map=sample_data(GLBRC018_OTU_bact_MMPRNT_MLE_G5)
+GLBRC018_OTU_fung_MMPRNT_MLE_G5_map=sample_data(GLBRC018_OTU_fung_MMPRNT_MLE_G5)
 
 #Diversity 
 
-GLBRC018_OTU_bact_MMPRNT_All_sites_G5_div=estimate_richness(GLBRC018_OTU_bact_MMPRNT_All_sites_G5)
-GLBRC018_OTU_bact_MMPRNT_All_sites_G5_div=merge(GLBRC018_OTU_bact_MMPRNT_All_sites_G5_div,GLBRC018_OTU_bact_MMPRNT_All_sites_G5_map,by="row.names")
-head(GLBRC018_OTU_bact_MMPRNT_All_sites_G5_div)
-unique(GLBRC018_OTU_bact_MMPRNT_All_sites_G5_div$siteID)
+GLBRC018_OTU_bact_MMPRNT_MLE_G5_div=estimate_richness(GLBRC018_OTU_bact_MMPRNT_MLE_G5)
+GLBRC018_OTU_bact_MMPRNT_MLE_G5_div=merge(GLBRC018_OTU_bact_MMPRNT_MLE_G5_div,GLBRC018_OTU_bact_MMPRNT_MLE_G5_map,by="row.names")
+head(GLBRC018_OTU_bact_MMPRNT_MLE_G5_div)
+unique(GLBRC018_OTU_bact_MMPRNT_MLE_G5_div$siteID)
 
-GLBRC018_OTU_fung_MMPRNT_All_sites_G5_div=estimate_richness(GLBRC018_OTU_fung_MMPRNT_All_sites_G5)
-GLBRC018_OTU_fung_MMPRNT_All_sites_G5_div=merge(GLBRC018_OTU_fung_MMPRNT_All_sites_G5_div,GLBRC018_OTU_fung_MMPRNT_All_sites_G5_map,by="row.names")
-head(GLBRC018_OTU_fung_MMPRNT_All_sites_G5_div)
-unique(GLBRC018_OTU_fung_MMPRNT_All_sites_G5_div$siteID)
+GLBRC018_OTU_fung_MMPRNT_MLE_G5_div=estimate_richness(GLBRC018_OTU_fung_MMPRNT_MLE_G5)
+GLBRC018_OTU_fung_MMPRNT_MLE_G5_div=merge(GLBRC018_OTU_fung_MMPRNT_MLE_G5_div,GLBRC018_OTU_fung_MMPRNT_MLE_G5_map,by="row.names")
+head(GLBRC018_OTU_fung_MMPRNT_MLE_G5_div)
+unique(GLBRC018_OTU_fung_MMPRNT_MLE_G5_div$siteID)
 
 
 site_order=c("LUX","LC","ESC", "HAN","RHN")
@@ -168,22 +168,22 @@ site_labels=c("LUX"="Lux Arbor","LC"="Lake City","ESC"="Escanaba","HAN"= "Hancoc
 #Stats 
 
 #Roots
-GLBRC018_OTU_bact_MMPRNT_All_sites_G5_div_root=subset(GLBRC018_OTU_bact_MMPRNT_All_sites_G5_div,Root_soil=="Root")
+GLBRC018_OTU_bact_MMPRNT_MLE_G5_div_root=subset(GLBRC018_OTU_bact_MMPRNT_MLE_G5_div,Root_soil=="Root")
 
-root_rich_all_site_bact_mod=lmer((Observed)~siteID*FertStatus+(1|plotRep),data = GLBRC018_OTU_bact_MMPRNT_All_sites_G5_div_root)
-plot(root_rich_all_site_bact_mod)
-hist(resid(root_rich_all_site_bact_mod))
-qqPlot(resid(root_rich_all_site_bact_mod))
-shapiro.test(resid(root_rich_all_site_bact_mod))
+root_rich_MLE_bact_mod=lmer((Observed)~siteID*FertStatus+(1|plotRep),data = GLBRC018_OTU_bact_MMPRNT_MLE_G5_div_root)
+plot(root_rich_MLE_bact_mod)
+hist(resid(root_rich_MLE_bact_mod))
+qqPlot(resid(root_rich_MLE_bact_mod))
+shapiro.test(resid(root_rich_MLE_bact_mod))
 #W = 0.98842, p-value = 0.4491
-simulateResiduals(fittedModel = root_rich_all_site_bact_mod, plot = T)
+simulateResiduals(fittedModel = root_rich_MLE_bact_mod, plot = T)
 
-anova(root_rich_all_site_bact_mod)
+anova(root_rich_MLE_bact_mod)
 #siteID            2837112  709278     4 92.997 39.6794 < 2.2e-16 ***
 #FertStatus         291606  291606     1 91.919 16.3134 0.0001112 ***
 #siteID:FertStatus  209668   52417     4 91.921  2.9324 0.0248494 * 
 
-emmeans(root_rich_all_site_bact_mod,pairwise~FertStatus|siteID)
+emmeans(root_rich_MLE_bact_mod,pairwise~FertStatus|siteID)
 
 #$contrasts
 #siteID = LC:
@@ -193,7 +193,7 @@ emmeans(root_rich_all_site_bact_mod,pairwise~FertStatus|siteID)
 #contrast      estimate   SE   df t.ratio p.value
 #Fert - Unfert  -202.67 54.6 92.0  -3.713  0.0004
 
-emmeans(root_rich_all_site_bact_mod,pairwise~siteID)
+emmeans(root_rich_MLE_bact_mod,pairwise~siteID)
 #$contrasts
 #contrast  estimate    SE    df t.ratio p.value
 #ESC - HAN    209.4 42.2 95.2   4.963  <.0001
@@ -209,22 +209,22 @@ emmeans(root_rich_all_site_bact_mod,pairwise~siteID)
 
 
 #Soil
-GLBRC018_OTU_bact_MMPRNT_All_sites_G5_div_soil=subset(GLBRC018_OTU_bact_MMPRNT_All_sites_G5_div,Root_soil=="Soil")
+GLBRC018_OTU_bact_MMPRNT_MLE_G5_div_soil=subset(GLBRC018_OTU_bact_MMPRNT_MLE_G5_div,Root_soil=="Soil")
 
-soil_rich_all_site_bact_mod=lmer(Observed~siteID*FertStatus+(1|plotRep),data = GLBRC018_OTU_bact_MMPRNT_All_sites_G5_div_soil)
-plot(soil_rich_all_site_bact_mod)
-hist(resid(soil_rich_all_site_bact_mod))
-qqPlot(resid(soil_rich_all_site_bact_mod))
-shapiro.test(resid(soil_rich_all_site_bact_mod))
+soil_rich_MLE_bact_mod=lmer(Observed~siteID*FertStatus+(1|plotRep),data = GLBRC018_OTU_bact_MMPRNT_MLE_G5_div_soil)
+plot(soil_rich_MLE_bact_mod)
+hist(resid(soil_rich_MLE_bact_mod))
+qqPlot(resid(soil_rich_MLE_bact_mod))
+shapiro.test(resid(soil_rich_MLE_bact_mod))
 #W = 0.99289, p-value = 0.8277
-simulateResiduals(fittedModel = soil_rich_all_site_bact_mod, plot = T)
+simulateResiduals(fittedModel = soil_rich_MLE_bact_mod, plot = T)
 
-anova(soil_rich_all_site_bact_mod)
+anova(soil_rich_MLE_bact_mod)
 #siteID            1877527  469382     4 93.992 32.6514 <2e-16 ***
 
 
 
-emmeans(soil_rich_all_site_bact_mod,pairwise~siteID)
+emmeans(soil_rich_MLE_bact_mod,pairwise~siteID)
 #$contrasts
 #contrast  estimate   SE    df t.ratio p.value
 #ESC - HAN     57.1 37.9 95.2   1.505  0.5618
@@ -242,20 +242,20 @@ emmeans(soil_rich_all_site_bact_mod,pairwise~siteID)
 
 
 #Roots
-GLBRC018_OTU_fung_MMPRNT_All_sites_G5_div_root=subset(GLBRC018_OTU_fung_MMPRNT_All_sites_G5_div,Root_soil=="Root")
+GLBRC018_OTU_fung_MMPRNT_MLE_G5_div_root=subset(GLBRC018_OTU_fung_MMPRNT_MLE_G5_div,Root_soil=="Root")
 
-root_rich_all_site_fung_mod=lmer(sqrt(Observed)~siteID*FertStatus+(1|plotRep),data = GLBRC018_OTU_fung_MMPRNT_All_sites_G5_div_root)
-plot(root_rich_all_site_fung_mod)
-hist(resid(root_rich_all_site_fung_mod))
-qqPlot(resid(root_rich_all_site_fung_mod))
-shapiro.test(resid(root_rich_all_site_fung_mod))
+root_rich_MLE_fung_mod=lmer(sqrt(Observed)~siteID*FertStatus+(1|plotRep),data = GLBRC018_OTU_fung_MMPRNT_MLE_G5_div_root)
+plot(root_rich_MLE_fung_mod)
+hist(resid(root_rich_MLE_fung_mod))
+qqPlot(resid(root_rich_MLE_fung_mod))
+shapiro.test(resid(root_rich_MLE_fung_mod))
 #W = 0.98082, p-value = 0.1111
-simulateResiduals(fittedModel = root_rich_all_site_fung_mod, plot = T)
+simulateResiduals(fittedModel = root_rich_MLE_fung_mod, plot = T)
 
-anova(root_rich_all_site_fung_mod)
+anova(root_rich_MLE_fung_mod)
 #siteID            61.781 15.4453     4   101  9.3761 1.741e-06 *** 
 
-emmeans(root_rich_all_site_fung_mod,pairwise~FertStatus|siteID)
+emmeans(root_rich_MLE_fung_mod,pairwise~FertStatus|siteID)
 
 #$contrasts
 #siteID = HAN:
@@ -264,7 +264,7 @@ emmeans(root_rich_all_site_fung_mod,pairwise~FertStatus|siteID)
 
 
 
-emmeans(root_rich_all_site_fung_mod,pairwise~siteID)
+emmeans(root_rich_MLE_fung_mod,pairwise~siteID)
 #$contrasts
 #contrast  estimate    SE    df t.ratio p.value
 #ESC - HAN    1.404 0.406 94.1   3.457  0.0072
@@ -283,22 +283,22 @@ emmeans(root_rich_all_site_fung_mod,pairwise~siteID)
 
 
 #Soil
-GLBRC018_OTU_fung_MMPRNT_All_sites_G5_div_soil=subset(GLBRC018_OTU_fung_MMPRNT_All_sites_G5_div,Root_soil=="Soil")
+GLBRC018_OTU_fung_MMPRNT_MLE_G5_div_soil=subset(GLBRC018_OTU_fung_MMPRNT_MLE_G5_div,Root_soil=="Soil")
 
-soil_rich_all_site_fung_mod=lmer(sqrt(Observed)~siteID*FertStatus+(1|plotRep),data = GLBRC018_OTU_fung_MMPRNT_All_sites_G5_div_soil)
-plot(soil_rich_all_site_fung_mod)
-hist(resid(soil_rich_all_site_fung_mod))
-qqPlot(resid(soil_rich_all_site_fung_mod))
-shapiro.test(resid(soil_rich_all_site_fung_mod))
+soil_rich_MLE_fung_mod=lmer(sqrt(Observed)~siteID*FertStatus+(1|plotRep),data = GLBRC018_OTU_fung_MMPRNT_MLE_G5_div_soil)
+plot(soil_rich_MLE_fung_mod)
+hist(resid(soil_rich_MLE_fung_mod))
+qqPlot(resid(soil_rich_MLE_fung_mod))
+shapiro.test(resid(soil_rich_MLE_fung_mod))
 #W = 0.99242, p-value = 0.3085
-simulateResiduals(fittedModel = soil_rich_all_site_fung_mod, plot = T)
+simulateResiduals(fittedModel = soil_rich_MLE_fung_mod, plot = T)
 
-anova(soil_rich_all_site_fung_mod)
+anova(soil_rich_MLE_fung_mod)
 #siteID            82.237 20.5594     4   102 28.2327 8.618e-16 ***
 
 
 
-emmeans(soil_rich_all_site_fung_mod,pairwise~siteID)
+emmeans(soil_rich_MLE_fung_mod,pairwise~siteID)
 #$contrasts
 #contrast  estimate    SE   df t.ratio p.value
 #ESC - HAN   0.4673 0.268 96.0   1.746  0.4114
@@ -318,25 +318,25 @@ emmeans(soil_rich_all_site_fung_mod,pairwise~siteID)
 
 
 #Roots
-GLBRC018_OTU_bact_MMPRNT_All_sites_G5_div_root=subset(GLBRC018_OTU_bact_MMPRNT_All_sites_G5_div,Root_soil=="Root")
+GLBRC018_OTU_bact_MMPRNT_MLE_G5_div_root=subset(GLBRC018_OTU_bact_MMPRNT_MLE_G5_div,Root_soil=="Root")
 
-root_invsimp_all_site_bact_mod=lmer(log(InvSimpson)~siteID*FertStatus+(1|plotRep),data = GLBRC018_OTU_bact_MMPRNT_All_sites_G5_div_root)
-plot(root_invsimp_all_site_bact_mod)
-hist(resid(root_invsimp_all_site_bact_mod))
-qqPlot(resid(root_invsimp_all_site_bact_mod))
-shapiro.test(resid(root_invsimp_all_site_bact_mod))
+root_invsimp_MLE_bact_mod=lmer(log(InvSimpson)~siteID*FertStatus+(1|plotRep),data = GLBRC018_OTU_bact_MMPRNT_MLE_G5_div_root)
+plot(root_invsimp_MLE_bact_mod)
+hist(resid(root_invsimp_MLE_bact_mod))
+qqPlot(resid(root_invsimp_MLE_bact_mod))
+shapiro.test(resid(root_invsimp_MLE_bact_mod))
 #W = 0.98672, p-value = 0.3322
 
 
 
-anova(root_invsimp_all_site_bact_mod)
+anova(root_invsimp_MLE_bact_mod)
 #siteID            9.6757 2.41893     4   103  15.247 7.99e-10 ***
 #FertStatus        1.7852 1.78523     1   103  11.253 0.001114 ** 
 #siteID:FertStatus 0.8643 0.21608     4   103   1.362 0.252315    
 
 
 
-emmeans(root_invsimp_all_site_bact_mod,pairwise~FertStatus|siteID)
+emmeans(root_invsimp_MLE_bact_mod,pairwise~FertStatus|siteID)
 #siteID = LC:
 #contrast      estimate    SE  df t.ratio p.value
 #Fert - Unfert  -0.4439 0.163 92.1  -2.730  0.0076
@@ -350,7 +350,7 @@ emmeans(root_invsimp_all_site_bact_mod,pairwise~FertStatus|siteID)
 # contrast      estimate    SE  df t.ratio p.value
 #Fert - Unfert  -0.3085 0.163 92.1  -1.897  0.0609
 
-emmeans(root_invsimp_all_site_bact_mod,pairwise~siteID)
+emmeans(root_invsimp_MLE_bact_mod,pairwise~siteID)
 #contrast  estimate    SE    df t.ratio p.value
 #ESC - HAN   0.2326 0.125 97.0   1.862  0.3448
 #ESC - LC   -0.0906 0.115 92.1  -0.788  0.9335
@@ -366,23 +366,23 @@ emmeans(root_invsimp_all_site_bact_mod,pairwise~siteID)
 
 
 #Soil
-GLBRC018_OTU_bact_MMPRNT_All_sites_G5_div_soil=subset(GLBRC018_OTU_bact_MMPRNT_All_sites_G5_div,Root_soil=="Soil")
+GLBRC018_OTU_bact_MMPRNT_MLE_G5_div_soil=subset(GLBRC018_OTU_bact_MMPRNT_MLE_G5_div,Root_soil=="Soil")
 
-soil_invsimp_all_site_bact_mod=lmer(InvSimpson~siteID*FertStatus+(1|plotRep),data = GLBRC018_OTU_bact_MMPRNT_All_sites_G5_div_soil)
-plot(soil_invsimp_all_site_bact_mod)
-hist(resid(soil_invsimp_all_site_bact_mod))
-qqPlot(resid(soil_invsimp_all_site_bact_mod))
-shapiro.test(resid(soil_invsimp_all_site_bact_mod))
+soil_invsimp_MLE_bact_mod=lmer(InvSimpson~siteID*FertStatus+(1|plotRep),data = GLBRC018_OTU_bact_MMPRNT_MLE_G5_div_soil)
+plot(soil_invsimp_MLE_bact_mod)
+hist(resid(soil_invsimp_MLE_bact_mod))
+qqPlot(resid(soil_invsimp_MLE_bact_mod))
+shapiro.test(resid(soil_invsimp_MLE_bact_mod))
 #W = 0.98578, p-value = 0.273
 
 
 
 
-anova(soil_invsimp_all_site_bact_mod)
+anova(soil_invsimp_MLE_bact_mod)
 #siteID            134024   33506     4 93.833  7.3166 3.575e-05 ***
 
 
-emmeans(soil_invsimp_all_site_bact_mod,pairwise~siteID)
+emmeans(soil_invsimp_MLE_bact_mod,pairwise~siteID)
 #$contrasts
 #contrast  estimate   SE    df t.ratio p.value
 #ESC - HAN     21.3 21.3 97.3   1.003  0.8534
@@ -398,22 +398,22 @@ emmeans(soil_invsimp_all_site_bact_mod,pairwise~siteID)
 
 
 #Roots
-GLBRC018_OTU_fung_MMPRNT_All_sites_G5_div_root=subset(GLBRC018_OTU_fung_MMPRNT_All_sites_G5_div,Root_soil=="Root")
+GLBRC018_OTU_fung_MMPRNT_MLE_G5_div_root=subset(GLBRC018_OTU_fung_MMPRNT_MLE_G5_div,Root_soil=="Root")
 
-root_invsimp_all_site_fung_mod=lmer(log(InvSimpson)~siteID*FertStatus+(1|plotRep),data = GLBRC018_OTU_fung_MMPRNT_All_sites_G5_div_root)
-plot(root_invsimp_all_site_fung_mod)
-hist(resid(root_invsimp_all_site_fung_mod))
-qqPlot(resid(root_invsimp_all_site_fung_mod))
-shapiro.test(resid(root_invsimp_all_site_fung_mod))
+root_invsimp_MLE_fung_mod=lmer(log(InvSimpson)~siteID*FertStatus+(1|plotRep),data = GLBRC018_OTU_fung_MMPRNT_MLE_G5_div_root)
+plot(root_invsimp_MLE_fung_mod)
+hist(resid(root_invsimp_MLE_fung_mod))
+qqPlot(resid(root_invsimp_MLE_fung_mod))
+shapiro.test(resid(root_invsimp_MLE_fung_mod))
 #W = 0.98727, p-value = 0.3799
 
 
-anova(root_invsimp_all_site_fung_mod)
+anova(root_invsimp_MLE_fung_mod)
 #siteID            2.2187 0.55467     4 90.896  2.9090 0.02581 * 
 #FertStatus        0.1326 0.13265     1 89.554  0.6957 0.40646   
 #siteID:FertStatus 3.2841 0.82103     4 89.570  4.3060 0.00312 **
 
-emmeans(root_invsimp_all_site_fung_mod,pairwise~FertStatus|siteID)
+emmeans(root_invsimp_MLE_fung_mod,pairwise~FertStatus|siteID)
 
 
 #$contrasts
@@ -421,7 +421,7 @@ emmeans(root_invsimp_all_site_fung_mod,pairwise~FertStatus|siteID)
 #contrast      estimate    SE   df t.ratio p.value
 #Fert - Unfert   0.6081 0.183 90.8   3.330  0.0013
 
-emmeans(root_invsimp_all_site_fung_mod,pairwise~siteID)
+emmeans(root_invsimp_MLE_fung_mod,pairwise~siteID)
 #contrast  estimate    SE    df t.ratio p.value
 #ESC - HAN -0.17800 0.139 93.3  -1.285  0.7010
 #ESC - LC   0.07510 0.131 91.1   0.575  0.9784
@@ -437,23 +437,23 @@ emmeans(root_invsimp_all_site_fung_mod,pairwise~siteID)
 
 
 #Soil
-GLBRC018_OTU_fung_MMPRNT_All_sites_G5_div_soil=subset(GLBRC018_OTU_fung_MMPRNT_All_sites_G5_div,Root_soil=="Soil")
+GLBRC018_OTU_fung_MMPRNT_MLE_G5_div_soil=subset(GLBRC018_OTU_fung_MMPRNT_MLE_G5_div,Root_soil=="Soil")
 
-soil_invsimp_all_site_fung_mod=lmer(InvSimpson~siteID*FertStatus+(1|plotRep),data = GLBRC018_OTU_fung_MMPRNT_All_sites_G5_div_soil)
-plot(soil_invsimp_all_site_fung_mod)
-hist(resid(soil_invsimp_all_site_fung_mod))
-qqPlot(resid(soil_invsimp_all_site_fung_mod))
-shapiro.test(resid(soil_invsimp_all_site_fung_mod))
+soil_invsimp_MLE_fung_mod=lmer(InvSimpson~siteID*FertStatus+(1|plotRep),data = GLBRC018_OTU_fung_MMPRNT_MLE_G5_div_soil)
+plot(soil_invsimp_MLE_fung_mod)
+hist(resid(soil_invsimp_MLE_fung_mod))
+qqPlot(resid(soil_invsimp_MLE_fung_mod))
+shapiro.test(resid(soil_invsimp_MLE_fung_mod))
 #W = 0.99158, p-value = 0.7256
 
 
-anova(soil_invsimp_all_site_fung_mod)
+anova(soil_invsimp_MLE_fung_mod)
 #siteID            978.07 244.518     4 92.431  3.3455 0.01323 *
 #FertStatus          1.90   1.898     1 91.297  0.0260 0.87235  
 #siteID:FertStatus 558.02 139.506     4 91.274  1.9087 0.11566  
 
 
-emmeans(soil_invsimp_all_site_fung_mod,pairwise~siteID)
+emmeans(soil_invsimp_MLE_fung_mod,pairwise~siteID)
 #$contrasts
 #contrast  estimate   SE    df t.ratio p.value
 #ESC - HAN    1.927 2.70 94.4   0.715  0.9527
@@ -486,7 +486,7 @@ soil_bact_rich_letters=data.frame(siteID=c("LUX","LC","ESC", "HAN","RHN"),
                                   Root_soil=rep("Soil"))
 
 root_soil_bact_rich_letters=rbind(root_bact_rich_letters,soil_bact_rich_letters)
-bact_rich_max=GLBRC018_OTU_bact_MMPRNT_All_sites_G5_div%>%group_by(siteID,Root_soil)%>%summarise(max_value=max(Observed))
+bact_rich_max=GLBRC018_OTU_bact_MMPRNT_MLE_G5_div%>%group_by(siteID,Root_soil)%>%summarise(max_value=max(Observed))
 
 bact_rich_max_disp_letters=merge(root_soil_bact_rich_letters,bact_rich_max,by=c("siteID","Root_soil"))
 
@@ -500,7 +500,7 @@ soil_fung_rich_letters=data.frame(siteID=c("LUX","LC","ESC", "HAN","RHN"),
                                   Root_soil=rep("Soil"))
 root_soil_fung_rich_letters=rbind(root_fung_rich_letters,soil_fung_rich_letters)
 
-fung_rich_max=GLBRC018_OTU_fung_MMPRNT_All_sites_G5_div%>%group_by(siteID,Root_soil)%>%summarise(max_value=max(Observed))
+fung_rich_max=GLBRC018_OTU_fung_MMPRNT_MLE_G5_div%>%group_by(siteID,Root_soil)%>%summarise(max_value=max(Observed))
 
 fung_rich_max_rich_letters=merge(root_soil_fung_rich_letters,fung_rich_max,by=c("siteID","Root_soil"))
 
@@ -524,7 +524,7 @@ soil_bact_invSimp_letters=data.frame(siteID=c("ESC","HAN","LC","LUX","RHN"),
 
 
 root_soil_bact_invSimp_letters=rbind(root_bact_invSimp_letters,soil_bact_invSimp_letters)
-bact_invSimp_max=GLBRC018_OTU_bact_MMPRNT_All_sites_G5_div%>%group_by(siteID,Root_soil)%>%summarise(max_value=max(InvSimpson))
+bact_invSimp_max=GLBRC018_OTU_bact_MMPRNT_MLE_G5_div%>%group_by(siteID,Root_soil)%>%summarise(max_value=max(InvSimpson))
 
 bact_invSimp_max_disp_letters=merge(root_soil_bact_invSimp_letters,bact_invSimp_max,by=c("siteID","Root_soil"))
 
@@ -544,13 +544,13 @@ soil_fung_invsimp_letters=data.frame(siteID=c("ESC","HAN","LC","LUX","RHN"),
                                      Root_soil=rep("Soil"))
 root_soil_fung_invsimp_letters=rbind(root_fung_invsimp_letters,soil_fung_invsimp_letters)
 
-fung_invsimp_max=GLBRC018_OTU_fung_MMPRNT_All_sites_G5_div%>%group_by(siteID,Root_soil)%>%summarise(max_value=max(InvSimpson))
+fung_invsimp_max=GLBRC018_OTU_fung_MMPRNT_MLE_G5_div%>%group_by(siteID,Root_soil)%>%summarise(max_value=max(InvSimpson))
 
 fung_invsimp_max_invsimp_letters=merge(root_soil_fung_invsimp_letters,fung_invsimp_max,by=c("siteID","Root_soil"))
 
 
 
-(bact_rich_p2=ggplot(GLBRC018_OTU_bact_MMPRNT_All_sites_G5_div)+
+(bact_rich_p2=ggplot(GLBRC018_OTU_bact_MMPRNT_MLE_G5_div)+
     geom_boxplot(aes(y=Observed, x=factor(siteID,levels = site_order),
                      fill=siteID,alpha=FertStatus),color="black")+
     geom_text(data = bact_rich_max_disp_letters, aes(x=siteID, y = 250 + max_value, label = sig_let), vjust=0, size=10)+
@@ -563,7 +563,7 @@ fung_invsimp_max_invsimp_letters=merge(root_soil_fung_invsimp_letters,fung_invsi
           strip.background = element_rect(fill = "white",color = "black")))
 
 
-(fung_rich_p2=ggplot(GLBRC018_OTU_fung_MMPRNT_All_sites_G5_div,aes(y=Observed, x=factor(siteID,levels = site_order)))+
+(fung_rich_p2=ggplot(GLBRC018_OTU_fung_MMPRNT_MLE_G5_div,aes(y=Observed, x=factor(siteID,levels = site_order)))+
     geom_boxplot(aes(y=Observed, x=factor(siteID,levels = site_order),
                      fill=siteID,alpha=FertStatus),color="black")+
     geom_text(data = fung_rich_max_rich_letters, aes(x=siteID, y = 10 + max_value, label = sig_let), vjust=0, size=10)+
@@ -574,7 +574,7 @@ fung_invsimp_max_invsimp_letters=merge(root_soil_fung_invsimp_letters,fung_invsi
 
 
 
-(bact_invSimp_p3=ggplot(GLBRC018_OTU_bact_MMPRNT_All_sites_G5_div)+
+(bact_invSimp_p3=ggplot(GLBRC018_OTU_bact_MMPRNT_MLE_G5_div)+
     geom_boxplot(aes(y=InvSimpson, x=factor(siteID,levels = site_order),
                      fill=FertStatus,color=FertStatus))+
     geom_text(data = bact_invSimp_max_disp_letters, aes(x=siteID, y = 40 + max_value, label = sig_let), vjust=0, size=10)+
@@ -585,7 +585,7 @@ fung_invsimp_max_invsimp_letters=merge(root_soil_fung_invsimp_letters,fung_invsi
     scale_y_continuous(name = "Bacterial\nInverse Simpson",limits = c(0,520))+
     theme(axis.text.x = element_blank(),legend.key.size = unit(3, 'cm'),legend.text = element_text(size=32)))
 
-(bact_invSimp_p2=ggplot(GLBRC018_OTU_bact_MMPRNT_All_sites_G5_div)+
+(bact_invSimp_p2=ggplot(GLBRC018_OTU_bact_MMPRNT_MLE_G5_div)+
     geom_boxplot(aes(y=InvSimpson, x=factor(siteID,levels = site_order),
                      fill=siteID,alpha=FertStatus),color="black")+
     geom_text(data = bact_invSimp_max_disp_letters, aes(x=siteID, y = 40 + max_value, label = sig_let), vjust=0, size=10)+
@@ -597,7 +597,7 @@ fung_invsimp_max_invsimp_letters=merge(root_soil_fung_invsimp_letters,fung_invsi
     theme(strip.text = element_blank(),strip.background = element_blank(),legend.position = "none",axis.text.x = element_blank()))
 
 
-(fung_invSimp_p2=ggplot(GLBRC018_OTU_fung_MMPRNT_All_sites_G5_div,aes(y=Observed, x=factor(siteID,levels = site_order)))+
+(fung_invSimp_p2=ggplot(GLBRC018_OTU_fung_MMPRNT_MLE_G5_div,aes(y=Observed, x=factor(siteID,levels = site_order)))+
     geom_boxplot(aes(y=InvSimpson, x=factor(siteID,levels = site_order),
                      fill=siteID,alpha=FertStatus),color="black")+
     geom_text(data = fung_invsimp_max_invsimp_letters, aes(x=siteID, y = 1 + max_value, label = sig_let), vjust=0, size=10)+
@@ -619,10 +619,11 @@ fung_invsimp_max_invsimp_letters=merge(root_soil_fung_invsimp_letters,fung_invsi
 plot_grid(rich_invSimp_4panel,get_legend(bact_invSimp_p3),ncol = 2,rel_widths = c(4,1.5))
 
 
-
+#NOT INCLUDED IN REPOSITORY
 ggsave(plot_grid(rich_invSimp_4panel,get_legend(bact_invSimp_p3),ncol = 2,rel_widths = c(4,1.5)),
        filename = "richness_invSimpson_boxplot_All_Sites_p.png",path = here::here("Manuscript","MLE_comm_figs"),width = 25,height =20)
 
 ggsave(plot_grid(rich_invSimp_4panel,get_legend(bact_invSimp_p3),ncol = 2,rel_widths = c(4,1.5)),
        filename = "richness_invSimpson_boxplot_All_Sites_p.svg",path = here::here("Manuscript","MLE_comm_figs"),width = 25,height =20)
 
+#NOT INCLUDED IN REPOSITORY

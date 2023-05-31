@@ -720,7 +720,7 @@ plot_grid(LUX_root_PRO_nmds,LUX_soil_PRO_nmds,get_legend(LUX_soil_procruste_p3),
           rel_widths = c(2,2,0.5),align = "v",axis = "l")
 
 
-
+#NOT INCLUDED IN REPOSITORY
 ggsave(plot_grid(LUX_root_PRO_nmds,LUX_soil_PRO_nmds,get_legend(LUX_soil_procruste_p3),
                  LUX_root_procruste_p3,LUX_soil_procruste_p3,get_legend(lux_procruste_p3),
                  labels = c("a)","b)"," ","c)","d)"," "),label_size = 32,label_x = c(0,0.05,0,0,0.05,0),
@@ -732,6 +732,6 @@ ggsave(plot_grid(LUX_root_PRO_nmds,LUX_soil_PRO_nmds,get_legend(LUX_soil_procrus
                  labels = c("a)","b)"," ","c)","d)"," "),label_size = 32,label_x = c(0,0.05,0,0,0.05,0),
                  rel_widths = c(2,2,0.5),align = "v",axis = "l",rel_heights = c(1.2,1)),
        filename = "procrustes_NMDS_boxplot_LUX_date_color_p.svg",path = here::here("Manuscript","Lux_Arbor_comm_figs"),width = 15,height =12)
-
+#NOT INCLUDED IN REPOSITORY
 
 
