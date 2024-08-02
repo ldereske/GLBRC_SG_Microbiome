@@ -1,7 +1,7 @@
 ##Let  extract the reads from 2018 (20180119_A_16S-V4_PE) because that has the merds reads are in it. This is considered our Run C for 2018.
 
 ```
-cd /mnt/research/EvansLab/MMPRNT_2018/20190617_16S-V4_PE250/
+cd /MMPRNT_2018/20190617_16S-V4_PE250/
 gunzip *.fastq.gz
 ```
 
@@ -44,7 +44,7 @@ grep "^EE" * > 20190617_16S-V4_PE250_fastq_EE.txt
 look for any forward and reverse reads that look especially bad in terms of quality (high E is bad quality). This info will also be really helpful for troubleshooting later on (e.g. why some samples have extremely low read numbers)
 
 #### we need to remove the underscores in the MERDS and ZymoMock file names
-cd /mnt/research/EvansLab/MMPRNT_2018/20190617_16S-V4_PE250/
+cd /MMPRNT_2018/20190617_16S-V4_PE250/
 rename "MERDS_SG_" "MERDSSG" MERDS_SG*
 rename "ZymoMock_C" "ZymoMockC" ZymoMock_C*
 
@@ -58,13 +58,13 @@ https://www.drive5.com/usearch/manual/merge_options.html
 #### This step takes approximately 10 minutes
 ```
 
-cd /mnt/research/EvansLab/Lukas/
+cd /Lukas/
 mkdir MMPRNT018
 cd MMPRNT018
 mkdir 20190617_16S-V4_PE250
-cd /mnt/research/EvansLab/MMPRNT_2018/20190617_16S-V4_PE250/
+cd /MMPRNT_2018/20190617_16S-V4_PE250/
 
-usearch10.0.240 -fastq_mergepairs *R1*.fastq -relabel @ -fastqout /mnt/research/EvansLab/Lukas/MMPRNT018/20190617_16S-V4_PE250/combined_merged_20190617_16S-V4_PE250.fastq  -tabbedout /mnt/research/EvansLab/Lukas/MMPRNT018/20190617_16S-V4_PE250/combined_merged_20190617_16S-V4_PE250_pair_report.txt -alnout /mnt/research/EvansLab/Lukas/MMPRNT018/20190617_16S-V4_PE250/combined_merged_20190617_16S-V4_PE250_pair_aln.txt
+usearch10.0.240 -fastq_mergepairs *R1*.fastq -relabel @ -fastqout /Lukas/MMPRNT018/20190617_16S-V4_PE250/combined_merged_20190617_16S-V4_PE250.fastq  -tabbedout /Lukas/MMPRNT018/20190617_16S-V4_PE250/combined_merged_20190617_16S-V4_PE250_pair_report.txt -alnout /Lukas/MMPRNT018/20190617_16S-V4_PE250/combined_merged_20190617_16S-V4_PE250_pair_aln.txt
 
 ```
 09:09 722Mb   100.0% 61.8% merged
@@ -115,7 +115,7 @@ chmod +x rev_trunc.sh
 Now try to merge the sequences again with the truncated reverse reads.
 
 ```
-usearch10.0.240 -fastq_mergepairs *R1*.fastq -reverse trim_reverse_20190617_16S-V4_PE250/*R2* -relabel @ -fastqout /mnt/research/EvansLab/Lukas/MMPRNT018/20190617_16S-V4_PE250/combined_merged_20190617_16S-V4_PE250_trunc.fastq  -tabbedout /mnt/research/EvansLab/Lukas/MMPRNT018/20190617_16S-V4_PE250/combined_merged_20190617_16S-V4_PE250_trunc_pair_report.txt -alnout /mnt/research/EvansLab/Lukas/MMPRNT018/20190617_16S-V4_PE250/combined_merged_20190617_16S-V4_PE250_trunc_pair_aln.txt
+usearch10.0.240 -fastq_mergepairs *R1*.fastq -reverse trim_reverse_20190617_16S-V4_PE250/*R2* -relabel @ -fastqout /Lukas/MMPRNT018/20190617_16S-V4_PE250/combined_merged_20190617_16S-V4_PE250_trunc.fastq  -tabbedout /Lukas/MMPRNT018/20190617_16S-V4_PE250/combined_merged_20190617_16S-V4_PE250_trunc_pair_report.txt -alnout /Lukas/MMPRNT018/20190617_16S-V4_PE250/combined_merged_20190617_16S-V4_PE250_trunc_pair_aln.txt
 ```
 Good merging 
 ```
@@ -141,7 +141,7 @@ Totals:
 ### 2b) let's check sequence quality of the merged seqs using USEARCH's [fastq_eestats2](https://www.drive5.com/usearch/manual/cmd_fastq_eestats2.html).
 
 ```
-usearch11.0.667 -fastq_eestats2 /mnt/research/EvansLab/Lukas/MMPRNT018/20190617_16S-V4_PE250/combined_merged_20190617_16S-V4_PE250_trunc.fastq -output /mnt/research/EvansLab/Lukas/MMPRNT018/20190617_16S-V4_PE250/combined_merged_20190617_16S-V4_PE250_trunc_eestats2.txt
+usearch11.0.667 -fastq_eestats2 /Lukas/MMPRNT018/20190617_16S-V4_PE250/combined_merged_20190617_16S-V4_PE250_trunc.fastq -output /Lukas/MMPRNT018/20190617_16S-V4_PE250/combined_merged_20190617_16S-V4_PE250_trunc_eestats2.txt
 ```
 Quality and length look good
 ```
@@ -169,7 +169,7 @@ This code removes the forward adapter of 515F and the reverse complement of 806R
 module load icc/2018.1.163-GCC-6.4.0-2.28
 module load impi/2018.1.163
 module load cutadapt/1.16-Python-3.6.4
-cutadapt -a ATTAGAWACCCBDGTAGTCC -a GTGCCAGCMGCCGCGGTAA -o /mnt/research/EvansLab/Lukas/MMPRNT018/20190617_16S-V4_PE250/cut_combined_merged_20190617_16S-V4_PE250_trunc.fastq /mnt/research/EvansLab/Lukas/MMPRNT018/20190617_16S-V4_PE250/combined_merged_20190617_16S-V4_PE250_trunc.fastq > /mnt/research/EvansLab/Lukas/MMPRNT018/20190617_16S-V4_PE250/cut_adpt_results_combined_merged_20190617_16S-V4_PE250_trunc.txt
+cutadapt -a ATTAGAWACCCBDGTAGTCC -a GTGCCAGCMGCCGCGGTAA -o /Lukas/MMPRNT018/20190617_16S-V4_PE250/cut_combined_merged_20190617_16S-V4_PE250_trunc.fastq /Lukas/MMPRNT018/20190617_16S-V4_PE250/combined_merged_20190617_16S-V4_PE250_trunc.fastq > /Lukas/MMPRNT018/20190617_16S-V4_PE250/cut_adpt_results_combined_merged_20190617_16S-V4_PE250_trunc.txt
 ```
 ```
 === Summary ===
@@ -185,11 +185,11 @@ Total written (filtered):  2,004,027,165 bp (100.0%)
 ###Rename the merged file to get rid of hyphens in sample names (e.g. "MMPRNT-#" should be "MMPRNT#")
 
 ```
-sed -e 's/MMPRNT-/MMPRNT/g' /mnt/research/EvansLab/Lukas/MMPRNT018/20190617_16S-V4_PE250/cut_combined_merged_20190617_16S-V4_PE250_trunc.fastq > /mnt/research/EvansLab/Lukas/MMPRNT018/20190617_16S-V4_PE250/renamed_cut_combined_merged_20190617_16S-V4_PE250_trunc.fastq
-sed -e 's/Freeze-1123/Freeze1123/g' /mnt/research/EvansLab/Lukas/MMPRNT018/20190617_16S-V4_PE250/renamed_cut_combined_merged_20190617_16S-V4_PE250_trunc.fastq > /mnt/research/EvansLab/Lukas/MMPRNT018/20190617_16S-V4_PE250/renamed1_cut_combined_merged_20190617_16S-V4_PE250_trunc.fastq
-sed -e 's/LC2017G5/LC2017G5C/g' /mnt/research/EvansLab/Lukas/MMPRNT018/20190617_16S-V4_PE250/renamed1_cut_combined_merged_20190617_16S-V4_PE250_trunc.fastq > /mnt/research/EvansLab/Lukas/MMPRNT018/20190617_16S-V4_PE250/renamed2_cut_combined_merged_20190617_16S-V4_PE250_trunc.fastq
-sed -e 's/LUX2017G5/LUX2017G5C/g' /mnt/research/EvansLab/Lukas/MMPRNT018/20190617_16S-V4_PE250/renamed2_cut_combined_merged_20190617_16S-V4_PE250_trunc.fastq > /mnt/research/EvansLab/Lukas/MMPRNT018/20190617_16S-V4_PE250/renamed3_cut_combined_merged_20190617_16S-V4_PE250_trunc.fastq
-sed -e 's/Marshall-/Marshall/g' /mnt/research/EvansLab/Lukas/MMPRNT018/20190617_16S-V4_PE250/renamed3_cut_combined_merged_20190617_16S-V4_PE250_trunc.fastq > /mnt/research/EvansLab/Lukas/MMPRNT018/20190617_16S-V4_PE250/renamed_cut_combined_merged_20190617_16S-V4_PE250_trunc.fastq
+sed -e 's/MMPRNT-/MMPRNT/g' /Lukas/MMPRNT018/20190617_16S-V4_PE250/cut_combined_merged_20190617_16S-V4_PE250_trunc.fastq > /Lukas/MMPRNT018/20190617_16S-V4_PE250/renamed_cut_combined_merged_20190617_16S-V4_PE250_trunc.fastq
+sed -e 's/Freeze-1123/Freeze1123/g' /Lukas/MMPRNT018/20190617_16S-V4_PE250/renamed_cut_combined_merged_20190617_16S-V4_PE250_trunc.fastq > /Lukas/MMPRNT018/20190617_16S-V4_PE250/renamed1_cut_combined_merged_20190617_16S-V4_PE250_trunc.fastq
+sed -e 's/LC2017G5/LC2017G5C/g' /Lukas/MMPRNT018/20190617_16S-V4_PE250/renamed1_cut_combined_merged_20190617_16S-V4_PE250_trunc.fastq > /Lukas/MMPRNT018/20190617_16S-V4_PE250/renamed2_cut_combined_merged_20190617_16S-V4_PE250_trunc.fastq
+sed -e 's/LUX2017G5/LUX2017G5C/g' /Lukas/MMPRNT018/20190617_16S-V4_PE250/renamed2_cut_combined_merged_20190617_16S-V4_PE250_trunc.fastq > /Lukas/MMPRNT018/20190617_16S-V4_PE250/renamed3_cut_combined_merged_20190617_16S-V4_PE250_trunc.fastq
+sed -e 's/Marshall-/Marshall/g' /Lukas/MMPRNT018/20190617_16S-V4_PE250/renamed3_cut_combined_merged_20190617_16S-V4_PE250_trunc.fastq > /Lukas/MMPRNT018/20190617_16S-V4_PE250/renamed_cut_combined_merged_20190617_16S-V4_PE250_trunc.fastq
 ```
 
 
@@ -197,11 +197,11 @@ sed -e 's/Marshall-/Marshall/g' /mnt/research/EvansLab/Lukas/MMPRNT018/20190617_
 ###Check sample names to make sure hyphen is gone:
 
 ```
-less /mnt/research/EvansLab/Lukas/MMPRNT018/20190617_16S-V4_PE250/renamed_cut_combined_merged_20190617_16S-V4_PE250_trunc.fastq
+less /Lukas/MMPRNT018/20190617_16S-V4_PE250/renamed_cut_combined_merged_20190617_16S-V4_PE250_trunc.fastq
 ```
 Get sample names to check that all of the samples are present
 ```
-usearch10.0.240 -fastx_get_sample_names /mnt/research/EvansLab/Lukas/MMPRNT018/20190617_16S-V4_PE250/renamed_cut_combined_merged_20190617_16S-V4_PE250_trunc.fastq -output /mnt/research/EvansLab/Lukas/MMPRNT018/20190617_16S-V4_PE250/renamed_cut_combined_merged_20190617_16S-V4_PE250_trunc_samples.txt
+usearch10.0.240 -fastx_get_sample_names /Lukas/MMPRNT018/20190617_16S-V4_PE250/renamed_cut_combined_merged_20190617_16S-V4_PE250_trunc.fastq -output /Lukas/MMPRNT018/20190617_16S-V4_PE250/renamed_cut_combined_merged_20190617_16S-V4_PE250_trunc_samples.txt
 ```
 ```
 00:30 37Mb    100.0% 317 samples found
@@ -212,7 +212,7 @@ Looks good
 ##Let  extract the reads from 2018 run 20190614_16S-V4_PE250 this is considered our Run A
 
 ```
-cd /mnt/research/EvansLab/MMPRNT_2018/20190614_16S-V4_PE250/
+cd /MMPRNT_2018/20190614_16S-V4_PE250/
 gunzip *.fastq.gz
 ```
 
@@ -257,7 +257,7 @@ grep "^EE" * > 20190614_16S-V4_PE250_fastq_EE.txt
 look for any forward and reverse reads that look especially bad in terms of quality (high E is bad quality). This info will also be really helpful for troubleshooting later on (e.g. why some samples have extremely low read numbers)
 
 #### we need to remove the underscores in the LC2017G5,LUX2017G5, and ZymoMock file names
-cd /mnt/research/EvansLab/MMPRNT_2018/20190614_16S-V4_PE250/
+cd /MMPRNT_2018/20190614_16S-V4_PE250/
 rename "LC2017G5_A" "LC2017G5A" LC2017G5_A*
 rename "LUX2017G5_A" "LUX2017G5A" LUX2017G5_A*
 rename "ZymoMock_A" "ZymoMockA" ZymoMock_A*
@@ -272,12 +272,12 @@ https://www.drive5.com/usearch/manual/merge_options.html
 #### This step takes approximately 10 minutes
 ```
 
-cd /mnt/research/EvansLab/Lukas/MMPRNT018
+cd /Lukas/MMPRNT018
 
 mkdir 20190614_16S-V4_PE250
-cd /mnt/research/EvansLab/MMPRNT_2018/20190614_16S-V4_PE250/
+cd /MMPRNT_2018/20190614_16S-V4_PE250/
 
-usearch10.0.240 -fastq_mergepairs *R1*.fastq -relabel @ -fastqout /mnt/research/EvansLab/Lukas/MMPRNT018/20190614_16S-V4_PE250/combined_20190614_16S-V4_PE250.fastq  -tabbedout /mnt/research/EvansLab/Lukas/MMPRNT018/20190614_16S-V4_PE250/combined_merged_20190614_16S-V4_PE250_pair_report.txt -alnout /mnt/research/EvansLab/Lukas/MMPRNT018/20190614_16S-V4_PE250/combined_merged_20190614_16S-V4_PE250_pair_aln.txt
+usearch10.0.240 -fastq_mergepairs *R1*.fastq -relabel @ -fastqout /Lukas/MMPRNT018/20190614_16S-V4_PE250/combined_20190614_16S-V4_PE250.fastq  -tabbedout /Lukas/MMPRNT018/20190614_16S-V4_PE250/combined_merged_20190614_16S-V4_PE250_pair_report.txt -alnout /Lukas/MMPRNT018/20190614_16S-V4_PE250/combined_merged_20190614_16S-V4_PE250_pair_aln.txt
 
 ```
 07:42 722Mb   100.0% 72.3% merged
@@ -307,7 +307,7 @@ Looks like an okay merge
 ### 2b) let's check sequence quality of the merged seqs using USEARCH's [fastq_eestats2](https://www.drive5.com/usearch/manual/cmd_fastq_eestats2.html).
 
 ```
-usearch11.0.667 -fastq_eestats2 /mnt/research/EvansLab/Lukas/MMPRNT018/20190614_16S-V4_PE250/combined_20190614_16S-V4_PE250.fastq -output /mnt/research/EvansLab/Lukas/MMPRNT018/20190614_16S-V4_PE250/combined_20190614_16S-V4_PE250_eestats2.txt
+usearch11.0.667 -fastq_eestats2 /Lukas/MMPRNT018/20190614_16S-V4_PE250/combined_20190614_16S-V4_PE250.fastq -output /Lukas/MMPRNT018/20190614_16S-V4_PE250/combined_20190614_16S-V4_PE250_eestats2.txt
 ```
 Quality and length look good
 ```
@@ -339,7 +339,7 @@ Probably not super necessary
 module load icc/2018.1.163-GCC-6.4.0-2.28
 module load impi/2018.1.163
 module load cutadapt/1.16-Python-3.6.4
-cutadapt -a ATTAGAWACCCBDGTAGTCC -a GTGCCAGCMGCCGCGGTAA -o /mnt/research/EvansLab/Lukas/MMPRNT018/20190614_16S-V4_PE250/cut_combined_20190614_16S-V4_PE250.fastq /mnt/research/EvansLab/Lukas/MMPRNT018/20190614_16S-V4_PE250/combined_20190614_16S-V4_PE250.fastq > /mnt/research/EvansLab/Lukas/MMPRNT018/20190614_16S-V4_PE250/cut_adpt_results_combined_20190614_16S-V4_PE250.txt
+cutadapt -a ATTAGAWACCCBDGTAGTCC -a GTGCCAGCMGCCGCGGTAA -o /Lukas/MMPRNT018/20190614_16S-V4_PE250/cut_combined_20190614_16S-V4_PE250.fastq /Lukas/MMPRNT018/20190614_16S-V4_PE250/combined_20190614_16S-V4_PE250.fastq > /Lukas/MMPRNT018/20190614_16S-V4_PE250/cut_adpt_results_combined_20190614_16S-V4_PE250.txt
 ```
 ```
 === Summary ===
@@ -356,7 +356,7 @@ Total written (filtered):  1,798,788,269 bp (100.0%)
 ###Rename the merged file to get rid of hyphens in sample names (e.g. "MMPRNT-#" should be "MMPRNT#")
 
 ```
-sed -e 's/MMPRNT-/MMPRNT/g' /mnt/research/EvansLab/Lukas/MMPRNT018/20190614_16S-V4_PE250/cut_combined_20190614_16S-V4_PE250.fastq > /mnt/research/EvansLab/Lukas/MMPRNT018/20190614_16S-V4_PE250/renamed_cut_combined_20190614_16S-V4_PE250.fastq
+sed -e 's/MMPRNT-/MMPRNT/g' /Lukas/MMPRNT018/20190614_16S-V4_PE250/cut_combined_20190614_16S-V4_PE250.fastq > /Lukas/MMPRNT018/20190614_16S-V4_PE250/renamed_cut_combined_20190614_16S-V4_PE250.fastq
 
 ```
 
@@ -365,11 +365,11 @@ sed -e 's/MMPRNT-/MMPRNT/g' /mnt/research/EvansLab/Lukas/MMPRNT018/20190614_16S-
 ###Check sample names to make sure hyphen is gone:
 
 ```
-less /mnt/research/EvansLab/Lukas/MMPRNT018/20190614_16S-V4_PE250/renamed_cut_combined_20190614_16S-V4_PE250.fastq
+less /Lukas/MMPRNT018/20190614_16S-V4_PE250/renamed_cut_combined_20190614_16S-V4_PE250.fastq
 ```
 Get sample names to check that all of the samples are present
 ```
-usearch10.0.240 -fastx_get_sample_names /mnt/research/EvansLab/Lukas/MMPRNT018/20190614_16S-V4_PE250/renamed_cut_combined_20190614_16S-V4_PE250.fastq -output /mnt/research/EvansLab/Lukas/MMPRNT018/20190614_16S-V4_PE250/renamed_cut_combined_20190614_16S-V4_PE250_samples.txt
+usearch10.0.240 -fastx_get_sample_names /Lukas/MMPRNT018/20190614_16S-V4_PE250/renamed_cut_combined_20190614_16S-V4_PE250.fastq -output /Lukas/MMPRNT018/20190614_16S-V4_PE250/renamed_cut_combined_20190614_16S-V4_PE250_samples.txt
 ```
 ```
 00:25 37Mb    100.0% 315 samples found
@@ -380,7 +380,7 @@ Looks good
 ##Let  extract the reads from 2018 run 20190621_16S-V4_PE250 this is considered our Run B
 
 ```
-cd /mnt/research/EvansLab/MMPRNT_2018/20190621_16S-V4_PE250/
+cd /MMPRNT_2018/20190621_16S-V4_PE250/
 gunzip *.fastq.gz
 ```
 
@@ -423,7 +423,7 @@ grep "^EE" * > 20190614_16S-V4_PE250_fastq_EE.txt
 look for any forward and reverse reads that look especially bad in terms of quality (high E is bad quality). This info will also be really helpful for troubleshooting later on (e.g. why some samples have extremely low read numbers)
 
 #### we need to remove the underscores in the LC2017G5,LUX2017G5, and ZymoMock file names
-cd /mnt/research/EvansLab/MMPRNT_2018/20190621_16S-V4_PE250/
+cd /MMPRNT_2018/20190621_16S-V4_PE250/
 rename "LC2017G5_B" "LC2017G5B" LC2017G5_B*
 rename "LUX2017G5_B" "LUX2017G5B" LUX2017G5_B*
 rename "ZymoMock_B" "ZymoMockB" ZymoMock_B*
@@ -440,12 +440,12 @@ https://www.drive5.com/usearch/manual/merge_options.html
 #### This step takes approximately 10 minutes
 ```
 
-cd /mnt/research/EvansLab/Lukas/MMPRNT018
+cd /Lukas/MMPRNT018
 
 mkdir 20190621_16S-V4_PE250
-cd /mnt/research/EvansLab/MMPRNT_2018/20190621_16S-V4_PE250/
+cd /MMPRNT_2018/20190621_16S-V4_PE250/
 
-usearch10.0.240 -fastq_mergepairs *R1*.fastq -relabel @ -fastqout /mnt/research/EvansLab/Lukas/MMPRNT018/20190621_16S-V4_PE250/combined_20190621_16S-V4_PE250.fastq  -tabbedout /mnt/research/EvansLab/Lukas/MMPRNT018/20190621_16S-V4_PE250/combined_merged_20190621_16S-V4_PE250_pair_report.txt -alnout /mnt/research/EvansLab/Lukas/MMPRNT018/20190621_16S-V4_PE250/combined_merged_20190621_16S-V4_PE250_pair_aln.txt
+usearch10.0.240 -fastq_mergepairs *R1*.fastq -relabel @ -fastqout /Lukas/MMPRNT018/20190621_16S-V4_PE250/combined_20190621_16S-V4_PE250.fastq  -tabbedout /Lukas/MMPRNT018/20190621_16S-V4_PE250/combined_merged_20190621_16S-V4_PE250_pair_report.txt -alnout /Lukas/MMPRNT018/20190621_16S-V4_PE250/combined_merged_20190621_16S-V4_PE250_pair_aln.txt
 
 ```
 07:16 307Mb   100.0% 48.7% merged
@@ -499,7 +499,7 @@ chmod +x rev_trunc.sh
 Now try to merge the sequences again with the truncated reverse reads.
 
 ```
-usearch10.0.240 -fastq_mergepairs *R1*.fastq -reverse trim_reverse_20190621_16S-V4_PE250/*R2* -relabel @ -fastqout /mnt/research/EvansLab/Lukas/MMPRNT018/20190621_16S-V4_PE250/combined_merged_20190621_16S-V4_PE250_trunc.fastq  -tabbedout /mnt/research/EvansLab/Lukas/MMPRNT018/20190621_16S-V4_PE250/combined_merged_20190621_16S-V4_PE250_trunc_pair_report.txt -alnout /mnt/research/EvansLab/Lukas/MMPRNT018/20190621_16S-V4_PE250/combined_merged_20190621_16S-V4_PE250_trunc_pair_aln.txt
+usearch10.0.240 -fastq_mergepairs *R1*.fastq -reverse trim_reverse_20190621_16S-V4_PE250/*R2* -relabel @ -fastqout /Lukas/MMPRNT018/20190621_16S-V4_PE250/combined_merged_20190621_16S-V4_PE250_trunc.fastq  -tabbedout /Lukas/MMPRNT018/20190621_16S-V4_PE250/combined_merged_20190621_16S-V4_PE250_trunc_pair_report.txt -alnout /Lukas/MMPRNT018/20190621_16S-V4_PE250/combined_merged_20190621_16S-V4_PE250_trunc_pair_aln.txt
 ```
 Okay merging 
 ```
@@ -527,7 +527,7 @@ Totals:
 ### 2b) let's check sequence quality of the merged seqs using USEARCH's [fastq_eestats2](https://www.drive5.com/usearch/manual/cmd_fastq_eestats2.html).
 
 ```
-usearch11.0.667 -fastq_eestats2 /mnt/research/EvansLab/Lukas/MMPRNT018/20190621_16S-V4_PE250/combined_merged_20190621_16S-V4_PE250_trunc.fastq -output /mnt/research/EvansLab/Lukas/MMPRNT018/20190621_16S-V4_PE250/combined_merged_20190621_16S-V4_PE250_trunc_eestats2.txt
+usearch11.0.667 -fastq_eestats2 /Lukas/MMPRNT018/20190621_16S-V4_PE250/combined_merged_20190621_16S-V4_PE250_trunc.fastq -output /Lukas/MMPRNT018/20190621_16S-V4_PE250/combined_merged_20190621_16S-V4_PE250_trunc_eestats2.txt
 ```
 Quality and length look good
 ```
@@ -557,7 +557,7 @@ Probably not super necessary
 module load icc/2018.1.163-GCC-6.4.0-2.28
 module load impi/2018.1.163
 module load cutadapt/1.16-Python-3.6.4
-cutadapt -a ATTAGAWACCCBDGTAGTCC -a GTGCCAGCMGCCGCGGTAA -o /mnt/research/EvansLab/Lukas/MMPRNT018/20190621_16S-V4_PE250/cut_combined_merged_20190621_16S-V4_PE250_trunc.fastq /mnt/research/EvansLab/Lukas/MMPRNT018/20190621_16S-V4_PE250/combined_merged_20190621_16S-V4_PE250_trunc.fastq > /mnt/research/EvansLab/Lukas/MMPRNT018/20190621_16S-V4_PE250/cut_adpt_results_combined_merged_20190621_16S-V4_PE250_trunc.txt
+cutadapt -a ATTAGAWACCCBDGTAGTCC -a GTGCCAGCMGCCGCGGTAA -o /Lukas/MMPRNT018/20190621_16S-V4_PE250/cut_combined_merged_20190621_16S-V4_PE250_trunc.fastq /Lukas/MMPRNT018/20190621_16S-V4_PE250/combined_merged_20190621_16S-V4_PE250_trunc.fastq > /Lukas/MMPRNT018/20190621_16S-V4_PE250/cut_adpt_results_combined_merged_20190621_16S-V4_PE250_trunc.txt
 ```
 ```
 === Summary ===
@@ -575,7 +575,7 @@ Total written (filtered):  1,948,802,785 bp (100.0%)
 ###Rename the merged file to get rid of hyphens in sample names (e.g. "MMPRNT-#" should be "MMPRNT#")
 
 ```
-sed -e 's/MMPRNT-/MMPRNT/g' /mnt/research/EvansLab/Lukas/MMPRNT018/20190621_16S-V4_PE250/cut_combined_merged_20190621_16S-V4_PE250_trunc.fastq > /mnt/research/EvansLab/Lukas/MMPRNT018/20190621_16S-V4_PE250/rename_cut_combined_merged_20190621_16S-V4_PE250_trunc.fastq
+sed -e 's/MMPRNT-/MMPRNT/g' /Lukas/MMPRNT018/20190621_16S-V4_PE250/cut_combined_merged_20190621_16S-V4_PE250_trunc.fastq > /Lukas/MMPRNT018/20190621_16S-V4_PE250/rename_cut_combined_merged_20190621_16S-V4_PE250_trunc.fastq
 
 ```
 
@@ -584,11 +584,11 @@ sed -e 's/MMPRNT-/MMPRNT/g' /mnt/research/EvansLab/Lukas/MMPRNT018/20190621_16S-
 ###Check sample names to make sure hyphen is gone:
 
 ```
-less /mnt/research/EvansLab/Lukas/MMPRNT018/20190621_16S-V4_PE250/rename_cut_combined_merged_20190621_16S-V4_PE250_trunc.fastq
+less /Lukas/MMPRNT018/20190621_16S-V4_PE250/rename_cut_combined_merged_20190621_16S-V4_PE250_trunc.fastq
 ```
 Get sample names to check that all of the samples are present
 ```
-usearch10.0.240 -fastx_get_sample_names /mnt/research/EvansLab/Lukas/MMPRNT018/20190621_16S-V4_PE250/rename_cut_combined_merged_20190621_16S-V4_PE250_trunc.fastq -output /mnt/research/EvansLab/Lukas/MMPRNT018/20190621_16S-V4_PE250/rename_cut_combined_merged_20190621_16S-V4_PE250_trunc_samples.txt
+usearch10.0.240 -fastx_get_sample_names /Lukas/MMPRNT018/20190621_16S-V4_PE250/rename_cut_combined_merged_20190621_16S-V4_PE250_trunc.fastq -output /Lukas/MMPRNT018/20190621_16S-V4_PE250/rename_cut_combined_merged_20190621_16S-V4_PE250_trunc_samples.txt
 ```
 ```
 00:25 37Mb    100.0% 315 samples found
@@ -602,12 +602,12 @@ Looks good
 
 ```
 #29377783 seqs
-#cd /mnt/research/EvansLab/Lukas
+#cd /Lukas
 #mkdir GLBRC018_Root_Soil
 ```
 
 
-+ /mnt/research/EvansLab/GLBRC_SG_Roots/Field2018_Bac/Lib_1_backup_Bac/
++ /GLBRC_SG_Roots/Field2018_Bac/Lib_1_backup_Bac/
 
 Pedro created a bar code file in a text editor
 
@@ -617,7 +617,7 @@ https://docs.qiime2.org/2020.2/plugins/available/demux/emp-paired/?highlight=dem
 ###### Import the multiplexed sequences
 We need to rename and move the zipped sequence files
 ```
-cd /mnt/research/EvansLab/GLBRC_SG_Roots/Field2018_Bac/Lib_1_backup_Bac/
+cd /GLBRC_SG_Roots/Field2018_Bac/Lib_1_backup_Bac/
 mkdir QIIME2_demux
 cd QIIME2_demux/
 mkdir compressed_seqs
@@ -650,7 +650,7 @@ nano Q2_demux_Lib1_GLBRC018_root_bact.sbatch
 #SBATCH --mail-user=belldere@msu.edu
 
 cd ${SLURM_SUBMIT_DIR}
-export PATH="/mnt/research/EvansLab/Software/anaconda3/bin:$PATH"
+export PATH="/Software/anaconda3/bin:$PATH"
 source activate qiime2-2019.4
 
 #convert the files to the qza format 
@@ -686,7 +686,7 @@ Unzip the demultiplexed sequences
 
 ```
 
-cd /mnt/research/EvansLab/GLBRC_SG_Roots/Field2018_Bac/Lib_1_backup_Bac/QIIME2_demux/output/demultiplexed-seqs
+cd /GLBRC_SG_Roots/Field2018_Bac/Lib_1_backup_Bac/QIIME2_demux/output/demultiplexed-seqs
 gunzip *.fastq.gz
 
 ```
@@ -738,7 +738,7 @@ https://www.drive5.com/usearch/manual/merge_options.html
 #### This step takes approximately 10 minutes
 ```
 
-cd /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil
+cd /Lukas/GLBRC018_Root_Soil
 #mkdir Bacterial_libs
 mkdir Bacterial_libs/Lib1_bact
 cd Bacterial_libs/Lib1_bact
@@ -760,9 +760,9 @@ nano merg_seq_Lib1_GLBRC018_soil_bact.sbatch
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=belldere@msu.edu
 
-cd /mnt/research/EvansLab/GLBRC_SG_Roots/Field2018_Bac/Lib_1_backup_Bac/QIIME2_demux/output/demultiplexed-seqs
+cd /GLBRC_SG_Roots/Field2018_Bac/Lib_1_backup_Bac/QIIME2_demux/output/demultiplexed-seqs
 
-usearch11.0.667 -fastq_mergepairs *_R1*.fastq -relabel @ -fastqout /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Bacterial_libs/Lib1_bact/merged_Lib1_16S.fastq  -tabbedout /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Bacterial_libs/Lib1_bact/merged_Lib1_16S_pair_report.txt -fastqout_notmerged_fwd /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Bacterial_libs/Lib1_bact/NO_Match_16S_Amplicon_PE300_ITS1_for.fastq -fastqout_notmerged_rev /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Bacterial_libs/Lib1_bact/NO_Match_16S_Amplicon_PE300_ITS1_rev.fastq
+usearch11.0.667 -fastq_mergepairs *_R1*.fastq -relabel @ -fastqout /Lukas/GLBRC018_Root_Soil/Bacterial_libs/Lib1_bact/merged_Lib1_16S.fastq  -tabbedout /Lukas/GLBRC018_Root_Soil/Bacterial_libs/Lib1_bact/merged_Lib1_16S_pair_report.txt -fastqout_notmerged_fwd /Lukas/GLBRC018_Root_Soil/Bacterial_libs/Lib1_bact/NO_Match_16S_Amplicon_PE300_ITS1_for.fastq -fastqout_notmerged_rev /Lukas/GLBRC018_Root_Soil/Bacterial_libs/Lib1_bact/NO_Match_16S_Amplicon_PE300_ITS1_rev.fastq
 
 ###End
 
@@ -799,7 +799,7 @@ Totals:
 ###Check sample names to make sure all of the samples are present
 
 ```
-usearch11.0.667 -fastx_get_sample_names /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Bacterial_libs/Lib1_bact/merged_Lib1_16S.fastq -output /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Bacterial_libs/Lib1_bact/merged_merged_Lib1_16S_samples.txt
+usearch11.0.667 -fastx_get_sample_names /Lukas/GLBRC018_Root_Soil/Bacterial_libs/Lib1_bact/merged_Lib1_16S.fastq -output /Lukas/GLBRC018_Root_Soil/Bacterial_libs/Lib1_bact/merged_merged_Lib1_16S_samples.txt
 ```
 ```
 #Should be 368 samples
@@ -814,12 +814,12 @@ usearch11.0.667 -fastx_get_sample_names /mnt/research/EvansLab/Lukas/GLBRC018_Ro
 
 ```
 #22209927 reads
-#cd /mnt/research/EvansLab/Lukas
+#cd /Lukas
 #mkdir GLBRC018_Root_Soil
 ```
 
 
-+ /mnt/research/EvansLab/GLBRC_SG_Roots/Field2018_Bac/Lib_2_backup_Bac/
++ /GLBRC_SG_Roots/Field2018_Bac/Lib_2_backup_Bac/
 
 Pedro created a bar code file in a text editor
 
@@ -829,7 +829,7 @@ https://docs.qiime2.org/2020.2/plugins/available/demux/emp-paired/?highlight=dem
 ###### Import the multiplexed sequences
 We need to rename and move the zipped sequence files
 ```
-cd /mnt/research/EvansLab/GLBRC_SG_Roots/Field2018_Bac/Lib_2_backup_Bac/
+cd /GLBRC_SG_Roots/Field2018_Bac/Lib_2_backup_Bac/
 mkdir QIIME2_demux
 cd QIIME2_demux/
 mkdir compressed_seqs
@@ -862,7 +862,7 @@ nano Q2_demux_Lib2_GLBRC018_root_bact.sbatch
 #SBATCH --mail-user=belldere@msu.edu
 
 cd ${SLURM_SUBMIT_DIR}
-export PATH="/mnt/research/EvansLab/Software/anaconda3/bin:$PATH"
+export PATH="/Software/anaconda3/bin:$PATH"
 source activate qiime2-2019.4
 
 #convert the files to the qza format 
@@ -903,7 +903,7 @@ Unzip the demultiplexed sequences
 
 ```
 
-cd /mnt/research/EvansLab/GLBRC_SG_Roots/Field2018_Bac/Lib_2_backup_Bac/QIIME2_demux/output/demultiplexed-seqs
+cd /GLBRC_SG_Roots/Field2018_Bac/Lib_2_backup_Bac/QIIME2_demux/output/demultiplexed-seqs
 gunzip *.fastq.gz
 
 ```
@@ -955,7 +955,7 @@ https://www.drive5.com/usearch/manual/merge_options.html
 #### This step takes approximately 10 minutes
 ```
 
-cd /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil
+cd /Lukas/GLBRC018_Root_Soil
 mkdir Bacterial_libs
 mkdir Bacterial_libs/Lib2_bact
 cd Bacterial_libs/Lib2_bact
@@ -977,9 +977,9 @@ nano merg_seq_Lib2_GLBRC018_soil_bact.sbatch
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=belldere@msu.edu
 
-cd /mnt/research/EvansLab/GLBRC_SG_Roots/Field2018_Bac/Lib_2_backup_Bac/QIIME2_demux/output/demultiplexed-seqs
+cd /GLBRC_SG_Roots/Field2018_Bac/Lib_2_backup_Bac/QIIME2_demux/output/demultiplexed-seqs
 
-usearch11.0.667 -fastq_mergepairs *_R1*.fastq -relabel @ -fastqout /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Bacterial_libs/Lib2_bact/merged_Lib2_16S.fastq  -tabbedout /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Bacterial_libs/Lib2_bact/merged_Lib2_16S_pair_report.txt -fastqout_notmerged_fwd /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Bacterial_libs/Lib2_bact/NO_Match_16S_Amplicon_PE300_ITS1_for.fastq -fastqout_notmerged_rev /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Bacterial_libs/Lib2_bact/NO_Match_16S_Amplicon_PE300_ITS1_rev.fastq
+usearch11.0.667 -fastq_mergepairs *_R1*.fastq -relabel @ -fastqout /Lukas/GLBRC018_Root_Soil/Bacterial_libs/Lib2_bact/merged_Lib2_16S.fastq  -tabbedout /Lukas/GLBRC018_Root_Soil/Bacterial_libs/Lib2_bact/merged_Lib2_16S_pair_report.txt -fastqout_notmerged_fwd /Lukas/GLBRC018_Root_Soil/Bacterial_libs/Lib2_bact/NO_Match_16S_Amplicon_PE300_ITS1_for.fastq -fastqout_notmerged_rev /Lukas/GLBRC018_Root_Soil/Bacterial_libs/Lib2_bact/NO_Match_16S_Amplicon_PE300_ITS1_rev.fastq
 
 ###End
 
@@ -1013,7 +1013,7 @@ Totals:
 ###Check sample names to make sure all of the samples are present
 
 ```
-usearch11.0.667 -fastx_get_sample_names /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Bacterial_libs/Lib2_bact/merged_Lib2_16S.fastq -output /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Bacterial_libs/Lib2_bact/merged_merged_Lib2_16S_samples.txt
+usearch11.0.667 -fastx_get_sample_names /Lukas/GLBRC018_Root_Soil/Bacterial_libs/Lib2_bact/merged_Lib2_16S.fastq -output /Lukas/GLBRC018_Root_Soil/Bacterial_libs/Lib2_bact/merged_merged_Lib2_16S_samples.txt
 ```
 ```
 #Should be 408 samples 
@@ -1028,7 +1028,7 @@ usearch11.0.667 -fastx_get_sample_names /mnt/research/EvansLab/Lukas/GLBRC018_Ro
 ###Combined the Bonito lab generated libs
 
 ```
-cd  /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Bacterial_libs/ 
+cd  /Lukas/GLBRC018_Root_Soil/Bacterial_libs/ 
 cat Lib2_bact/merged_Lib2_16S.fastq Lib1_bact/merged_Lib1_16S.fastq > merged_roots_comb_16s.fastq 
 
 ```
@@ -1055,7 +1055,7 @@ nano cutA_comb_GLBRC018_root_bact.sbatch
 module load icc/2018.1.163-GCC-6.4.0-2.28
 module load impi/2018.1.163
 module load cutadapt/1.16-Python-3.6.4
-cd  /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Bacterial_libs/ 
+cd  /Lukas/GLBRC018_Root_Soil/Bacterial_libs/ 
 
 cutadapt -g GTGCCAGCMGCCGCGGTAA -a ATTAGAWACCCBDGTAGTCC -e 0.01 -f fastq -n 2 --discard-untrimmed --match-read-wildcards -o strip_merged_roots_comb_16s.fastq merged_roots_comb_16s.fastq 
 
@@ -1108,7 +1108,7 @@ nano cutA2_comb_GLBRC018_root_bact.sbatch
 #SBATCH --mail-user=belldere@msu.edu
 
 
-cd  /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Bacterial_libs/ 
+cd  /Lukas/GLBRC018_Root_Soil/Bacterial_libs/ 
 
 #cutadapt -g GTGCCAGCMGCCGCGGTAA -a ATTAGAWACCCBDGTAGTCC -e 0.01 -f fastq -n 2 --discard-untrimmed --match-read-wildcards -o strip_merged_roots_comb_16s.fastq merged_roots_comb_16s.fastq 
 
@@ -1145,11 +1145,11 @@ Total written (filtered):  9,634,441,175 bp (99.4%)
 ### This step is only necessary if more than one Illumina run are being analyzed together.
 
 ```
-cd  /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Bacterial_libs/ 
+cd  /Lukas/GLBRC018_Root_Soil/Bacterial_libs/ 
 
 
 #merge the 2018 data 
-cat stripped_merged_roots_comb_16s.fastq /mnt/research/EvansLab/Lukas/MMPRNT018/20190621_16S-V4_PE250/rename_cut_combined_merged_20190621_16S-V4_PE250_trunc.fastq /mnt/research/EvansLab/Lukas/MMPRNT018/20190614_16S-V4_PE250/renamed_cut_combined_20190614_16S-V4_PE250.fastq /mnt/research/EvansLab/Lukas/MMPRNT018/20190617_16S-V4_PE250/renamed_cut_combined_merged_20190617_16S-V4_PE250_trunc.fastq > combined_soil_roots_merged_16S_GLBRC018.fastq
+cat stripped_merged_roots_comb_16s.fastq /Lukas/MMPRNT018/20190621_16S-V4_PE250/rename_cut_combined_merged_20190621_16S-V4_PE250_trunc.fastq /Lukas/MMPRNT018/20190614_16S-V4_PE250/renamed_cut_combined_20190614_16S-V4_PE250.fastq /Lukas/MMPRNT018/20190617_16S-V4_PE250/renamed_cut_combined_merged_20190617_16S-V4_PE250_trunc.fastq > combined_soil_roots_merged_16S_GLBRC018.fastq
 
 
 ```
@@ -1190,7 +1190,7 @@ nano filter_comb_GLBRC018_root_bact.sbatch
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=belldere@msu.edu
 
-cd  /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Bacterial_libs/ 
+cd  /Lukas/GLBRC018_Root_Soil/Bacterial_libs/ 
 
 usearch11.0.667 -fastq_filter combined_soil_roots_merged_16S_GLBRC018.fastq -fastq_maxee 0.1 -fastq_trunclen 250 -fastaout combined_soil_roots_merged_16S_GLBRC018_fil.fasta
 
@@ -1233,7 +1233,7 @@ This step takes approximately 30 minutes with ~330,000 unique sequences
 
 
 ```
-cd  /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Bacterial_libs/ 
+cd  /Lukas/GLBRC018_Root_Soil/Bacterial_libs/ 
 nano derep_OTU_B_clustering_GLBRC018.sbatch
 
 #!/bin/bash --login
@@ -1247,7 +1247,7 @@ nano derep_OTU_B_clustering_GLBRC018.sbatch
 #SBATCH --job-name   B_derep_OTU_GLBRC018  # you can give your job a name for easier identification (same as -J)
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=belldere@msu.edu
-cd  /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Bacterial_libs/ 
+cd  /Lukas/GLBRC018_Root_Soil/Bacterial_libs/ 
 
 usearch11.0.667 -fastx_uniques combined_soil_roots_merged_16S_GLBRC018_phix_fil.fasta  -fastaout uniques_combined_soil_roots_merged_16S_GLBRC018_phix_fil.fa -sizeout
 
@@ -1285,7 +1285,7 @@ This step takes approximately 1 hour 30 minutes with ~30,000 OTUs
 
 ```
 
-cd  /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Bacterial_libs/ 
+cd  /Lukas/GLBRC018_Root_Soil/Bacterial_libs/ 
 nano OTU_mapping_GLBRC018_16S.sbatch
 
 #!/bin/bash --login
@@ -1300,7 +1300,7 @@ nano OTU_mapping_GLBRC018_16S.sbatch
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=belldere@msu.edu
 
-cd  /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Bacterial_libs/ 
+cd  /Lukas/GLBRC018_Root_Soil/Bacterial_libs/ 
 
 usearch11.0.667 -otutab combined_soil_roots_merged_16S_GLBRC018.fastq -otus rep_set_combined_soil_roots_merged_16S_GLBRC018_otus.fasta -otutabout combined_soil_roots_merged_16S_GLBRC018_OTU_table.txt -notmatchedfq combined_soil_roots_merged_16S_GLBRC018_otu_unmapped.fq
 
@@ -1331,7 +1331,7 @@ I am also going to use RDP database. (https://drive5.com/sintax/rdp_16s_v16.fa.g
 This step takes approximately  18 hours and 20 minutes with ~30,000 OTUs against the Silva reference database, so you may want to submit a job for it.
 
 ```
-cd  /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Bacterial_libs/ 
+cd  /Lukas/GLBRC018_Root_Soil/Bacterial_libs/ 
 nano taxa_class_OTU_B_GLBRC018.sbatch
 
 #!/bin/bash --login
@@ -1346,11 +1346,11 @@ nano taxa_class_OTU_B_GLBRC018.sbatch
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=belldere@msu.edu
 
-cd  /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Bacterial_libs/ 
+cd  /Lukas/GLBRC018_Root_Soil/Bacterial_libs/ 
 
-usearch11.0.667 -sintax rep_set_combined_soil_roots_merged_16S_GLBRC018_otus.fasta -db /mnt/research/EvansLab/Databases/Silva132_release/silva_16s_v123.fa -tabbedout combined_soil_roots_merged_16S_GLBRC018_otus_silva123_taxonomy.sintax -strand both
+usearch11.0.667 -sintax rep_set_combined_soil_roots_merged_16S_GLBRC018_otus.fasta -db /Databases/Silva132_release/silva_16s_v123.fa -tabbedout combined_soil_roots_merged_16S_GLBRC018_otus_silva123_taxonomy.sintax -strand both
 
-usearch11.0.667 -sintax rep_set_combined_soil_roots_merged_16S_GLBRC018_otus.fasta -db /mnt/research/EvansLab/Databases/RDP_16S_v16_usearch/rdp_16s_v16.fa -tabbedout combined_soil_roots_merged_16S_GLBRC018_otus_RDP_v16_taxonomy.sintax -strand both
+usearch11.0.667 -sintax rep_set_combined_soil_roots_merged_16S_GLBRC018_otus.fasta -db /Databases/RDP_16S_v16_usearch/rdp_16s_v16.fa -tabbedout combined_soil_roots_merged_16S_GLBRC018_otus_RDP_v16_taxonomy.sintax -strand both
 
 ###end of .sbatch
 
@@ -1367,7 +1367,7 @@ sbatch taxa_class_OTU_B_GLBRC018.sbatch
 
 
 ````
-cd /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Bacterial_libs/ 
+cd /Lukas/GLBRC018_Root_Soil/Bacterial_libs/ 
 nano OTU_pasta_tree_build_GLBRC018.sbatch
 
 
@@ -1383,11 +1383,11 @@ nano OTU_pasta_tree_build_GLBRC018.sbatch
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=belldere@msu.edu
 
-cd /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Bacterial_libs/ 
+cd /Lukas/GLBRC018_Root_Soil/Bacterial_libs/ 
 
 module load GNU/7.3.0-2.30  OpenMPI/3.1.1
 module load Python/2.7.15
-python /mnt/research/EvansLab/Software/pasta-code/pasta/run_pasta.py -i rep_set_combined_soil_roots_merged_16S_GLBRC018_otus.fasta -j tree_OTU_16S_GLBRC018 -o tree_pasta_OTU_16S_GLBRC018/
+python /Software/pasta-code/pasta/run_pasta.py -i rep_set_combined_soil_roots_merged_16S_GLBRC018_otus.fasta -j tree_OTU_16S_GLBRC018 -o tree_pasta_OTU_16S_GLBRC018/
 ####end sbatch file
 
 
@@ -1400,73 +1400,5 @@ sbatch OTU_pasta_tree_build_GLBRC018.sbatch
 Total time spent: 4304.00007606s
 ```
 
-### 9) Classifying the taxa with the native install and no Bonito lab paths and SILVA138.1 database [CONSTAX](https://constax.readthedocs.io/en/latest/index.html) 
-```
 
-cd /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Bacterial_libs/ 
-
-nano CONSTAX_v2_SILVA138_1_16s_GLBRC018.sbatch
-
-#!/bin/bash --login
-
-#SBATCH --time=56:00:00             # limit of wall clock time - how long the job will run (same as -t)
-#SBATCH --ntasks=1                 # number of tasks - how many tasks (nodes) that you require (same as -n)
-#SBATCH --cpus-per-task=1          # number of CPUs (or cores) per task (same as -c)
-#SBATCH --mem=128G                  # memory required per node - amount of memory (in bytes)
-#SBATCH --job-name B_costax_v2_SILVA138_1         # you can give your job a name for easier identification (same as -J)
-#SBATCH --output=%x-%j.SLURMout
-#SBATCH --mail-type=ALL
-#SBATCH --mail-user=belldere@msu.edu
-
-cd /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Bacterial_libs/ 
-
-source activate CONSTAXv2
-constax --input rep_set_combined_soil_roots_merged_16S_GLBRC018_otus.fasta --db /mnt/research/EvansLab/Databases/SILVA_138_1/SILVA_138_1_SSURef_bact_arch.fasta --train --trainfile /mnt/research/EvansLab/Databases/SILVA_138_1/CONSTAX_v2_Nav_training_files/ --tax constax_V2_SILVA132_1/ -o constax_V2_SILVA132_1/ --conf 0.8 -b 
-
-scontrol show job $SLURM_JOB_ID     ### write job information to output file
-####
-
-sbatch CONSTAX_v2_SILVA138_1_16s_GLBRC018.sbatch
-
-#Submitted batch job 23955566
-```
-```
-RunTime=
-```
-
-
-### 9b) TEST: Classifying the taxa with the native install and no Bonito lab paths and SILVA138.1 database [CONSTAX](https://constax.readthedocs.io/en/latest/index.html) 
-I updated CONSTAX to v 2.0.10 and fixed the pathfile to include sintax
-```
-
-cd /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Bacterial_libs/ 
-
-nano CONSTAX_TEST2_v2_SILVA138_1_16s_GLBRC018.sbatch
-
-#!/bin/bash --login
-
-#SBATCH --time=56:00:00             # limit of wall clock time - how long the job will run (same as -t)
-#SBATCH --ntasks=1                 # number of tasks - how many tasks (nodes) that you require (same as -n)
-#SBATCH --cpus-per-task=1          # number of CPUs (or cores) per task (same as -c)
-#SBATCH --mem=128G                  # memory required per node - amount of memory (in bytes)
-#SBATCH --job-name B__TEST2_costax_v2_SILVA138_1         # you can give your job a name for easier identification (same as -J)
-#SBATCH --output=%x-%j.SLURMout
-#SBATCH --mail-type=ALL
-#SBATCH --mail-user=belldere@msu.edu
-
-cd /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Bacterial_libs/ 
-
-source activate CONSTAXv2
-constax --input rep_set_combined_soil_roots_merged_16S_GLBRC018_otus.fasta --db /mnt/research/EvansLab/Databases/SILVA_138_1/SILVA_138_1_SSURef_bact_arch.fasta --trainfile /mnt/research/EvansLab/Databases/SILVA_138_1/CONSTAX_v2_Nav_training_files/ --tax constax_V2_SILVA132_1_TEST/ -o constax_V2_SILVA132_1_TEST/ --conf 0.8 -b --pathfile /mnt/research/EvansLab/Software/anaconda3/envs/CONSTAXv2/opt/constax-2.0.10/pathfile.txt 
-
-scontrol show job $SLURM_JOB_ID     ### write job information to output file
-####
-
-sbatch CONSTAX_TEST2_v2_SILVA138_1_16s_GLBRC018.sbatch
-
-#Submitted batch job 26425167
-```
-```
-RunTime=
-```
 

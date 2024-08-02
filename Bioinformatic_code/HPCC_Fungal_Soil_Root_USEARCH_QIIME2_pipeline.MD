@@ -10,7 +10,7 @@ gunzip *.fastq.gz
 ####Let's demultiplex this dataset 
 I created a bar code file in a text editor
 ```
-cd /mnt/research/EvansLab/MMPRNT_2018/20200302_Amplicon_PE300/ 
+cd /MMPRNT_2018/20200302_Amplicon_PE300/ 
 mkdir demux_files
 
 ```
@@ -30,7 +30,7 @@ gzip GLBRC_Lib11_ITS_Evans_soil_2018_S1_L001_R2_001.fastq  QIIME2_demux/compress
 gzip GLBRC_Lib11_ITS_Evans_soil_2018_S1_L001_I1_001.fastq  QIIME2_demux/compressed_seqs/barcodes.fastq.gz
 
 
-export PATH="/mnt/research/EvansLab/Software/anaconda3/bin:$PATH"
+export PATH="/Software/anaconda3/bin:$PATH"
 source activate qiime2-2019.4
 qiime tools import --show-importable-types
 cd QIIME2_demux
@@ -52,8 +52,8 @@ nano Q2_demux_lib_MMPRNT018_soil_fungi.sbatch
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=belldere@msu.edu
 
-cd /mnt/research/EvansLab/MMPRNT_2018/20200302_Amplicon_PE300/QIIME2_demux
-export PATH="/mnt/research/EvansLab/Software/anaconda3/bin:$PATH"
+cd /MMPRNT_2018/20200302_Amplicon_PE300/QIIME2_demux
+export PATH="/Software/anaconda3/bin:$PATH"
 source activate qiime2-2019.4
 
 
@@ -89,7 +89,7 @@ qiime tools export  --input-path demultiplexed-seqs.qza  --output-path output/de
 ```
 Let's unzip the resulting demultiplex files
 ```
-cd /mnt/research/EvansLab/MMPRNT_2018/20200302_Amplicon_PE300/QIIME2_demux/output/demultiplexed-seqs/
+cd /MMPRNT_2018/20200302_Amplicon_PE300/QIIME2_demux/output/demultiplexed-seqs/
 gunzip *.fastq.gz
 ```
 
@@ -145,7 +145,7 @@ https://www.drive5.com/usearch/manual/merge_options.html
 
 ```
 
-cd /mnt/research/EvansLab/Lukas/MMPRNT018/
+cd /Lukas/MMPRNT018/
 #mkdir Fungal_libs
 mkdir Fungal_libs/20200302_Amplicon_PE300
 
@@ -166,9 +166,9 @@ nano merg_seq_lib11_MMPRNT018_soil_fungi.sbatch
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=belldere@msu.edu
 
-cd /mnt/research/EvansLab/MMPRNT_2018/20200302_Amplicon_PE300/QIIME2_demux/output/demultiplexed-seqs/
+cd /MMPRNT_2018/20200302_Amplicon_PE300/QIIME2_demux/output/demultiplexed-seqs/
 
-usearch11.0.667 -fastq_mergepairs *_R1*.fastq -relabel @ -fastqout /mnt/research/EvansLab/Lukas/MMPRNT018/Fungal_libs/20200302_Amplicon_PE300/lib11_20200302_Amplicon_PE300_ITS1.fastq  -tabbedout /mnt/research/EvansLab/Lukas/MMPRNT018/Fungal_libs/20200302_Amplicon_PE300/lib11_20200302_Amplicon_PE300_ITS1_pair_report.txt -alnout /mnt/research/EvansLab/Lukas/MMPRNT018/Fungal_libs/20200302_Amplicon_PE300/lib11_20200302_Amplicon_PE300_ITS1_pair_aln.txt
+usearch11.0.667 -fastq_mergepairs *_R1*.fastq -relabel @ -fastqout /Lukas/MMPRNT018/Fungal_libs/20200302_Amplicon_PE300/lib11_20200302_Amplicon_PE300_ITS1.fastq  -tabbedout /Lukas/MMPRNT018/Fungal_libs/20200302_Amplicon_PE300/lib11_20200302_Amplicon_PE300_ITS1_pair_report.txt -alnout /Lukas/MMPRNT018/Fungal_libs/20200302_Amplicon_PE300/lib11_20200302_Amplicon_PE300_ITS1_pair_aln.txt
 
 ###End
 sbatch merg_seq_lib11_MMPRNT018_soil_fungi.sbatch
@@ -203,7 +203,7 @@ Totals:
 
 ```
 
-usearch11.0.667 -fastx_get_sample_names /mnt/research/EvansLab/Lukas/MMPRNT018/Fungal_libs/20200302_Amplicon_PE300/lib11_20200302_Amplicon_PE300_ITS1.fastq -output /mnt/research/EvansLab/Lukas/MMPRNT018/Fungal_libs/20200302_Amplicon_PE300/lib11_20200302_Amplicon_PE300_ITS1_samples.txt
+usearch11.0.667 -fastx_get_sample_names /Lukas/MMPRNT018/Fungal_libs/20200302_Amplicon_PE300/lib11_20200302_Amplicon_PE300_ITS1.fastq -output /Lukas/MMPRNT018/Fungal_libs/20200302_Amplicon_PE300/lib11_20200302_Amplicon_PE300_ITS1_samples.txt
 
 ```
 
@@ -239,7 +239,7 @@ cp GLBRC_Lib9_ITS_Evans_soil_2018_S1_L001_R2_001.fastq.gz  QIIME2_demux/compress
 cp GLBRC_Lib9_ITS_Evans_soil_2018_S1_L001_I1_001.fastq.gz  QIIME2_demux/compressed_seqs/barcodes.fastq.gz
 
 #Now we need to convert the files to Q2 format
-export PATH="/mnt/research/EvansLab/Software/anaconda3/bin:$PATH"
+export PATH="/Software/anaconda3/bin:$PATH"
 source activate qiime2-2019.4
 #qiime tools import --show-importable-types
 cd QIIME2_demux
@@ -261,8 +261,8 @@ nano Q2_demux_lib9_MMPRNT018_soil_fungi.sbatch
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=belldere@msu.edu
 
-cd /mnt/research/EvansLab/MMPRNT_2018/20200306_M02808_Amplicon_PE300/QIIME2_demux
-export PATH="/mnt/research/EvansLab/Software/anaconda3/bin:$PATH"
+cd /MMPRNT_2018/20200306_M02808_Amplicon_PE300/QIIME2_demux
+export PATH="/Software/anaconda3/bin:$PATH"
 source activate qiime2-2019.4
 
 
@@ -285,7 +285,7 @@ sbatch Q2_demux_lib9_MMPRNT018_soil_fungi.sbatch
 
 Let's try to visualize the demux sequences
 ```
-export PATH="/mnt/research/EvansLab/Software/anaconda3/bin:$PATH"
+export PATH="/Software/anaconda3/bin:$PATH"
 source activate qiime2-2019.4
 qiime demux summarize  --i-data demultiplexed-seqs.qza  --o-visualization demux-seq_summary.qzv
 #Saved Visualization to: demux-seq_summary.qzv
@@ -306,7 +306,7 @@ Total:	22197892
 
 Let's unzip the resulting demultiplex files
 ```
-cd /mnt/research/EvansLab/MMPRNT_2018/20200306_M02808_Amplicon_PE300/QIIME2_demux/output/demultiplexed-seqs/
+cd /MMPRNT_2018/20200306_M02808_Amplicon_PE300/QIIME2_demux/output/demultiplexed-seqs/
 gunzip *.fastq.gz
 ```
 
@@ -365,7 +365,7 @@ https://www.drive5.com/usearch/manual/merge_options.html
 
 ```
 
-cd /mnt/research/EvansLab/Lukas/MMPRNT018/
+cd /Lukas/MMPRNT018/
 #mkdir Fungal_libs
 mkdir Fungal_libs/20200306_M02808_Amplicon_PE300
 cd Fungal_libs/20200306_M02808_Amplicon_PE300
@@ -386,9 +386,9 @@ nano merg_seq_lib9_MMPRNT018_soil_fungi.sbatch
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=belldere@msu.edu
 
-cd /mnt/research/EvansLab/MMPRNT_2018/20200306_M02808_Amplicon_PE300/QIIME2_demux/output/demultiplexed-seqs/
+cd /MMPRNT_2018/20200306_M02808_Amplicon_PE300/QIIME2_demux/output/demultiplexed-seqs/
 
-usearch11.0.667 -fastq_mergepairs *_R1*.fastq -relabel @ -fastqout /mnt/research/EvansLab/Lukas/MMPRNT018/Fungal_libs/20200306_M02808_Amplicon_PE300/lib09_20200302_Amplicon_PE300_ITS1.fastq  -tabbedout /mnt/research/EvansLab/Lukas/MMPRNT018/Fungal_libs/20200306_M02808_Amplicon_PE300/lib09_20200302_Amplicon_PE300_ITS1_pair_report.txt 
+usearch11.0.667 -fastq_mergepairs *_R1*.fastq -relabel @ -fastqout /Lukas/MMPRNT018/Fungal_libs/20200306_M02808_Amplicon_PE300/lib09_20200302_Amplicon_PE300_ITS1.fastq  -tabbedout /Lukas/MMPRNT018/Fungal_libs/20200306_M02808_Amplicon_PE300/lib09_20200302_Amplicon_PE300_ITS1_pair_report.txt 
 
 ###End
 sbatch merg_seq_lib9_MMPRNT018_soil_fungi.sbatch
@@ -419,7 +419,7 @@ Totals:
 
 
 ```
-usearch11.0.667 -fastx_get_sample_names /mnt/research/EvansLab/Lukas/MMPRNT018/Fungal_libs/20200306_M02808_Amplicon_PE300/lib09_20200302_Amplicon_PE300_ITS1.fastq -output /mnt/research/EvansLab/Lukas/MMPRNT018/Fungal_libs/20200306_M02808_Amplicon_PE300/lib09_20200302_Amplicon_PE300_ITS1_samples.txt
+usearch11.0.667 -fastx_get_sample_names /Lukas/MMPRNT018/Fungal_libs/20200306_M02808_Amplicon_PE300/lib09_20200302_Amplicon_PE300_ITS1.fastq -output /Lukas/MMPRNT018/Fungal_libs/20200306_M02808_Amplicon_PE300/lib09_20200302_Amplicon_PE300_ITS1_samples.txt
 ```
 ---
 # Should be 192 samples but one sample lost during demux (MMPRNT1151)
@@ -432,7 +432,7 @@ usearch11.0.667 -fastx_get_sample_names /mnt/research/EvansLab/Lukas/MMPRNT018/F
 ### GLBRC_Lib10_ITS_Evans_soil_2018
 
 ```
-cd /mnt/research/EvansLab/MMPRNT_2018/20200306_M03127_Amplicon_PE300
+cd /MMPRNT_2018/20200306_M03127_Amplicon_PE300
 
 ```
 I created a bar code file in a text editor
@@ -474,8 +474,8 @@ nano Q2_demux_lib10_MMPRNT018_soil_fungi.sbatch
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=belldere@msu.edu
 
-cd /mnt/research/EvansLab/MMPRNT_2018/20200306_M03127_Amplicon_PE300/QIIME2_demux
-export PATH="/mnt/research/EvansLab/Software/anaconda3/bin:$PATH"
+cd /MMPRNT_2018/20200306_M03127_Amplicon_PE300/QIIME2_demux
+export PATH="/Software/anaconda3/bin:$PATH"
 source activate qiime2-2019.4
 
 qiime tools import --type EMPPairedEndSequences --input-path compressed_seqs --output-path multiplexed-seqs_paired_end.qza
@@ -510,7 +510,7 @@ Total:	31137769
 Let's unzip the resulting demultiplex files
 
 ```
-cd  /mnt/research/EvansLab/MMPRNT_2018/20200306_M03127_Amplicon_PE300/QIIME2_demux/output/demultiplexed-seqs/
+cd  /MMPRNT_2018/20200306_M03127_Amplicon_PE300/QIIME2_demux/output/demultiplexed-seqs/
 gunzip *.fastq.gz
 ```
 
@@ -562,7 +562,7 @@ https://www.drive5.com/usearch/manual/merge_options.html
 #### This step takes approximately 10 minutes
 ```
 
-cd /mnt/research/EvansLab/Lukas/MMPRNT018/
+cd /Lukas/MMPRNT018/
 #mkdir Fungal_libs
 mkdir Fungal_libs/20200306_M03127_Amplicon_PE300
 cd Fungal_libs/20200306_M03127_Amplicon_PE300
@@ -583,9 +583,9 @@ nano merg_seq_lib10_MMPRNT018_soil_fungi.sbatch
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=belldere@msu.edu
 
-cd /mnt/research/EvansLab/MMPRNT_2018/20200306_M03127_Amplicon_PE300/QIIME2_demux/output/demultiplexed-seqs/
+cd /MMPRNT_2018/20200306_M03127_Amplicon_PE300/QIIME2_demux/output/demultiplexed-seqs/
 
-usearch11.0.667 -fastq_mergepairs *_R1*.fastq -relabel @ -fastqout /mnt/research/EvansLab/Lukas/MMPRNT018/Fungal_libs/20200306_M03127_Amplicon_PE300/lib10_20200306_Amplicon_PE300_ITS1.fastq  -tabbedout /mnt/research/EvansLab/Lukas/MMPRNT018/Fungal_libs/20200306_M03127_Amplicon_PE300/lib10_20200306_Amplicon_PE300_ITS1_pair_report.txt 
+usearch11.0.667 -fastq_mergepairs *_R1*.fastq -relabel @ -fastqout /Lukas/MMPRNT018/Fungal_libs/20200306_M03127_Amplicon_PE300/lib10_20200306_Amplicon_PE300_ITS1.fastq  -tabbedout /Lukas/MMPRNT018/Fungal_libs/20200306_M03127_Amplicon_PE300/lib10_20200306_Amplicon_PE300_ITS1_pair_report.txt 
 
 ###End
 sbatch merg_seq_lib10_MMPRNT018_soil_fungi.sbatch
@@ -618,7 +618,7 @@ Totals:
 
 
 ```
-usearch11.0.667 -fastx_get_sample_names /mnt/research/EvansLab/Lukas/MMPRNT018/Fungal_libs/20200306_M03127_Amplicon_PE300/lib10_20200306_Amplicon_PE300_ITS1.fastq -output /mnt/research/EvansLab/Lukas/MMPRNT018/Fungal_libs/20200306_M03127_Amplicon_PE300/lib10_20200306_Amplicon_PE300_ITS1_samples.txt
+usearch11.0.667 -fastx_get_sample_names /Lukas/MMPRNT018/Fungal_libs/20200306_M03127_Amplicon_PE300/lib10_20200306_Amplicon_PE300_ITS1.fastq -output /Lukas/MMPRNT018/Fungal_libs/20200306_M03127_Amplicon_PE300/lib10_20200306_Amplicon_PE300_ITS1_samples.txt
 ```
 ---
 # Should be 192 samples but one sample lost during demux (MMPRNT1434)
@@ -631,7 +631,7 @@ usearch11.0.667 -fastx_get_sample_names /mnt/research/EvansLab/Lukas/MMPRNT018/F
 ### GLBRC_Lib12_ITS_Evans_soil_2018
 
 ```
-cd /mnt/research/EvansLab/MMPRNT_2018/20200309_M02808_Amplicon_PE300
+cd /MMPRNT_2018/20200309_M02808_Amplicon_PE300
 
 ```
 I created a bar code file in a text editor
@@ -673,8 +673,8 @@ nano Q2_demux_lib12_MMPRNT018_soil_fungi.sbatch
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=belldere@msu.edu
 
-cd /mnt/research/EvansLab/MMPRNT_2018/20200309_M02808_Amplicon_PE300/QIIME2_demux
-export PATH="/mnt/research/EvansLab/Software/anaconda3/bin:$PATH"
+cd /MMPRNT_2018/20200309_M02808_Amplicon_PE300/QIIME2_demux
+export PATH="/Software/anaconda3/bin:$PATH"
 source activate qiime2-2019.4
 
 #convert the files to the qza format
@@ -711,7 +711,7 @@ Total:	21900461
 ---
 Let's unzip the resulting demultiplex files
 ```
-cd  /mnt/research/EvansLab/MMPRNT_2018/20200309_M02808_Amplicon_PE300/QIIME2_demux/output/demultiplexed-seqs/
+cd  /MMPRNT_2018/20200309_M02808_Amplicon_PE300/QIIME2_demux/output/demultiplexed-seqs/
 gunzip *.fastq.gz
 ```
 
@@ -763,7 +763,7 @@ https://www.drive5.com/usearch/manual/merge_options.html
 #### This step takes approximately 10 minutes
 ```
 
-cd /mnt/research/EvansLab/Lukas/MMPRNT018/
+cd /Lukas/MMPRNT018/
 #mkdir Fungal_libs
 mkdir Fungal_libs/20200309_M02808_Amplicon_PE300
 cd Fungal_libs/20200309_M02808_Amplicon_PE300
@@ -784,9 +784,9 @@ nano merg_seq_lib12_MMPRNT018_soil_fungi.sbatch
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=belldere@msu.edu
 
-cd /mnt/research/EvansLab/MMPRNT_2018/20200309_M02808_Amplicon_PE300/QIIME2_demux/output/demultiplexed-seqs/
+cd /MMPRNT_2018/20200309_M02808_Amplicon_PE300/QIIME2_demux/output/demultiplexed-seqs/
 
-usearch11.0.667 -fastq_mergepairs *_R1*.fastq -relabel @ -fastqout /mnt/research/EvansLab/Lukas/MMPRNT018/Fungal_libs/20200309_M02808_Amplicon_PE300/lib12_20200309_Amplicon_PE300_ITS1.fastq  -tabbedout /mnt/research/EvansLab/Lukas/MMPRNT018/Fungal_libs/20200309_M02808_Amplicon_PE300/lib12_20200309_Amplicon_PE300_ITS1_pair_report.txt 
+usearch11.0.667 -fastq_mergepairs *_R1*.fastq -relabel @ -fastqout /Lukas/MMPRNT018/Fungal_libs/20200309_M02808_Amplicon_PE300/lib12_20200309_Amplicon_PE300_ITS1.fastq  -tabbedout /Lukas/MMPRNT018/Fungal_libs/20200309_M02808_Amplicon_PE300/lib12_20200309_Amplicon_PE300_ITS1_pair_report.txt 
 
 ###End
 sbatch merg_seq_lib12_MMPRNT018_soil_fungi.sbatch
@@ -819,7 +819,7 @@ Totals:
 
 
 ```
-usearch11.0.667 -fastx_get_sample_names /mnt/research/EvansLab/Lukas/MMPRNT018/Fungal_libs/20200309_M02808_Amplicon_PE300/lib12_20200309_Amplicon_PE300_ITS1.fastq -output /mnt/research/EvansLab/Lukas/MMPRNT018/Fungal_libs/20200309_M02808_Amplicon_PE300/lib12_20200309_Amplicon_PE300_ITS1_samples.txt
+usearch11.0.667 -fastx_get_sample_names /Lukas/MMPRNT018/Fungal_libs/20200309_M02808_Amplicon_PE300/lib12_20200309_Amplicon_PE300_ITS1.fastq -output /Lukas/MMPRNT018/Fungal_libs/20200309_M02808_Amplicon_PE300/lib12_20200309_Amplicon_PE300_ITS1_samples.txt
 ```
 ```
 #Should be 192 samples but there were two missing after demux (MMPRNT1842 and MMPRNT1862)
@@ -832,7 +832,7 @@ usearch11.0.667 -fastx_get_sample_names /mnt/research/EvansLab/Lukas/MMPRNT018/F
 ### GLBRC_Lib13_ITS_Evans_soil_2018
 
 ```
-cd /mnt/research/EvansLab/MMPRNT_2018/20200309_M03127_Amplicon_PE300
+cd /MMPRNT_2018/20200309_M03127_Amplicon_PE300
 
 #Look at the quality of the index file 
 usearch11.0.667 -fastq_eestats2 GLBRC_Lib13_ITS_Evans_soil_2018_S1_L001_I1_001.fastq -output  eestats2_GLBRC_Lib13_ITS_Evans_soil_2018_S1_L001_I1_001.txt
@@ -877,8 +877,8 @@ nano Q2_demux_lib13_MMPRNT018_soil_fungi.sbatch
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=belldere@msu.edu
 
-cd /mnt/research/EvansLab/MMPRNT_2018/20200309_M03127_Amplicon_PE300/QIIME2_demux
-export PATH="/mnt/research/EvansLab/Software/anaconda3/bin:$PATH"
+cd /MMPRNT_2018/20200309_M03127_Amplicon_PE300/QIIME2_demux
+export PATH="/Software/anaconda3/bin:$PATH"
 source activate qiime2-2019.4
 
 #convert the files to the qza format
@@ -918,7 +918,7 @@ Unzip the demultiplexed sequences
 
 ```
 
-cd /mnt/research/EvansLab/MMPRNT_2018/20200309_M03127_Amplicon_PE300/QIIME2_demux/output/demultiplexed-seqs
+cd /MMPRNT_2018/20200309_M03127_Amplicon_PE300/QIIME2_demux/output/demultiplexed-seqs
 
 
 ```
@@ -970,7 +970,7 @@ https://www.drive5.com/usearch/manual/merge_options.html
 #### This step takes approximately 10 minutes
 ```
 
-cd /mnt/research/EvansLab/Lukas/MMPRNT018/
+cd /Lukas/MMPRNT018/
 #mkdir Fungal_libs
 mkdir Fungal_libs/20200309_M03127_Amplicon_PE300
 cd Fungal_libs/20200309_M03127_Amplicon_PE300
@@ -991,9 +991,9 @@ nano merg_seq_lib13_MMPRNT018_soil_fungi.sbatch
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=belldere@msu.edu
 
-cd /mnt/research/EvansLab/MMPRNT_2018/20200309_M03127_Amplicon_PE300/QIIME2_demux/output/demultiplexed-seqs/
+cd /MMPRNT_2018/20200309_M03127_Amplicon_PE300/QIIME2_demux/output/demultiplexed-seqs/
 
-usearch11.0.667 -fastq_mergepairs *_R1*.fastq -relabel @ -fastqout /mnt/research/EvansLab/Lukas/MMPRNT018/Fungal_libs/20200309_M03127_Amplicon_PE300/lib13_demux_20200309_Amplicon_PE300_ITS1-2.fastq  -tabbedout /mnt/research/EvansLab/Lukas/MMPRNT018/Fungal_libs/20200309_M03127_Amplicon_PE300/lib13_demux_20200309_Amplicon_PE300_ITS1-2_pair_report.txt -fastqout_notmerged_fwd /mnt/research/EvansLab/Lukas/MMPRNT018/Fungal_libs/20200309_M03127_Amplicon_PE300/NO_Match_lib13_demux_20200309_Amplicon_PE300_ITS1-2_for.fastq -fastqout_notmerged_rev /mnt/research/EvansLab/Lukas/MMPRNT018/Fungal_libs/20200309_M03127_Amplicon_PE300/NO_Match_lib13_demux_20200309_Amplicon_PE300_ITS1-2_rev.fastq
+usearch11.0.667 -fastq_mergepairs *_R1*.fastq -relabel @ -fastqout /Lukas/MMPRNT018/Fungal_libs/20200309_M03127_Amplicon_PE300/lib13_demux_20200309_Amplicon_PE300_ITS1-2.fastq  -tabbedout /Lukas/MMPRNT018/Fungal_libs/20200309_M03127_Amplicon_PE300/lib13_demux_20200309_Amplicon_PE300_ITS1-2_pair_report.txt -fastqout_notmerged_fwd /Lukas/MMPRNT018/Fungal_libs/20200309_M03127_Amplicon_PE300/NO_Match_lib13_demux_20200309_Amplicon_PE300_ITS1-2_for.fastq -fastqout_notmerged_rev /Lukas/MMPRNT018/Fungal_libs/20200309_M03127_Amplicon_PE300/NO_Match_lib13_demux_20200309_Amplicon_PE300_ITS1-2_rev.fastq
 
 ###End
 
@@ -1025,7 +1025,7 @@ Totals:
 ###Check sample names to make sure all of the samples are present
 
 ```
-usearch11.0.667 -fastx_get_sample_names /mnt/research/EvansLab/Lukas/MMPRNT018/Fungal_libs/20200309_M03127_Amplicon_PE300/lib13_demux_20200309_Amplicon_PE300_ITS1-2.fastq -output /mnt/research/EvansLab/Lukas/MMPRNT018/Fungal_libs/20200309_M03127_Amplicon_PE300/lib13_demux_20200309_Amplicon_PE300_ITS1-2_samples.txt
+usearch11.0.667 -fastx_get_sample_names /Lukas/MMPRNT018/Fungal_libs/20200309_M03127_Amplicon_PE300/lib13_demux_20200309_Amplicon_PE300_ITS1-2.fastq -output /Lukas/MMPRNT018/Fungal_libs/20200309_M03127_Amplicon_PE300/lib13_demux_20200309_Amplicon_PE300_ITS1-2_samples.txt
 ```
 ```
 #Should be 191 samples
@@ -1039,12 +1039,12 @@ usearch11.0.667 -fastx_get_sample_names /mnt/research/EvansLab/Lukas/MMPRNT018/F
 
 ```
 #20326995 seqs
-cd /mnt/research/EvansLab/Lukas
+cd /Lukas
 mkdir GLBRC018_Root_Soil
 ```
 
 
-+ /mnt/research/EvansLab/GLBRC_SG_Roots/Field2018_Fun/Lib_8_backup/
++ /GLBRC_SG_Roots/Field2018_Fun/Lib_8_backup/
 
 Pedro created a bar code file in a text editor
 
@@ -1054,7 +1054,7 @@ https://docs.qiime2.org/2020.2/plugins/available/demux/emp-paired/?highlight=dem
 ###### Import the multiplexed sequences
 We need to rename and move the zipped sequence files
 ```
-cd /mnt/research/EvansLab/GLBRC_SG_Roots/Field2018_Fun/Lib_8_backup/
+cd /GLBRC_SG_Roots/Field2018_Fun/Lib_8_backup/
 mkdir QIIME2_demux
 cd QIIME2_demux/
 mkdir compressed_seqs
@@ -1087,7 +1087,7 @@ nano Q2_demux_lib8_GLBRC018_root_fungi.sbatch
 #SBATCH --mail-user=belldere@msu.edu
 
 cd ${SLURM_SUBMIT_DIR}
-export PATH="/mnt/research/EvansLab/Software/anaconda3/bin:$PATH"
+export PATH="/Software/anaconda3/bin:$PATH"
 source activate qiime2-2019.4
 
 #convert the files to the qza format 
@@ -1128,7 +1128,7 @@ Unzip the demultiplexed sequences
 
 ```
 
-cd /mnt/research/EvansLab/GLBRC_SG_Roots/Field2018_Fun/Lib_8_backup/QIIME2_demux/output/demultiplexed-seqs
+cd /GLBRC_SG_Roots/Field2018_Fun/Lib_8_backup/QIIME2_demux/output/demultiplexed-seqs
 gunzip *.fastq
 
 ```
@@ -1180,7 +1180,7 @@ https://www.drive5.com/usearch/manual/merge_options.html
 #### This step takes approximately 10 minutes
 ```
 
-cd /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil
+cd /Lukas/GLBRC018_Root_Soil
 mkdir Fungal_libs
 mkdir Fungal_libs/LIb8_fun
 cd Fungal_libs/LIb8_fun
@@ -1202,9 +1202,9 @@ nano merg_seq_lib8_GLBRC018_soil_fungi.sbatch
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=belldere@msu.edu
 
-cd /mnt/research/EvansLab/GLBRC_SG_Roots/Field2018_Fun/Lib_8_backup/QIIME2_demux/output/demultiplexed-seqs
+cd /GLBRC_SG_Roots/Field2018_Fun/Lib_8_backup/QIIME2_demux/output/demultiplexed-seqs
 
-usearch11.0.667 -fastq_mergepairs *_R1*.fastq -relabel @ -fastqout /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Fungal_libs/LIb8_fun/merged_lib8_ITS1.fastq  -tabbedout /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Fungal_libs/LIb8_fun/merged_lib8_ITS1_pair_report.txt -fastqout_notmerged_fwd /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Fungal_libs/LIb8_fun/NO_Match_lib8_Amplicon_PE300_ITS1_for.fastq -fastqout_notmerged_rev /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Fungal_libs/LIb8_fun/NO_Match_lib8_Amplicon_PE300_ITS1_rev.fastq
+usearch11.0.667 -fastq_mergepairs *_R1*.fastq -relabel @ -fastqout /Lukas/GLBRC018_Root_Soil/Fungal_libs/LIb8_fun/merged_lib8_ITS1.fastq  -tabbedout /Lukas/GLBRC018_Root_Soil/Fungal_libs/LIb8_fun/merged_lib8_ITS1_pair_report.txt -fastqout_notmerged_fwd /Lukas/GLBRC018_Root_Soil/Fungal_libs/LIb8_fun/NO_Match_lib8_Amplicon_PE300_ITS1_for.fastq -fastqout_notmerged_rev /Lukas/GLBRC018_Root_Soil/Fungal_libs/LIb8_fun/NO_Match_lib8_Amplicon_PE300_ITS1_rev.fastq
 
 ###End
 
@@ -1235,7 +1235,7 @@ Totals:
 ###Check sample names to make sure all of the samples are present
 
 ```
-usearch11.0.667 -fastx_get_sample_names /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Fungal_libs/LIb8_fun/merged_lib8_ITS1.fastq -output /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Fungal_libs/LIb8_fun/merged_lib8_ITS1_samples.txt
+usearch11.0.667 -fastx_get_sample_names /Lukas/GLBRC018_Root_Soil/Fungal_libs/LIb8_fun/merged_lib8_ITS1.fastq -output /Lukas/GLBRC018_Root_Soil/Fungal_libs/LIb8_fun/merged_lib8_ITS1_samples.txt
 ```
 ```
 #Should be  samples 268
@@ -1246,7 +1246,7 @@ usearch11.0.667 -fastx_get_sample_names /mnt/research/EvansLab/Lukas/GLBRC018_Ro
 #I want to check the quality
 
 ```
-usearch11.0.667 -fastq_eestats2 /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Fungal_libs/LIb8_fun/merged_lib8_ITS1.fastq -output /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Fungal_libs/LIb8_fun/merged_lib8_ITS1_eestats2.txt
+usearch11.0.667 -fastq_eestats2 /Lukas/GLBRC018_Root_Soil/Fungal_libs/LIb8_fun/merged_lib8_ITS1.fastq -output /Lukas/GLBRC018_Root_Soil/Fungal_libs/LIb8_fun/merged_lib8_ITS1_eestats2.txt
 ```
 ```
 03:25 661Mb   100.0% Reading reads
@@ -1273,12 +1273,12 @@ Length         MaxEE 0.50         MaxEE 1.00         MaxEE 2.00
 
 ```
 #33877753 seq
-#cd /mnt/research/EvansLab/Lukas
+#cd /Lukas
 #mkdir GLBRC018_Root_Soil
 ```
 
 
-+ /mnt/research/EvansLab/GLBRC_SG_Roots/Field2018_Fun/Lib_8_backup/
++ /GLBRC_SG_Roots/Field2018_Fun/Lib_8_backup/
 
 Pedro created a bar code file in a text editor
 
@@ -1288,7 +1288,7 @@ https://docs.qiime2.org/2020.2/plugins/available/demux/emp-paired/?highlight=dem
 ###### Import the multiplexed sequences
 We need to rename and move the zipped sequence files
 ```
-cd /mnt/research/EvansLab/GLBRC_SG_Roots/Field2018_Fun/Lib_5_backup/
+cd /GLBRC_SG_Roots/Field2018_Fun/Lib_5_backup/
 mkdir QIIME2_demux
 cd QIIME2_demux/
 mkdir compressed_seqs
@@ -1321,7 +1321,7 @@ nano Q2_demux_lib5_GLBRC018_root_fungi.sbatch
 #SBATCH --mail-user=belldere@msu.edu
 
 cd ${SLURM_SUBMIT_DIR}
-export PATH="/mnt/research/EvansLab/Software/anaconda3/bin:$PATH"
+export PATH="/Software/anaconda3/bin:$PATH"
 source activate qiime2-2019.4
 
 #convert the files to the qza format
@@ -1362,7 +1362,7 @@ Unzip the demultiplexed sequences
 
 ```
 
-cd /mnt/research/EvansLab/GLBRC_SG_Roots/Field2018_Fun/Lib_5_backup/QIIME2_demux/output/demultiplexed-seqs
+cd /GLBRC_SG_Roots/Field2018_Fun/Lib_5_backup/QIIME2_demux/output/demultiplexed-seqs
 gunzip *.fastq.gz
 
 ```
@@ -1414,7 +1414,7 @@ https://www.drive5.com/usearch/manual/merge_options.html
 #### This step takes approximately 10 minutes
 ```
 
-cd /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil
+cd /Lukas/GLBRC018_Root_Soil
 #mkdir Fungal_libs
 mkdir Fungal_libs/lib5_fun
 cd Fungal_libs/lib5_fun
@@ -1436,9 +1436,9 @@ nano merg_seq_lib5_GLBRC018_soil_fungi.sbatch
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=belldere@msu.edu
 
-cd /mnt/research/EvansLab/GLBRC_SG_Roots/Field2018_Fun/Lib_5_backup/QIIME2_demux/output/demultiplexed-seqs
+cd /GLBRC_SG_Roots/Field2018_Fun/Lib_5_backup/QIIME2_demux/output/demultiplexed-seqs
 
-usearch11.0.667 -fastq_mergepairs *_R1*.fastq -relabel @ -fastqout /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Fungal_libs/lib5_fun/merged_lib5_ITS1.fastq  -tabbedout /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Fungal_libs/lib5_fun/merged_lib5_ITS1_pair_report.txt -fastqout_notmerged_fwd /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Fungal_libs/lib5_fun/NO_Match_lib5_Amplicon_PE300_ITS1_for.fastq -fastqout_notmerged_rev /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Fungal_libs/lib5_fun/NO_Match_lib5_Amplicon_PE300_ITS1_rev.fastq
+usearch11.0.667 -fastq_mergepairs *_R1*.fastq -relabel @ -fastqout /Lukas/GLBRC018_Root_Soil/Fungal_libs/lib5_fun/merged_lib5_ITS1.fastq  -tabbedout /Lukas/GLBRC018_Root_Soil/Fungal_libs/lib5_fun/merged_lib5_ITS1_pair_report.txt -fastqout_notmerged_fwd /Lukas/GLBRC018_Root_Soil/Fungal_libs/lib5_fun/NO_Match_lib5_Amplicon_PE300_ITS1_for.fastq -fastqout_notmerged_rev /Lukas/GLBRC018_Root_Soil/Fungal_libs/lib5_fun/NO_Match_lib5_Amplicon_PE300_ITS1_rev.fastq
 
 ###End
 
@@ -1471,7 +1471,7 @@ Totals:
 ###Check sample names to make sure all of the samples are present
 
 ```
-usearch11.0.667 -fastx_get_sample_names /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Fungal_libs/lib5_fun/merged_lib5_ITS1.fastq -output /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Fungal_libs/lib5_fun/merged_lib5_ITS1_samples.txt
+usearch11.0.667 -fastx_get_sample_names /Lukas/GLBRC018_Root_Soil/Fungal_libs/lib5_fun/merged_lib5_ITS1.fastq -output /Lukas/GLBRC018_Root_Soil/Fungal_libs/lib5_fun/merged_lib5_ITS1_samples.txt
 ```
 ```
 #Should be 336 samples
@@ -1483,7 +1483,7 @@ usearch11.0.667 -fastx_get_sample_names /mnt/research/EvansLab/Lukas/GLBRC018_Ro
 #I want to check the quality
 
 ```
-usearch11.0.667 -fastq_eestats2 /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Fungal_libs/lib5_fun/merged_lib5_ITS1.fastq -output /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Fungal_libs/lib5_fun/merged_lib5_ITS1_eestats2.txt
+usearch11.0.667 -fastq_eestats2 /Lukas/GLBRC018_Root_Soil/Fungal_libs/lib5_fun/merged_lib5_ITS1.fastq -output /Lukas/GLBRC018_Root_Soil/Fungal_libs/lib5_fun/merged_lib5_ITS1_eestats2.txt
 ```
 ```
 02:46 661Mb   100.0% Reading reads
@@ -1513,7 +1513,7 @@ Length         MaxEE 0.50         MaxEE 1.00         MaxEE 2.00
 
 ```
 
-cat /mnt/research/EvansLab/Lukas/MMPRNT018/Fungal_libs/20200302_Amplicon_PE300/lib11_20200302_Amplicon_PE300_ITS1.fastq /mnt/research/EvansLab/Lukas/MMPRNT018/Fungal_libs/20200306_M02808_Amplicon_PE300/lib09_20200302_Amplicon_PE300_ITS1.fastq /mnt/research/EvansLab/Lukas/MMPRNT018/Fungal_libs/20200306_M03127_Amplicon_PE300/lib10_20200306_Amplicon_PE300_ITS1.fastq /mnt/research/EvansLab/Lukas/MMPRNT018/Fungal_libs/20200309_M02808_Amplicon_PE300/lib12_20200309_Amplicon_PE300_ITS1.fastq /mnt/research/EvansLab/Lukas/MMPRNT018/Fungal_libs/20200309_M03127_Amplicon_PE300/lib13_demux_20200309_Amplicon_PE300_ITS1-2.fastq /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Fungal_libs/lib5_fun/merged_lib5_ITS1.fastq /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Fungal_libs/LIb8_fun/merged_lib8_ITS1.fastq > /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Fungal_libs/combined_merged_ITS1_2_GLBRC018.fastq
+cat /Lukas/MMPRNT018/Fungal_libs/20200302_Amplicon_PE300/lib11_20200302_Amplicon_PE300_ITS1.fastq /Lukas/MMPRNT018/Fungal_libs/20200306_M02808_Amplicon_PE300/lib09_20200302_Amplicon_PE300_ITS1.fastq /Lukas/MMPRNT018/Fungal_libs/20200306_M03127_Amplicon_PE300/lib10_20200306_Amplicon_PE300_ITS1.fastq /Lukas/MMPRNT018/Fungal_libs/20200309_M02808_Amplicon_PE300/lib12_20200309_Amplicon_PE300_ITS1.fastq /Lukas/MMPRNT018/Fungal_libs/20200309_M03127_Amplicon_PE300/lib13_demux_20200309_Amplicon_PE300_ITS1-2.fastq /Lukas/GLBRC018_Root_Soil/Fungal_libs/lib5_fun/merged_lib5_ITS1.fastq /Lukas/GLBRC018_Root_Soil/Fungal_libs/LIb8_fun/merged_lib8_ITS1.fastq > /Lukas/GLBRC018_Root_Soil/Fungal_libs/combined_merged_ITS1_2_GLBRC018.fastq
 
 
 ```
@@ -1523,7 +1523,7 @@ Before we continue, you may want to check if the sample names are formatted corr
 Additionally, this is a good opportunity to double check that all of your samples merged and have unique IDs using [fastx_get_sample_names](https://www.drive5.com/usearch/manual/cmd_fastx_get_sample_names.html)
 
 ```
-usearch11.0.667 -fastx_get_sample_names /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Fungal_libs/combined_merged_ITS1_2_GLBRC018.fastq -output /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Fungal_libs/combined_merged_ITS1_2_GLBRC018_samples.txt
+usearch11.0.667 -fastx_get_sample_names /Lukas/GLBRC018_Root_Soil/Fungal_libs/combined_merged_ITS1_2_GLBRC018.fastq -output /Lukas/GLBRC018_Root_Soil/Fungal_libs/combined_merged_ITS1_2_GLBRC018_samples.txt
 ```
 ```
 #Should be 192 + 191 + 190 + 190 + 191 + 265 + 335 = 1554 samples
@@ -1542,7 +1542,7 @@ I ran a test about only had 43 hits within 87% of seqs so I am goign to skip thi
 
 ```
 #I am going to submit a job
-cd /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Fungal_libs/
+cd /Lukas/GLBRC018_Root_Soil/Fungal_libs/
 
 nano qual_prefilter_GLBRC018_soil_root_fungi.sbatch
 
@@ -1559,7 +1559,7 @@ nano qual_prefilter_GLBRC018_soil_root_fungi.sbatch
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=belldere@msu.edu
 
-cd /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Fungal_libs/
+cd /Lukas/GLBRC018_Root_Soil/Fungal_libs/
 usearch11.0.667 -fastq_eestats2 combined_merged_ITS1_2_GLBRC018.fastq -output combined_merged_ITS1_2_GLBRC018_eestats2.txt
 
 #end
@@ -1610,7 +1610,7 @@ nano qual_primer_filter_GLBRC018_soil_root_fungi.sbatch
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=belldere@msu.edu
 
-cd /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Fungal_libs/
+cd /Lukas/GLBRC018_Root_Soil/Fungal_libs/
 
 
 usearch11.0.667 -fastq_filter combined_merged_ITS1_2_GLBRC018.fastq -fastq_maxee 0.1 -fastq_minlen 100 -fastaout combined_merged_ITS1_2_GLBRC018_filtered.fa
@@ -1644,7 +1644,7 @@ nano phix_filter_GLBRC018_soil_root_fungi.sbatch
 #SBATCH --job-name phix_filt_perfil_GLBRC018      # you can give your job a name for easier identification (same as -J)
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=belldere@msu.edu
-cd /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Fungal_libs/
+cd /Lukas/GLBRC018_Root_Soil/Fungal_libs/
 
 usearch11.0.667 -filter_phix combined_merged_ITS1_2_GLBRC018_filtered.fa -output combined_merged_ITS1_2_GLBRC018_filtered_no_phix.fa -alnout combined_merged_ITS1_2_GLBRC018_filtered_phix_hits.txt
 ###END
@@ -1684,7 +1684,7 @@ nano primer_filter_GLBRC018_soil_root_fungi.sbatch
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=belldere@msu.edu
 
-cd /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Fungal_libs/
+cd /Lukas/GLBRC018_Root_Soil/Fungal_libs/
 
 usearch11.0.667 -fastx_trim_primer combined_merged_ITS1_2_GLBRC018_filtered.fa -db EMP_AM__ITS1-2_fungal_primers.fa -strand both  -maxdiffs 4 -width 40 -fastaout combined_merged_ITS1_2_GLBRC018_primer_filtered.fa -tabbedout combined_merged_ITS1_2_GLBRC018_primer_filtered_primer_re.txt
 
@@ -1729,7 +1729,7 @@ nano OTU_clustering_fungi_GLBRC018.sbatch
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=belldere@msu.edu
 
-cd /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Fungal_libs/
+cd /Lukas/GLBRC018_Root_Soil/Fungal_libs/
 
 usearch11.0.667 -fastx_uniques combined_merged_ITS1_2_GLBRC018_primer_filtered.fa -fastaout uniques_combined_merged_ITS1_2_GLBRC018_primer_filtered.fa -sizeout
 
@@ -1790,7 +1790,7 @@ nano F_OTU_mapping_GLBRC018.sbatch
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=belldere@msu.edu
 
-cd /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Fungal_libs/
+cd /Lukas/GLBRC018_Root_Soil/Fungal_libs/
 
 usearch11.0.667 -otutab combined_merged_ITS1_2_GLBRC018.fastq -otus rep_set_combined_merged_ITS1_2_GLBRC_otus.fa  -otutabout combined_merged_ITS1_2_GLBRC_OTU_table.txt -notmatchedfq combined_merged_ITS1_2_GLBRC_otu_unmapped.fq
 
@@ -1828,7 +1828,7 @@ nano taxa_class_GLBRC018_OTU.sbatch
 #SBATCH --job-name   F_taxa_class_GLBRC018_OTU  # you can give your job a name for easier identification (same as -J)
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=belldere@msu.edu
-cd /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Fungal_libs/
+cd /Lukas/GLBRC018_Root_Soil/Fungal_libs/
 
 usearch11.0.667 -sintax rep_set_combined_merged_ITS1_2_GLBRC_otus.fa -db /mnt/ufs18/home-087/belldere/Databases/UNITe8.2/sh_general_release_all_04.02.2020/utax_reference_dataset_all_04.02.2020_fix.udb -tabbedout taxonomy_combined_merged_ITS1_2_GLBRC_otus.sintax -strand both
 
@@ -1849,10 +1849,10 @@ sbatch taxa_class_GLBRC018_OTU.sbatch
 
 ```
 
-### 9a) Classifiying the taxa with the native install and no Bonito lab paths and the utax_reference_dataset_all_04.02.2020_fix.udb [CONSTAX](https://github.com/Gian77/CONSTAXv2) against the eukaryote UNITe 8.2
+### 9) Classifiying the taxa with the native install and no Bonito lab paths and the utax_reference_dataset_all_04.02.2020_fix.udb [CONSTAX](https://github.com/Gian77/CONSTAXv2) against the eukaryote UNITe 8.2
 ```
 
-cd /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Fungal_libs/
+cd /Lukas/GLBRC018_Root_Soil/Fungal_libs/
 
 #CONSTAX requires ".fasta" files
 
@@ -1872,7 +1872,7 @@ nano CONSTAX_v2_GLBRC018_OTU_full.sbatch
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=belldere@msu.edu
 
-cd /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Fungal_libs/
+cd /Lukas/GLBRC018_Root_Soil/Fungal_libs/
 export PATH=$PATH:$HOME/anaconda3/bin
 source activate CONSTAXv2
 /mnt/home/belldere/Programs/CONSTAX/CONSTAXv2/constax.sh --input CONSTAX_out/REP_set_combined_merged_ITS1_2_GLBRC_otus.fasta --db /mnt/ufs18/home-087/belldere/Databases/UNITe8.2/sh_general_release_all_04.02.2020/sh_general_release_dynamic_all_04.02.2020_fix.fasta --trainfile /mnt/home/belldere/Databases/UNITe8.2/sh_general_release_all_04.02.2020/CONSTAX_v2_Nav_training_files/ --tax CONSTAX_out/constax_V2_classification_all_v4.2.2020_taxa/ -o CONSTAX_out/constax_V2_classification_all_v4.2.2020_taxa/ --conf 0.8 -b --pathfile /mnt/home/belldere/Programs/CONSTAX/CONSTAXv2/pathfile.txt 
@@ -1888,67 +1888,3 @@ sbatch CONSTAX_v2_GLBRC018_OTU_full.sbatch
 RunTime=00:38:31
 ```
 
-### 9b) Classifying the taxa with the native install and no Bonito lab paths and the most recent CONSTAX [CONSTAX](https://constax.readthedocs.io/en/latest/index.html) 
-```
-
-cd /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Fungal_libs/
-
-nano CONSTAX_v2.1_GLBRC018_OTU_full.sbatch
-
-#!/bin/bash --login
-
-#SBATCH --time=3:30:00             # limit of wall clock time - how long the job will run (same as -t)
-#SBATCH --ntasks=1                 # number of tasks - how many tasks (nodes) that you require (same as -n)
-#SBATCH --cpus-per-task=1          # number of CPUs (or cores) per task (same as -c)
-#SBATCH --mem=128G                  # memory required per node - amount of memory (in bytes)
-#SBATCH --job-name F_costax_v2.1_fix_All_v4.2.2020_T         # you can give your job a name for easier identification (same as -J)
-#SBATCH --output=%x-%j.SLURMout
-#SBATCH --mail-type=ALL
-#SBATCH --mail-user=belldere@msu.edu
-
-cd /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Fungal_libs/
-
-source activate CONSTAXv2
-constax --input CONSTAX_out/REP_set_combined_merged_ITS1_2_GLBRC_otus.fasta --db /mnt/research/EvansLab/Databases/UNITE_8.2_fix/sh_general_release_dynamic_all_04.02.2020_fix.fasta --train --trainfile /mnt/research/EvansLab/Databases/UNITE_8.2_fix/CONSTAX_v2_Nav_training_files/ --tax constax_V2.1_classification_all_v4.2.2020_taxa/  -o constax_V2.1_classification_all_v4.2.2020_taxa/ --conf 0.8 -b 
-
-scontrol show job $SLURM_JOB_ID     ### write job information to output file
-####
-
-sbatch CONSTAX_v2.1_GLBRC018_OTU_full.sbatch
-
-#Submitted batch job 23948967
-```
-```
-Run time 00:31:14
-```
-
-
-### TEST TEST CONSTAX 
-```
-cd /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Fungal_libs/
-
-nano TEST_CONSTAX_v2.1_GLBRC018_OTU_full.sbatch
-
-#!/bin/bash --login
-
-#SBATCH --time=3:30:00             # limit of wall clock time - how long the job will run (same as -t)
-#SBATCH --ntasks=1                 # number of tasks - how many tasks (nodes) that you require (same as -n)
-#SBATCH --cpus-per-task=1          # number of CPUs (or cores) per task (same as -c)
-#SBATCH --mem=128G                  # memory required per node - amount of memory (in bytes)
-#SBATCH --job-name TEST_F_costax_v2.1_fix_All_v4.2.2020_T         # you can give your job a name for easier identification (same as -J)
-#SBATCH --output=%x-%j.SLURMout
-#SBATCH --mail-type=ALL
-#SBATCH --mail-user=belldere@msu.edu
-
-cd /mnt/research/EvansLab/Lukas/GLBRC018_Root_Soil/Fungal_libs/
-
-source activate CONSTAXv2
-constax --input CONSTAX_out/REP_set_combined_merged_ITS1_2_GLBRC_otus.fasta --db /mnt/ufs18/home-087/belldere/Databases/UNITe8.2/NICO_Vers/sh_general_release_eukaryotes_91074_RepS_04.02.2020.fasta --train --trainfile /mnt/ufs18/home-087/belldere/Databases/UNITe8.2/NICO_Vers/CONSTAX_v2_Nav_training_files/ --tax TEST_constax_V2.1_classification_all_v4.2.2020_taxa/  -o TEST_constax_V2.1_classification_all_v4.2.2020_taxa/ --conf 0.8 -b 
-
-scontrol show job $SLURM_JOB_ID     ### write job information to output file
-####
-
-sbatch TEST_CONSTAX_v2.1_GLBRC018_OTU_full.sbatch
-
-#Submitted batch job 24610279
-```
